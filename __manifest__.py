@@ -1,0 +1,29 @@
+# -*- coding: utf-8 -*-
+{
+    "name": "contract",
+    "summary": """
+        Introduces Contract entity.""",
+    "description": """
+        Framework Contracts between company and customers, company and vendors. Contracts have annexes for 
+        sale/purchase orders.
+    """,
+    "author": "RydLab",
+    "website": "https://rydlab.ru",
+    # Categories can be used to filter modules in modules listing
+    # Check https://github.com/odoo/odoo/blob/14.0/odoo/addons/base/data/ir_module_category_data.xml
+    # for the full list
+    "category": "Sale/Purchase",
+    "version": "0.1",
+    # any module necessary for this one to work correctly
+    "depends": ["base", "base_setup", "contacts", "portal"],
+    # always loaded
+    "data": [
+        "security/ir.model.access.csv",
+        "views/contract_annex.xml",
+        "views/contract.xml",
+        "views/partner.xml",
+        "views/res_config_settings.xml",
+    ],
+    "installable": True,
+    "application": True,
+}
