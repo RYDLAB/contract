@@ -80,7 +80,7 @@
 
 
     <!-- Top menu item -->
-    <menuitem name="contract" id="contract.menu_root" web_icon="contract,static/description/icon.png"/>
+    <menuitem name="Contract" id="contract.menu_root" web_icon="contract,static/description/icon.png"/>
 
     <!-- menu categories -->
     <menuitem name="Contracts" id="contract.contract_menu" parent="contract.menu_root"/>
