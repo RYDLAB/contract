@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    "name": "contract",
+    "name": "Contract",
     "summary": """
         Introduces Contract entity.""",
     "description": """
