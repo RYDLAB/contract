@@ -133,6 +133,11 @@ msgid "Contract Annex Amount"
 msgstr "Количество приложений к контракту "
 
 #. module: contract
+#: model_terms:ir.ui.view,arch_db:contract.res_partner_contract_view_buttons
+msgid "Contract information"
+msgstr "Данные для договора"
+
+#. module: contract
 #: model:ir.model.fields,field_description:contract.field_contract_contract__name
 msgid "Contract number"
 msgstr "Номер договора"
@@ -221,6 +226,30 @@ msgstr "Подписчики (Партнеры)"
 #: model:ir.model.fields,help:contract.field_contract_contract__activity_type_icon
 msgid "Font awesome icon e.g. fa-tasks"
 msgstr ""
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_res_partner__fullname
+#: model:ir.model.fields,field_description:contract.field_res_users__fullname
+msgid "Full name"
+msgstr "ФИО"
+
+#. module: contract
+#: model:ir.model.fields,help:contract.field_res_partner__fullname
+#: model:ir.model.fields,help:contract.field_res_users__fullname
+msgid "Full name eg. Ivanov Ivan Ivanovich"
+msgstr "Полное имя, например: Иванов Иван Иванович"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_res_partner__fullname_genitive
+#: model:ir.model.fields,field_description:contract.field_res_users__fullname_genitive
+msgid "Full name in genitive"
+msgstr "ФИО в родительном падеже"
+
+#. module: contract
+#: model:ir.model.fields,help:contract.field_res_partner__fullname_genitive
+#: model:ir.model.fields,help:contract.field_res_users__fullname_genitive
+msgid "Full name in the genitive eg. Ivanova Ivana Ivanovicha"
+msgstr "Полное имя в родительном падеже, например: Иванова Ивана Ивановича"
 
 #. module: contract
 #: model:ir.model.fields,field_description:contract.field_contract_annex__id
@@ -393,6 +422,30 @@ msgid "Person representing company"
 msgstr "Представитель компании"
 
 #. module: contract
+#: model:ir.model.fields,field_description:contract.field_res_partner__position
+#: model:ir.model.fields,field_description:contract.field_res_users__position
+msgid "Position"
+msgstr "Должность"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_res_partner__position_genitive
+#: model:ir.model.fields,field_description:contract.field_res_users__position_genitive
+msgid "Position in genitive"
+msgstr "Должность в родительном падеже"
+
+#. module: contract
+#: model:ir.model.fields,help:contract.field_res_partner__position_genitive
+#: model:ir.model.fields,help:contract.field_res_users__position_genitive
+msgid "Position in genitive: eg. directora"
+msgstr "Должность в родительном падеже, например: директора"
+
+#. module: contract
+#: model:ir.model.fields,help:contract.field_res_partner__position
+#: model:ir.model.fields,help:contract.field_res_users__position
+msgid "Position: eg. director"
+msgstr "Должность, например: директор"
+
+#. module: contract
 #: model_terms:ir.ui.view,arch_db:contract.contract_form_view
 msgid "Renew"
 msgstr "Обновить"
@@ -462,6 +515,18 @@ msgid ""
 "Today: Activity date is today\n"
 "Planned: Future activities."
 msgstr ""
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_res_partner__surname_initials
+#: model:ir.model.fields,field_description:contract.field_res_users__surname_initials
+msgid "Surname and initials"
+msgstr "Фамилия инициалы"
+
+#. module: contract
+#: model:ir.model.fields,help:contract.field_res_partner__surname_initials
+#: model:ir.model.fields,help:contract.field_res_users__surname_initials
+msgid "Surname and initials eg. Ivanov I. I."
+msgstr "Фамилия инициалы, например: Иванов И. и."
 
 #. module: contract
 #: model:ir.model.fields,help:contract.field_contract_contract__activity_exception_decoration
