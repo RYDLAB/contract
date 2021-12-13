@@ -5,28 +5,22 @@ class ResPartner(models.Model):
     _inherit = "res.partner"
 
     fullname = fields.Char(
-        string="Full name",
-        help="Full name eg. Ivanov Ivan Ivanovich"
+        string="Full name", help="Full name eg. Ivanov Ivan Ivanovich"
     )
 
     fullname_genitive = fields.Char(
         string="Full name in genitive",
-        help="Full name in the genitive eg. Ivanova Ivana Ivanovicha"
+        help="Full name in the genitive eg. Ivanova Ivana Ivanovicha",
     )
 
     surname_initials = fields.Char(
-        string="Surname and initials",
-        help="Surname and initials eg. Ivanov I. I."
+        string="Surname and initials", help="Surname and initials eg. Ivanov I. I."
     )
 
-    position = fields.Char(
-        string="Position",
-        help="Position: eg. director"
-    )
+    position = fields.Char(string="Position", help="Position: eg. director")
 
     position_genitive = fields.Char(
-        string="Position in genitive",
-        help="Position in genitive: eg. directora"
+        string="Position in genitive", help="Position in genitive: eg. directora"
     )
 
     partner_contract_ids = fields.One2many(
