@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 {
-    "name": "contract",
+    "name": "Contract",
     "summary": """
         Introduces Contract entity.""",
     "description": """
         Framework Contracts between company and customers, company and vendors. Contracts have annexes for 
         sale/purchase orders.
     """,
-    "author": "RydLab",
+    "author": "RYDLAB",
     "website": "https://rydlab.ru",
     # Categories can be used to filter modules in modules listing
     # Check https://github.com/odoo/odoo/blob/14.0/odoo/addons/base/data/ir_module_category_data.xml
