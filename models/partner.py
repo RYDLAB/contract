@@ -1,9 +1,19 @@
+from email.policy import strict
 from odoo import api, fields, models
 
 
 class ResPartner(models.Model):
     _inherit = "res.partner"
 
+    name_genitive = fields.Char(
+        string="Full name in genitive",
+    )
+    name_initials = fields.Char(
+        string="Surname and initials",
+    )
+    position_genitive = fields.Char(
+        string="Position genitive",
+    )
     partner_contract_ids = fields.One2many(
         comodel_name="contract.contract",
         inverse_name="partner_id",
