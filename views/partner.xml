@@ -30,16 +30,14 @@
                     <field name="representative_document" attrs="{'invisible': [('is_company', '=', False)]}"/>
                 </group>
             </xpath>
-            <xpath expr="//form/sheet/notebook/page[1]" position="after">
-                <page string="Contract information">
+            <xpath expr="//page[@name='contact_addresses']" position="after">
+                <page name="for_contracts" string="Data for contracts" attrs="{'invisible': [('company_type', '=', 'company')]}">
                     <group>
                         <group>
-                            <field name="fullname"/>
-                            <field name="fullname_genitive"/>
-                            <field name="surname_initials"/>
+                            <field name="name_genitive"/>
+                            <field name="name_initials"/>
                         </group>
                         <group>
-                            <field name="position"/>
                             <field name="position_genitive"/>
                         </group>
                     </group>
