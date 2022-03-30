@@ -43,11 +43,11 @@
                         <field name="contract_annex_ids"
                                nolabel="1"
                                mode="tree"
-                               widget="section_and_note_one2many"
                                attrs="{'readonly': ['|', ('state', '=', 'close'), '&amp;', ('allow_not_signed_contract', '=', False), ('state', '=', 'draft')]}"
-                        >
+                               >
                             <tree>
                                 <field name="display_name" string="Name"/>
+                                <button name="action_open_annex_form" type="object" string="View" attrs="{'invisible': [('id', '=', False)]}"/>
                             </tree>
                         </field>
                     </group>
