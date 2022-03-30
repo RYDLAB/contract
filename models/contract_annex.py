@@ -98,17 +98,17 @@ class ContractAnnex(models.Model):
         pass
 
     def action_open_annex_form(self):
-        view_id = self.env.ref('contract.contract_annex_view_form').id
+        view_id = self.env.ref("contract.contract_annex_view_form").id
         context = self._context.copy()
         return {
-            'name':'Contact annex',
-            'view_type':'form',
-            'view_mode':'tree',
-            'views' : [(view_id,'form')],
-            'res_model':'contract.annex',
-            'view_id':view_id,
-            'type':'ir.actions.act_window',
-            'res_id':self.id,
-            'target':'current',
-            'context':context,
+            "name": "Contact annex",
+            "view_type": "form",
+            "view_mode": "tree",
+            "views": [(view_id, "form")],
+            "res_model": "contract.annex",
+            "view_id": view_id,
+            "type": "ir.actions.act_window",
+            "res_id": self.id,
+            "target": "current",
+            "context": context,
         }
