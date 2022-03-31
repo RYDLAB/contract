@@ -14,8 +14,11 @@
                             <field name="partner_id" invisible="1"/>
                             <field name="contract_type" invisible="1"/>
                         </group>
-                        <group name="info" string="Info">
+                        <label for="name"/>
+                        <h1>
                             <field name="name" placeholder="Leave empty for compute"/>
+                        </h1>
+                        <group name="info">
                             <field name="annex_number" attrs="{'invisible': [('id', '=', False)]}"/>
                             <field name="contract_id" attrs="{'invisible': [('contract_id', '=', False)]}"/>
                             <field name="date_conclusion"/>

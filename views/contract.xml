@@ -27,8 +27,11 @@
                     <field name="state" widget="statusbar" statusbar_visible="draft,sign,close"/>
                 </header>
                 <sheet>
-                    <group string="Contract parameters" name="single_params">
+                    <label for="name"/>
+                    <h1>
                         <field name="name" />
+                    </h1>
+                    <group name="single_params">
                         <field name="partner_id"/>
                         <field name="type"/>
                         <field name="create_date" attrs="{'invisible': [('id', '=', False)]}"/>
