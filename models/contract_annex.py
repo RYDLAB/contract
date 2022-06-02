@@ -42,9 +42,7 @@ class ContractAnnex(models.Model):
         help="Number of current annex among other annexes",
     )
     currency_id = fields.Many2one(
-        comodel_name="res.currency",
-        string="Currency",
-        default=lambda self: self.env.company.currency_id.id,
+        related="contract_id.currency_id",
     )
     annex_cost = fields.Monetary(
         string="Annex Cost",

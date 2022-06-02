@@ -39,6 +39,12 @@ class Contract(models.Model):
         string="Company",
         default=lambda self: self.env.company,
     )
+    currency_id = fields.Many2one(
+        comodel_name="res.currency",
+        string="Contract's currency",
+        help="Contract settlements should be performed in this currency.",
+        default=lambda self: self.env.company.currency_id.id,
+    )
     res_model = fields.Char(default=lambda self: self._name)
     name = fields.Char(
         string="Contract number",

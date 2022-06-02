@@ -34,6 +34,7 @@
                     <group name="single_params">
                         <field name="partner_id"/>
                         <field name="type"/>
+                        <field name="currency_id"/>
                         <field name="create_date" attrs="{'invisible': [('id', '=', False)]}"/>
                         <field name="date_conclusion" attrs="{'invisible': ['|', ('id', '=', False), ('date_conclusion', '=', False)]}"/>
                         <field name="date_conclusion_fix" attrs="{'invisible': [('id', '=', False)]}"/>
