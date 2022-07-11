@@ -23,6 +23,8 @@
         "views/contract.xml",
         "views/partner.xml",
         "views/res_config_settings.xml",
+        "data/mail_template_data.xml",
+        "data/schedule_activities_data.xml",
     ],
     "installable": True,
     "application": True,

@@ -1,7 +1,9 @@
 import datetime
 import logging
 
-from odoo import fields, models
+from dateutil.relativedelta import relativedelta
+
+from odoo import fields, models, api
 
 _logger = logging.getLogger(__name__)
 
@@ -145,6 +147,35 @@ class Contract(models.Model):
 
     def action_renew(self):
         self.write({"state": "draft"})
+
+    def renew_contract(self):
+        renew_period = {self.renew_period_type: self.renew_period}
+        new_expiration_date = self.expiration_date + relativedelta(**renew_period)
+        self.write({"expiration_date": new_expiration_date})
+
+    def send_reminder_mail(self):
+        template = self.env.ref('contract.contract_expiration_notification')
+        if template:
+            # Select active contracts
+            contracts = self.search([
+                ('state', '=', 'sign'),
+            ])
+            for contract in contracts:
+                if contract._send_notification_today():
+                    # template.send_mail(contract.id, force_send=True)
+                    template.send_mail(contract.id)
+                elif contract.renew_automatically and contract.expiration_date == datetime.date.today():
+                    contract.renew_contract()
+                elif not contract.renew_automatically and contract.expiration_date == datetime.date.today():
+                    contract.action_close()
+
+    def _send_notification_today(self):
+        if self.responsible_employee_id and \
+                self.notification_expiration and \
+                self.expiration_date - datetime.timedelta(days=self.notification_expiration_period) == datetime.date.today():
+            return True
+        else:
+            return False
 
     @api.constrains('notification_expiration_period')
     def _check_notification_expiration_period(self):
