@@ -94,6 +94,36 @@ class Contract(models.Model):
         default=lambda self: self.get_allow_not_signed_contract(),
         store=False,
     )
+    responsible_employee_id = fields.Many2one(
+        comodel_name="hr.employee",
+        string="Responsible employee"
+    )
+    expiration_date = fields.Date(
+        default=fields.Date.today() + datetime.timedelta(days=30),
+        string="Contract expiration date"
+    )
+    notification_expiration = fields.Boolean(
+        default=False,
+        string="Contract expiration notice",
+        help="Notify the responsible employee of the expiration of the contract"
+    )
+    notification_expiration_period = fields.Integer(
+        default=1,
+        string="Notice period, days",
+        help="The number of days before the notification is received"
+    )
+    renew_automatically = fields.Boolean(default=False, string="Renew contract automatically")
+    renew_period = fields.Integer(default=1, string="Contract renew period")
+    renew_period_type = fields.Selection(
+        [
+            ("days", "Days"),
+            ("months", "Months"),
+            ("years", "Years"),
+        ],
+        string="Type of contract renew period",
+        required=True,
+        default="days"
+    )
 
     def unlink(self):
         self.contract_annex_ids.unlink()
@@ -115,3 +145,15 @@ class Contract(models.Model):
 
     def action_renew(self):
         self.write({"state": "draft"})
+
+    @api.constrains('notification_expiration_period')
+    def _check_notification_expiration_period(self):
+        for record in self:
+            if record.notification_expiration_period and record.notification_expiration_period <= 0:
+                raise models.ValidationError('The validity period of the notification must be a positive number')
+
+    @api.constrains('renew_period')
+    def _check_renew_period(self):
+        for record in self:
+            if record.renew_period and record.renew_period <= 0:
+                raise models.ValidationError('The contract new period must be a positive number')
