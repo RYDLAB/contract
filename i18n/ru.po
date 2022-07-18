@@ -570,8 +570,8 @@ msgstr "Фамилия и инициалы"
 
 #. module: contract
 #: model:ir.model.fields,help:contract.field_contract_contract__notification_expiration_period
-msgid "The number of days before the notification is received"
-msgstr "Количество дней до окончания действия договора"
+msgid "The day's number to contract expiration for sending notice"
+msgstr "Количество дней до истечения срока действия контракта для отправки уведомления"
 
 #. module: contract
 #: model:ir.model.fields,field_description:contract.field_contract_contract__renew_period_type

@@ -1,9 +1,8 @@
 import datetime
 import logging
-
 from dateutil.relativedelta import relativedelta
 
-from odoo import fields, models, api
+from odoo import api, fields, models
 
 _logger = logging.getLogger(__name__)
 
@@ -97,24 +96,25 @@ class Contract(models.Model):
         store=False,
     )
     responsible_employee_id = fields.Many2one(
-        comodel_name="hr.employee",
-        string="Responsible employee"
+        comodel_name="res.users",
+        string="Responsible employee",
+        domain=lambda self: [("groups_id", "=", self.env.ref("base.group_user").id)],
+        default=lambda self: self.env.user,
     )
-    expiration_date = fields.Date(
-        default=fields.Date.today() + datetime.timedelta(days=30),
-        string="Contract expiration date"
-    )
+    expiration_date = fields.Date(string="Contract expiration date")
     notification_expiration = fields.Boolean(
         default=False,
         string="Contract expiration notice",
-        help="Notify the responsible employee of the expiration of the contract"
+        help="Notify the responsible employee of the expiration of the contract",
     )
     notification_expiration_period = fields.Integer(
         default=1,
         string="Notice period, days",
-        help="The number of days before the notification is received"
+        help="The day's number to contract expiration for sending notice",
     )
-    renew_automatically = fields.Boolean(default=False, string="Renew contract automatically")
+    renew_automatically = fields.Boolean(
+        default=False, string="Renew contract automatically"
+    )
     renew_period = fields.Integer(default=1, string="Contract renew period")
     renew_period_type = fields.Selection(
         [
@@ -124,7 +124,7 @@ class Contract(models.Model):
         ],
         string="Type of contract renew period",
         required=True,
-        default="days"
+        default="days",
     )
 
     def unlink(self):
@@ -153,38 +153,61 @@ class Contract(models.Model):
         new_expiration_date = self.expiration_date + relativedelta(**renew_period)
         self.write({"expiration_date": new_expiration_date})
 
-    def send_reminder_mail(self):
-        template = self.env.ref('contract.contract_expiration_notification')
-        if template:
-            # Select active contracts
-            contracts = self.search([
-                ('state', '=', 'sign'),
-            ])
+    def check_contracts(self):
+        # Select active contracts
+        contracts = self.search(
+            [
+                ("state", "=", "sign"),
+            ]
+        )
+        try:
+            template_name = "contract.contract_expiration_notification"
+            template = self.env.ref(template_name)
+        except ValueError:
+            _logger.error('Template "%s" not found!', template_name)
+        else:
             for contract in contracts:
                 if contract._send_notification_today():
-                    # template.send_mail(contract.id, force_send=True)
-                    template.send_mail(contract.id)
-                elif contract.renew_automatically and contract.expiration_date == datetime.date.today():
+                    if contract.responsible_employee_id.notification_type == "email":
+                        template.send_mail(contract.id)
+        finally:
+            for contract in contracts:
+                if (
+                    contract.renew_automatically
+                    and contract.expiration_date == datetime.date.today()
+                ):
                     contract.renew_contract()
-                elif not contract.renew_automatically and contract.expiration_date == datetime.date.today():
+                elif (
+                    not contract.renew_automatically
+                    and contract.expiration_date == datetime.date.today()
+                ):
                     contract.action_close()
 
     def _send_notification_today(self):
-        if self.responsible_employee_id and \
-                self.notification_expiration and \
-                self.expiration_date - datetime.timedelta(days=self.notification_expiration_period) == datetime.date.today():
-            return True
-        else:
-            return False
+        return (
+            self.responsible_employee_id
+            and self.notification_expiration
+            and self.expiration_date
+            and self.expiration_date
+            - datetime.timedelta(days=self.notification_expiration_period)
+            == datetime.date.today()
+        )
 
-    @api.constrains('notification_expiration_period')
+    @api.constrains("notification_expiration_period")
     def _check_notification_expiration_period(self):
         for record in self:
-            if record.notification_expiration_period and record.notification_expiration_period <= 0:
-                raise models.ValidationError('The validity period of the notification must be a positive number')
+            if (
+                record.notification_expiration_period
+                and record.notification_expiration_period <= 0
+            ):
+                raise models.ValidationError(
+                    "The validity period of the notification must be a positive number"
+                )
 
-    @api.constrains('renew_period')
+    @api.constrains("renew_period")
     def _check_renew_period(self):
         for record in self:
             if record.renew_period and record.renew_period <= 0:
-                raise models.ValidationError('The contract new period must be a positive number')
+                raise models.ValidationError(
+                    "The contract new period must be a positive number"
+                )
