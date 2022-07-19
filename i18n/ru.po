@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 14.0-20211110\n"
+"Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-08 04:46+0000\n"
-"PO-Revision-Date: 2021-12-08 04:46+0000\n"
+"POT-Creation-Date: 2022-07-10 19:07+0000\n"
+"PO-Revision-Date: 2022-07-10 19:07+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -20,6 +20,19 @@ msgstr ""
 #: model:ir.model.fields,field_description:contract.field_res_users__contract_count
 msgid "# of contracts"
 msgstr "# договоров"
+
+#. module: contract
+#: model:mail.template,body_html:contract.contract_expiration_notification
+msgid ""
+"<p>Dear <t t-out=\"object.responsible_employee_id.name or ''\"/>,</p>\n"
+"            <p>A reminder to you about the expiration of contract No. <t t-out=\"object.name or ''\"/> in <t t-out=\"object.notification_expiration_period or ''\"/> days (<t t-out=\"object.expiration_date or ''\"/>).</p>\n"
+"            <br/>\n"
+"        "
+msgstr ""
+"<p>Уважаемый(ая) <t t-out=\"object.responsible_employee_id.name or ''\"/>,</p>\n"
+"            <p>Напоминаем вам об истечении срока действия договора No. <t t-out=\"object.name or ''\"/> через <t t-out=\"object.notification_expiration_period or ''\"/> дней (<t t-out=\"object.expiration_date or ''\"/>).</p>\n"
+"            <br/>\n"
+"        "
 
 #. module: contract
 #: model:ir.model.fields,field_description:contract.field_contract_contract__message_needaction
@@ -107,7 +120,7 @@ msgstr "Компания"
 #. module: contract
 #: model:ir.model,name:contract.model_res_config_settings
 msgid "Config Settings"
-msgstr "Настройки"
+msgstr "Конфигурационные настройки"
 
 #. module: contract
 #: model:ir.model,name:contract.model_res_partner
@@ -117,6 +130,7 @@ msgstr "Контакт"
 #. module: contract
 #: model:ir.model,name:contract.model_contract_contract
 #: model:ir.model.fields,field_description:contract.field_contract_annex__contract_id
+#: model:ir.ui.menu,name:contract.menu_root
 #: model_terms:ir.ui.view,arch_db:contract.contract_form_view
 msgid "Contract"
 msgstr "Договор"
@@ -133,9 +147,19 @@ msgid "Contract Annex Amount"
 msgstr "Количество приложений к контракту "
 
 #. module: contract
-#: model_terms:ir.ui.view,arch_db:contract.res_partner_contract_view_buttons
-msgid "Contract information"
-msgstr "Данные для договора"
+#: model:ir.model.fields,field_description:contract.field_contract_contract__expiration_date
+msgid "Contract expiration date"
+msgstr "Дата окончания действия"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__notification_expiration
+msgid "Contract expiration notice"
+msgstr "Уведомлять о завершении"
+
+#. module: contract
+#: model:mail.template,name:contract.contract_expiration_notification
+msgid "Contract expiration notification"
+msgstr ""
 
 #. module: contract
 #: model:ir.model.fields,field_description:contract.field_contract_contract__name
@@ -143,15 +167,34 @@ msgid "Contract number"
 msgstr "Номер договора"
 
 #. module: contract
-#: model_terms:ir.ui.view,arch_db:contract.contract_form_view
-msgid "Contract parameters"
-msgstr "Параметры договора"
+#: model:ir.model.fields,field_description:contract.field_contract_contract__renew_period
+msgid "Contract renew period"
+msgstr "Срок продления"
+
+#. module: contract
+#: model:ir.model.fields,help:contract.field_contract_annex__currency_id
+#: model:ir.model.fields,help:contract.field_contract_contract__currency_id
+msgid "Contract settlements should be performed in this currency."
+msgstr ""
 
 #. module: contract
 #: model:ir.model.fields,field_description:contract.field_contract_annex__contract_type
 #: model:ir.model.fields,field_description:contract.field_contract_contract__type
 msgid "Contract type"
 msgstr "Тип договора"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_annex__currency_id
+#: model:ir.model.fields,field_description:contract.field_contract_contract__currency_id
+msgid "Contract's currency"
+msgstr "Валюта договора"
+
+#. module: contract
+#: model:ir.actions.server,name:contract.contract_notification_template_ir_actions_server
+#: model:ir.cron,cron_name:contract.contract_notification_template
+#: model:ir.cron,name:contract.contract_notification_template
+msgid "Contract: Checking the expiration date of active contracts."
+msgstr "Контракт: Проверка срока действия активных контрактов"
 
 #. module: contract
 #: model:ir.actions.act_window,name:contract.contract_action_window
@@ -183,22 +226,26 @@ msgid "Created on"
 msgstr "Создано"
 
 #. module: contract
-#: model:ir.model.fields,field_description:contract.field_contract_annex__currency_id
-msgid "Currency"
-msgstr "Валюта"
+#: model_terms:ir.ui.view,arch_db:contract.res_partner_contract_view_buttons
+msgid "Data for contracts"
+msgstr "Данные для договора"
+
+#. module: contract
+#: model:ir.model.fields.selection,name:contract.selection__contract_contract__renew_period_type__days
+msgid "Days"
+msgstr "Дни"
 
 #. module: contract
 #: model:ir.model.fields,help:contract.field_contract_annex__contract_type
 #: model:ir.model.fields,help:contract.field_contract_contract__type
 msgid ""
 "Different relations requires different contracts with own text and template."
-msgstr "Разные отношения требуют разных договоров с собственным текстом и шаблоном"
+msgstr ""
+"Разные отношения требуют разных договоров с собственным текстом и шаблоном"
 
 #. module: contract
 #: model:ir.model.fields,field_description:contract.field_contract_annex__display_name
 #: model:ir.model.fields,field_description:contract.field_contract_contract__display_name
-#: model:ir.model.fields,field_description:contract.field_res_config_settings__display_name
-#: model:ir.model.fields,field_description:contract.field_res_partner__display_name
 msgid "Display Name"
 msgstr "Отображаемое имя"
 
@@ -213,11 +260,6 @@ msgid "Followers"
 msgstr "Подписчики"
 
 #. module: contract
-#: model:ir.model.fields,field_description:contract.field_contract_contract__message_channel_ids
-msgid "Followers (Channels)"
-msgstr "Подписчики (Каналы)"
-
-#. module: contract
 #: model:ir.model.fields,field_description:contract.field_contract_contract__message_partner_ids
 msgid "Followers (Partners)"
 msgstr "Подписчики (Партнеры)"
@@ -228,34 +270,24 @@ msgid "Font awesome icon e.g. fa-tasks"
 msgstr ""
 
 #. module: contract
-#: model:ir.model.fields,field_description:contract.field_res_partner__fullname
-#: model:ir.model.fields,field_description:contract.field_res_users__fullname
-msgid "Full name"
-msgstr "ФИО"
-
-#. module: contract
-#: model:ir.model.fields,help:contract.field_res_partner__fullname
-#: model:ir.model.fields,help:contract.field_res_users__fullname
-msgid "Full name eg. Ivanov Ivan Ivanovich"
-msgstr "Полное имя, например: Иванов Иван Иванович"
-
-#. module: contract
-#: model:ir.model.fields,field_description:contract.field_res_partner__fullname_genitive
-#: model:ir.model.fields,field_description:contract.field_res_users__fullname_genitive
+#: model:ir.model.fields,field_description:contract.field_res_partner__name_genitive
+#: model:ir.model.fields,field_description:contract.field_res_users__name_genitive
 msgid "Full name in genitive"
-msgstr "ФИО в родительном падеже"
+msgstr ""
 
 #. module: contract
-#: model:ir.model.fields,help:contract.field_res_partner__fullname_genitive
-#: model:ir.model.fields,help:contract.field_res_users__fullname_genitive
-msgid "Full name in the genitive eg. Ivanova Ivana Ivanovicha"
-msgstr "Полное имя в родительном падеже, например: Иванова Ивана Ивановича"
+#: model:ir.model.fields,field_description:contract.field_contract_contract__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: contract
+#: model_terms:ir.ui.view,arch_db:contract.reminder_closing_contract_qweb
+msgid "Hello"
+msgstr ""
 
 #. module: contract
 #: model:ir.model.fields,field_description:contract.field_contract_annex__id
 #: model:ir.model.fields,field_description:contract.field_contract_contract__id
-#: model:ir.model.fields,field_description:contract.field_res_config_settings__id
-#: model:ir.model.fields,field_description:contract.field_res_partner__id
 msgid "ID"
 msgstr "Номер"
 
@@ -285,17 +317,16 @@ msgstr "Если выбрано, некоторые сообщения имею�
 #: model_terms:ir.ui.view,arch_db:contract.res_config_settings_view_form
 msgid ""
 "If switched off, annexes creating is possible for signed contracts only."
-msgstr "Если не выбрано, создание приложений возможно только для подписанных договоров"
+msgstr ""
+"Если не выбрано, создание приложений возможно только для подписанных "
+"договоров"
 
 #. module: contract
 #: model:ir.model.fields,help:contract.field_res_config_settings__allow_not_signed_contract
 msgid "If switched off, binding annexes is possible for signed contracts only"
-msgstr "Если не выбрано, то привязка приложений возможна только для подписанных договоров"
-
-#. module: contract
-#: model_terms:ir.ui.view,arch_db:contract.contract_annex_view_form
-msgid "Info"
-msgstr "Информация"
+msgstr ""
+"Если не выбрано, то привязка приложений возможна только для подписанных "
+"договоров"
 
 #. module: contract
 #: model:ir.model.fields,field_description:contract.field_contract_contract__message_is_follower
@@ -305,8 +336,6 @@ msgstr "Наблюдатель"
 #. module: contract
 #: model:ir.model.fields,field_description:contract.field_contract_annex____last_update
 #: model:ir.model.fields,field_description:contract.field_contract_contract____last_update
-#: model:ir.model.fields,field_description:contract.field_res_config_settings____last_update
-#: model:ir.model.fields,field_description:contract.field_res_partner____last_update
 msgid "Last Modified on"
 msgstr "Изменено"
 
@@ -343,6 +372,11 @@ msgid "Messages"
 msgstr "Сообщения"
 
 #. module: contract
+#: model:ir.model.fields.selection,name:contract.selection__contract_contract__renew_period_type__months
+msgid "Months"
+msgstr "Месяцы"
+
+#. module: contract
 #: model:ir.model.fields,field_description:contract.field_contract_contract__my_activity_date_deadline
 msgid "My Activity Deadline"
 msgstr "Срок моего действия "
@@ -359,6 +393,11 @@ msgid "New"
 msgstr "Новый"
 
 #. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__activity_calendar_event_id
+msgid "Next Activity Calendar Event"
+msgstr ""
+
+#. module: contract
 #: model:ir.model.fields,field_description:contract.field_contract_contract__activity_date_deadline
 msgid "Next Activity Deadline"
 msgstr "Срок следующего действия"
@@ -372,6 +411,16 @@ msgstr "Итог следующего действия"
 #: model:ir.model.fields,field_description:contract.field_contract_contract__activity_type_id
 msgid "Next Activity Type"
 msgstr "Следующий вид действий"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__notification_expiration_period
+msgid "Notice period, days"
+msgstr "Срок уведомления, дней"
+
+#. module: contract
+#: model:ir.model.fields,help:contract.field_contract_contract__notification_expiration
+msgid "Notify the responsible employee of the expiration of the contract"
+msgstr "Уведомить ответственного сотрудника об истечении срока действия договора"
 
 #. module: contract
 #: model:ir.model.fields,field_description:contract.field_contract_contract__message_needaction_counter
@@ -422,33 +471,25 @@ msgid "Person representing company"
 msgstr "Представитель компании"
 
 #. module: contract
-#: model:ir.model.fields,field_description:contract.field_res_partner__position
-#: model:ir.model.fields,field_description:contract.field_res_users__position
-msgid "Position"
-msgstr "Должность"
-
-#. module: contract
 #: model:ir.model.fields,field_description:contract.field_res_partner__position_genitive
 #: model:ir.model.fields,field_description:contract.field_res_users__position_genitive
-msgid "Position in genitive"
+msgid "Position genitive"
 msgstr "Должность в родительном падеже"
 
 #. module: contract
-#: model:ir.model.fields,help:contract.field_res_partner__position_genitive
-#: model:ir.model.fields,help:contract.field_res_users__position_genitive
-msgid "Position in genitive: eg. directora"
-msgstr "Должность в родительном падеже, например: директора"
-
-#. module: contract
-#: model:ir.model.fields,help:contract.field_res_partner__position
-#: model:ir.model.fields,help:contract.field_res_users__position
-msgid "Position: eg. director"
-msgstr "Должность, например: директор"
+#: model:mail.template,subject:contract.contract_expiration_notification
+msgid "Reminder of the expiration of the contract"
+msgstr "Напоминание об истечении срока действия контракта"
 
 #. module: contract
 #: model_terms:ir.ui.view,arch_db:contract.contract_form_view
 msgid "Renew"
 msgstr "Обновить"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__renew_automatically
+msgid "Renew contract automatically"
+msgstr "Продлять автоматически"
 
 #. module: contract
 #: model:ir.model.fields,field_description:contract.field_res_partner__representative_id
@@ -471,6 +512,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:contract.field_contract_contract__activity_user_id
 msgid "Responsible User"
 msgstr "Ответственный"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__responsible_employee_id
+msgid "Responsible employee"
+msgstr "Ответственный сотрудник"
 
 #. module: contract
 #: model:ir.model.fields,field_description:contract.field_contract_contract__message_has_sms_error
@@ -517,16 +563,20 @@ msgid ""
 msgstr ""
 
 #. module: contract
-#: model:ir.model.fields,field_description:contract.field_res_partner__surname_initials
-#: model:ir.model.fields,field_description:contract.field_res_users__surname_initials
+#: model:ir.model.fields,field_description:contract.field_res_partner__name_initials
+#: model:ir.model.fields,field_description:contract.field_res_users__name_initials
 msgid "Surname and initials"
-msgstr "Фамилия инициалы"
+msgstr "Фамилия и инициалы"
 
 #. module: contract
-#: model:ir.model.fields,help:contract.field_res_partner__surname_initials
-#: model:ir.model.fields,help:contract.field_res_users__surname_initials
-msgid "Surname and initials eg. Ivanov I. I."
-msgstr "Фамилия инициалы, например: Иванов И. и."
+#: model:ir.model.fields,help:contract.field_contract_contract__notification_expiration_period
+msgid "The day's number to contract expiration for sending notice"
+msgstr "Количество дней до истечения срока действия контракта для отправки уведомления"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__renew_period_type
+msgid "Type of contract renew period"
+msgstr "Тип интервала продления"
 
 #. module: contract
 #: model:ir.model.fields,help:contract.field_contract_contract__activity_exception_decoration
@@ -542,6 +592,11 @@ msgstr "Непрочитанные сообщения"
 #: model:ir.model.fields,field_description:contract.field_contract_contract__message_unread_counter
 msgid "Unread Messages Counter"
 msgstr "Счетчик непрочитанных сообщений"
+
+#. module: contract
+#: model_terms:ir.ui.view,arch_db:contract.contract_form_view
+msgid "View"
+msgstr ""
 
 #. module: contract
 #: model:ir.model.fields,field_description:contract.field_contract_contract__website_message_ids
@@ -564,6 +619,6 @@ msgid "With vendor"
 msgstr "С поставщиком"
 
 #. module: contract
-#: model:ir.ui.menu,name:contract.menu_root
-msgid "Contract"
-msgstr "Договора"
+#: model:ir.model.fields.selection,name:contract.selection__contract_contract__renew_period_type__years
+msgid "Years"
+msgstr "Годы"

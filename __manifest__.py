@@ -13,7 +13,7 @@
     # Check https://github.com/odoo/odoo/blob/14.0/odoo/addons/base/data/ir_module_category_data.xml
     # for the full list
     "category": "Sale/Purchase",
-    "version": "0.1",
+    "version": "0.2",
     # any module necessary for this one to work correctly
     "depends": ["base", "base_setup", "contacts", "portal"],
     # always loaded
@@ -23,6 +23,8 @@
         "views/contract.xml",
         "views/partner.xml",
         "views/res_config_settings.xml",
+        "data/mail_template_data.xml",
+        "data/schedule_activities_data.xml",
     ],
     "installable": True,
     "application": True,

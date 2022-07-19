@@ -1,7 +1,8 @@
 import datetime
 import logging
+from dateutil.relativedelta import relativedelta
 
-from odoo import fields, models
+from odoo import api, fields, models
 
 _logger = logging.getLogger(__name__)
 
@@ -94,6 +95,37 @@ class Contract(models.Model):
         default=lambda self: self.get_allow_not_signed_contract(),
         store=False,
     )
+    responsible_employee_id = fields.Many2one(
+        comodel_name="res.users",
+        string="Responsible employee",
+        domain=lambda self: [("groups_id", "=", self.env.ref("base.group_user").id)],
+        default=lambda self: self.env.user,
+    )
+    expiration_date = fields.Date(string="Contract expiration date")
+    notification_expiration = fields.Boolean(
+        default=False,
+        string="Contract expiration notice",
+        help="Notify the responsible employee of the expiration of the contract",
+    )
+    notification_expiration_period = fields.Integer(
+        default=1,
+        string="Notice period, days",
+        help="The day's number to contract expiration for sending notice",
+    )
+    renew_automatically = fields.Boolean(
+        default=False, string="Renew contract automatically"
+    )
+    renew_period = fields.Integer(default=1, string="Contract renew period")
+    renew_period_type = fields.Selection(
+        [
+            ("days", "Days"),
+            ("months", "Months"),
+            ("years", "Years"),
+        ],
+        string="Type of contract renew period",
+        required=True,
+        default="days",
+    )
 
     def unlink(self):
         self.contract_annex_ids.unlink()
@@ -115,3 +147,67 @@ class Contract(models.Model):
 
     def action_renew(self):
         self.write({"state": "draft"})
+
+    def renew_contract(self):
+        renew_period = {self.renew_period_type: self.renew_period}
+        new_expiration_date = self.expiration_date + relativedelta(**renew_period)
+        self.write({"expiration_date": new_expiration_date})
+
+    def check_contracts(self):
+        # Select active contracts
+        contracts = self.search(
+            [
+                ("state", "=", "sign"),
+            ]
+        )
+        try:
+            template_name = "contract.contract_expiration_notification"
+            template = self.env.ref(template_name)
+        except ValueError:
+            _logger.error('Template "%s" not found!', template_name)
+        else:
+            for contract in contracts:
+                if contract._send_notification_today():
+                    if contract.responsible_employee_id.notification_type == "email":
+                        template.send_mail(contract.id)
+        finally:
+            for contract in contracts:
+                if (
+                    contract.renew_automatically
+                    and contract.expiration_date == datetime.date.today()
+                ):
+                    contract.renew_contract()
+                elif (
+                    not contract.renew_automatically
+                    and contract.expiration_date == datetime.date.today()
+                ):
+                    contract.action_close()
+
+    def _send_notification_today(self):
+        return (
+            self.responsible_employee_id
+            and self.notification_expiration
+            and self.expiration_date
+            and self.expiration_date
+            - datetime.timedelta(days=self.notification_expiration_period)
+            == datetime.date.today()
+        )
+
+    @api.constrains("notification_expiration_period")
+    def _check_notification_expiration_period(self):
+        for record in self:
+            if (
+                record.notification_expiration_period
+                and record.notification_expiration_period <= 0
+            ):
+                raise models.ValidationError(
+                    "The validity period of the notification must be a positive number"
+                )
+
+    @api.constrains("renew_period")
+    def _check_renew_period(self):
+        for record in self:
+            if record.renew_period and record.renew_period <= 0:
+                raise models.ValidationError(
+                    "The contract new period must be a positive number"
+                )
