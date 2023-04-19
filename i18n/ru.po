@@ -206,7 +206,7 @@ msgstr "Контракт: Проверка срока действия акти�
 #: model_terms:ir.ui.view,arch_db:contract.res_config_settings_view_form
 #: model_terms:ir.ui.view,arch_db:contract.res_partner_contract_view_buttons
 msgid "Contracts"
-msgstr "Договора"
+msgstr "Договоры"
 
 #. module: contract
 #: model:ir.model.fields,help:contract.field_contract_contract__contract_annex_amount

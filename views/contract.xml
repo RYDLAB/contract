@@ -55,16 +55,18 @@
                     </group>
                     <group string="Annexed Specifications" name="annexes">
                         <field name="allow_not_signed_contract" invisible="1"/>
-                        <field name="contract_annex_ids"
-                               nolabel="1"
-                               mode="tree"
-                               attrs="{'readonly': ['|', ('state', '=', 'close'), '&amp;', ('allow_not_signed_contract', '=', False), ('state', '=', 'draft')]}"
-                               >
-                            <tree>
-                                <field name="display_name" string="Name"/>
-                                <button name="action_open_annex_form" type="object" string="View" attrs="{'invisible': [('id', '=', False)]}"/>
-                            </tree>
-                        </field>
+                        <p colspan="2">
+                            <field name="contract_annex_ids"
+                                   nolabel="1"
+                                   mode="tree"
+                                   attrs="{'readonly': ['|', ('state', '=', 'close'), '&amp;', ('allow_not_signed_contract', '=', False), ('state', '=', 'draft')]}"
+                                   >
+                                <tree>
+                                    <field name="display_name" string="Name"/>
+                                    <button name="action_open_annex_form" type="object" string="View" attrs="{'invisible': [('id', '=', False)]}"/>
+                                </tree>
+                            </field>
+                        </p>
                     </group>
                 </sheet>
                 <div class="oe_chatter">
