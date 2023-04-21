@@ -36,22 +36,26 @@
                         <field name="name" />
                     </h1>
                     <group name="single_params">
-                        <field name="partner_id"/>
-                        <field name="type"/>
-                        <field name="currency_id"/>
-                        <field name="create_date" attrs="{'invisible': [('id', '=', False)]}"/>
-                        <field name="date_conclusion" attrs="{'invisible': ['|', ('id', '=', False), ('date_conclusion', '=', False)]}"/>
-                        <field name="date_conclusion_fix" attrs="{'invisible': [('id', '=', False)]}"/>
-                        <field name="responsible_employee_id"/>
-                        <field name="expiration_date"/>
-                        <field name="notification_expiration" attrs="{'invisible': [('responsible_employee_id', '=', False)]}"/>
-                        <field name="notification_expiration_period" attrs="{'invisible': [('notification_expiration', '=', False)]}"/>
-                        <field name="renew_automatically"/>
-                        <field name="renew_period" attrs="{'invisible': [('renew_automatically', '=', False)]}"/>
-                        <field name="renew_period_type" attrs="{'invisible': [('renew_automatically', '=', False)]}"/>
+                        <group>
+                            <field name="partner_id"/>
+                            <field name="type"/>
+                            <field name="currency_id"/>
+                            <field name="responsible_employee_id"/>
+                            <field name="create_date" attrs="{'invisible': [('id', '=', False)]}"/>
+                        </group>
+                        <group>
+                            <field name="date_conclusion" attrs="{'invisible': ['|', ('id', '=', False), ('date_conclusion', '=', False)]}"/>
+                            <field name="date_conclusion_fix" attrs="{'invisible': [('id', '=', False)]}"/>
+                            <field name="expiration_date"/>
+                            <field name="notification_expiration" attrs="{'invisible': [('responsible_employee_id', '=', False)]}"/>
+                            <field name="notification_expiration_period" attrs="{'invisible': [('notification_expiration', '=', False)]}"/>
+                            <field name="renew_automatically"/>
+                            <field name="renew_period" attrs="{'invisible': [('renew_automatically', '=', False)]}"/>
+                            <field name="renew_period_type" attrs="{'invisible': [('renew_automatically', '=', False)]}"/>
 
-                        <!-- Uses to generate number of Annex -->
-                        <field name="contract_annex_amount" invisible="1"/>
+                            <!-- Uses to generate number of Annex -->
+                            <field name="contract_annex_amount" invisible="1"/>
+                        </group>
                     </group>
                     <group string="Annexed Specifications" name="annexes">
                         <field name="allow_not_signed_contract" invisible="1"/>
