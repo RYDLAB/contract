@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="contract_expiration_notification" model="mail.template">
+        <field name="name">Contract expiration notification</field>
+<!--        <field name="email_from"></field>-->
+        <field name="email_to">{{ object.responsible_employee_id.work_email }}</field>
+        <field name="subject">Reminder of the expiration of the contract</field>
+        <field name="model_id" ref="contract.model_contract_contract"/>
+        <field name="lang">{{ object.responsible_employee_id.lang }}</field>
+        <field name="body_html" type="html">
+            <p>Dear <t t-out="object.responsible_employee_id.name or ''"/>,</p>
+            <p>A reminder to you about the expiration of contract No. <t t-out="object.name or ''"/> in <t t-out="object.notification_expiration_period or ''"/> days (<t t-out="object.expiration_date or ''"/>).</p>
+            <br/>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,624 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* contract
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-07-10 19:07+0000\n"
+"PO-Revision-Date: 2022-07-10 19:07+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_res_partner__contract_count
+#: model:ir.model.fields,field_description:contract.field_res_users__contract_count
+msgid "# of contracts"
+msgstr "# договоров"
+
+#. module: contract
+#: model:mail.template,body_html:contract.contract_expiration_notification
+msgid ""
+"<p>Dear <t t-out=\"object.responsible_employee_id.name or ''\"/>,</p>\n"
+"            <p>A reminder to you about the expiration of contract No. <t t-out=\"object.name or ''\"/> in <t t-out=\"object.notification_expiration_period or ''\"/> days (<t t-out=\"object.expiration_date or ''\"/>).</p>\n"
+"            <br/>\n"
+"        "
+msgstr ""
+"<p>Уважаемый(ая) <t t-out=\"object.responsible_employee_id.name or ''\"/>,</p>\n"
+"            <p>Напоминаем вам об истечении срока действия договора No. <t t-out=\"object.name or ''\"/> через <t t-out=\"object.notification_expiration_period or ''\"/> дней (<t t-out=\"object.expiration_date or ''\"/>).</p>\n"
+"            <br/>\n"
+"        "
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__message_needaction
+msgid "Action Needed"
+msgstr "Требуется действие"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__activity_ids
+msgid "Activities"
+msgstr "Виды деятельности"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "Деятельность декоратор исключения"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__activity_state
+msgid "Activity State"
+msgstr "Состояние активности"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "Значок вида деятельности"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__date_conclusion_fix
+msgid "Actual signing date"
+msgstr "Дата фактического подписания"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__allow_not_signed_contract
+msgid "Allow Not Signed Contract"
+msgstr "Допустить неподписание договора"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_res_config_settings__allow_not_signed_contract
+msgid "Allow binding annexes to unsigned contracts"
+msgstr "Разрешить приложения к неподписанным договорам"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_annex__annex_cost
+msgid "Annex Cost"
+msgstr ""
+
+#. module: contract
+#: model_terms:ir.ui.view,arch_db:contract.contract_form_view
+msgid "Annexed Specifications"
+msgstr "Спецификации"
+
+#. module: contract
+#: model:ir.actions.act_window,name:contract.annex_action_window
+#: model:ir.model.fields,field_description:contract.field_contract_contract__contract_annex_ids
+#: model:ir.ui.menu,name:contract.annex_list
+msgid "Annexes"
+msgstr "Приложения"
+
+#. module: contract
+#: model:ir.model.fields,help:contract.field_contract_contract__contract_annex_ids
+msgid "Annexes to this contract"
+msgstr "Приложения к настоящему договору"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__message_attachment_count
+msgid "Attachment Count"
+msgstr "Количество вложений"
+
+#. module: contract
+#: model_terms:ir.ui.view,arch_db:contract.contract_form_view
+msgid "Close"
+msgstr "Закрыть"
+
+#. module: contract
+#: model:ir.model.fields.selection,name:contract.selection__contract_contract__state__close
+msgid "Closed"
+msgstr "Закрыт"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_annex__company_id
+#: model:ir.model.fields,field_description:contract.field_contract_contract__company_id
+msgid "Company"
+msgstr "Компания"
+
+#. module: contract
+#: model:ir.model,name:contract.model_res_config_settings
+msgid "Config Settings"
+msgstr "Конфигурационные настройки"
+
+#. module: contract
+#: model:ir.model,name:contract.model_res_partner
+msgid "Contact"
+msgstr "Контакт"
+
+#. module: contract
+#: model:ir.model,name:contract.model_contract_contract
+#: model:ir.model.fields,field_description:contract.field_contract_annex__contract_id
+#: model:ir.ui.menu,name:contract.menu_root
+#: model_terms:ir.ui.view,arch_db:contract.contract_form_view
+msgid "Contract"
+msgstr "Договор"
+
+#. module: contract
+#: model:ir.model,name:contract.model_contract_annex
+#: model_terms:ir.ui.view,arch_db:contract.contract_annex_view_form
+msgid "Contract Annex"
+msgstr "Приложения"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__contract_annex_amount
+msgid "Contract Annex Amount"
+msgstr "Количество приложений к контракту "
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__expiration_date
+msgid "Contract expiration date"
+msgstr "Дата окончания действия"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__notification_expiration
+msgid "Contract expiration notice"
+msgstr "Уведомлять о завершении"
+
+#. module: contract
+#: model:mail.template,name:contract.contract_expiration_notification
+msgid "Contract expiration notification"
+msgstr ""
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__name
+msgid "Contract number"
+msgstr "Номер договора"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__renew_period
+msgid "Contract renew period"
+msgstr "Срок продления"
+
+#. module: contract
+#: model:ir.model.fields,help:contract.field_contract_annex__currency_id
+#: model:ir.model.fields,help:contract.field_contract_contract__currency_id
+msgid "Contract settlements should be performed in this currency."
+msgstr ""
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_annex__contract_type
+#: model:ir.model.fields,field_description:contract.field_contract_contract__type
+msgid "Contract type"
+msgstr "Тип договора"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_annex__currency_id
+#: model:ir.model.fields,field_description:contract.field_contract_contract__currency_id
+msgid "Contract's currency"
+msgstr "Валюта договора"
+
+#. module: contract
+#: model:ir.actions.server,name:contract.contract_notification_template_ir_actions_server
+#: model:ir.cron,cron_name:contract.contract_notification_template
+#: model:ir.cron,name:contract.contract_notification_template
+msgid "Contract: Checking the expiration date of active contracts."
+msgstr "Контракт: Проверка срока действия активных контрактов"
+
+#. module: contract
+#: model:ir.actions.act_window,name:contract.contract_action_window
+#: model:ir.actions.act_window,name:contract.contract_partner_action_window
+#: model:ir.model.fields,field_description:contract.field_res_partner__partner_contract_ids
+#: model:ir.model.fields,field_description:contract.field_res_users__partner_contract_ids
+#: model:ir.ui.menu,name:contract.contract_list
+#: model:ir.ui.menu,name:contract.contract_menu
+#: model_terms:ir.ui.view,arch_db:contract.res_config_settings_view_form
+#: model_terms:ir.ui.view,arch_db:contract.res_partner_contract_view_buttons
+msgid "Contracts"
+msgstr "Договоры"
+
+#. module: contract
+#: model:ir.model.fields,help:contract.field_contract_contract__contract_annex_amount
+msgid "Counter for tech purposes"
+msgstr "Счетчик для технических целей"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_annex__create_uid
+#: model:ir.model.fields,field_description:contract.field_contract_contract__create_uid
+msgid "Created by"
+msgstr "Создал"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_annex__create_date
+#: model:ir.model.fields,field_description:contract.field_contract_contract__create_date
+msgid "Created on"
+msgstr "Создано"
+
+#. module: contract
+#: model_terms:ir.ui.view,arch_db:contract.res_partner_contract_view_buttons
+msgid "Data for contracts"
+msgstr "Данные для договора"
+
+#. module: contract
+#: model:ir.model.fields.selection,name:contract.selection__contract_contract__renew_period_type__days
+msgid "Days"
+msgstr "Дни"
+
+#. module: contract
+#: model:ir.model.fields,help:contract.field_contract_annex__contract_type
+#: model:ir.model.fields,help:contract.field_contract_contract__type
+msgid ""
+"Different relations requires different contracts with own text and template."
+msgstr ""
+"Разные отношения требуют разных договоров с собственным текстом и шаблоном"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_annex__display_name
+#: model:ir.model.fields,field_description:contract.field_contract_contract__display_name
+msgid "Display Name"
+msgstr "Отображаемое имя"
+
+#. module: contract
+#: model:ir.model.fields,help:contract.field_contract_contract__date_conclusion_fix
+msgid "Field for pointing out manually when contract was actually signed."
+msgstr "Поле для указания вручную, когда контракт был фактически подписан."
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__message_follower_ids
+msgid "Followers"
+msgstr "Подписчики"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Подписчики (Партнеры)"
+
+#. module: contract
+#: model:ir.model.fields,help:contract.field_contract_contract__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_res_partner__name_genitive
+#: model:ir.model.fields,field_description:contract.field_res_users__name_genitive
+msgid "Full name in genitive"
+msgstr ""
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: contract
+#: model_terms:ir.ui.view,arch_db:contract.reminder_closing_contract_qweb
+msgid "Hello"
+msgstr ""
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_annex__id
+#: model:ir.model.fields,field_description:contract.field_contract_contract__id
+msgid "ID"
+msgstr "Номер"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__activity_exception_icon
+msgid "Icon"
+msgstr "Значок"
+
+#. module: contract
+#: model:ir.model.fields,help:contract.field_contract_contract__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "Значок для обозначения действия"
+
+#. module: contract
+#: model:ir.model.fields,help:contract.field_contract_contract__message_needaction
+#: model:ir.model.fields,help:contract.field_contract_contract__message_unread
+msgid "If checked, new messages require your attention."
+msgstr "Если выбрано, новые сообщения требуют вашего внимания"
+
+#. module: contract
+#: model:ir.model.fields,help:contract.field_contract_contract__message_has_error
+#: model:ir.model.fields,help:contract.field_contract_contract__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Если выбрано, некоторые сообщения имеют ошибку доставки"
+
+#. module: contract
+#: model_terms:ir.ui.view,arch_db:contract.res_config_settings_view_form
+msgid ""
+"If switched off, annexes creating is possible for signed contracts only."
+msgstr ""
+"Если не выбрано, создание приложений возможно только для подписанных "
+"договоров"
+
+#. module: contract
+#: model:ir.model.fields,help:contract.field_res_config_settings__allow_not_signed_contract
+msgid "If switched off, binding annexes is possible for signed contracts only"
+msgstr ""
+"Если не выбрано, то привязка приложений возможна только для подписанных "
+"договоров"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__message_is_follower
+msgid "Is Follower"
+msgstr "Наблюдатель"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_annex____last_update
+#: model:ir.model.fields,field_description:contract.field_contract_contract____last_update
+msgid "Last Modified on"
+msgstr "Изменено"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_annex__write_uid
+#: model:ir.model.fields,field_description:contract.field_contract_contract__write_uid
+msgid "Last Updated by"
+msgstr "Обновил"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_annex__write_date
+#: model:ir.model.fields,field_description:contract.field_contract_contract__write_date
+msgid "Last Updated on"
+msgstr "Обновлено"
+
+#. module: contract
+#: model_terms:ir.ui.view,arch_db:contract.contract_annex_view_form
+msgid "Leave empty for compute"
+msgstr "Оставьте пустым для вычисления"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__message_main_attachment_id
+msgid "Main Attachment"
+msgstr "Вложение"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__message_has_error
+msgid "Message Delivery error"
+msgstr "Ошибка доставки сообщения"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__message_ids
+msgid "Messages"
+msgstr "Сообщения"
+
+#. module: contract
+#: model:ir.model.fields.selection,name:contract.selection__contract_contract__renew_period_type__months
+msgid "Months"
+msgstr "Месяцы"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr "Срок моего действия "
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_annex__name
+#: model_terms:ir.ui.view,arch_db:contract.contract_form_view
+msgid "Name"
+msgstr "Имя"
+
+#. module: contract
+#: model:ir.model.fields.selection,name:contract.selection__contract_contract__state__draft
+msgid "New"
+msgstr "Новый"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__activity_calendar_event_id
+msgid "Next Activity Calendar Event"
+msgstr ""
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "Срок следующего действия"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__activity_summary
+msgid "Next Activity Summary"
+msgstr "Итог следующего действия"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__activity_type_id
+msgid "Next Activity Type"
+msgstr "Следующий вид действий"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__notification_expiration_period
+msgid "Notice period, days"
+msgstr "Срок уведомления, дней"
+
+#. module: contract
+#: model:ir.model.fields,help:contract.field_contract_contract__notification_expiration
+msgid "Notify the responsible employee of the expiration of the contract"
+msgstr "Уведомить ответственного сотрудника об истечении срока действия договора"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Количество действий"
+
+#. module: contract
+#: model:ir.model.fields,help:contract.field_contract_annex__annex_number
+msgid "Number of current annex among other annexes"
+msgstr "Номер текущего приложения среди других приложений"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__message_has_error_counter
+msgid "Number of errors"
+msgstr "Количество ошибок"
+
+#. module: contract
+#: model:ir.model.fields,help:contract.field_contract_contract__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "Количество сообщений, требующих действия"
+
+#. module: contract
+#: model:ir.model.fields,help:contract.field_contract_contract__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Количество сообщений с ошибкой доставки"
+
+#. module: contract
+#: model:ir.model.fields,help:contract.field_contract_contract__message_unread_counter
+msgid "Number of unread messages"
+msgstr "Количество непрочитанных сообщений"
+
+#. module: contract
+#: model:ir.model.fields,help:contract.field_res_partner__representative_document
+#: model:ir.model.fields,help:contract.field_res_users__representative_document
+msgid "Parent Case"
+msgstr "Родительный падеж"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_annex__partner_id
+#: model:ir.model.fields,field_description:contract.field_contract_contract__partner_id
+msgid "Partner"
+msgstr "Партнер"
+
+#. module: contract
+#: model:ir.model.fields,help:contract.field_res_partner__representative_id
+#: model:ir.model.fields,help:contract.field_res_users__representative_id
+msgid "Person representing company"
+msgstr "Представитель компании"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_res_partner__position_genitive
+#: model:ir.model.fields,field_description:contract.field_res_users__position_genitive
+msgid "Position genitive"
+msgstr "Должность в родительном падеже"
+
+#. module: contract
+#: model:mail.template,subject:contract.contract_expiration_notification
+msgid "Reminder of the expiration of the contract"
+msgstr "Напоминание об истечении срока действия контракта"
+
+#. module: contract
+#: model_terms:ir.ui.view,arch_db:contract.contract_form_view
+msgid "Renew"
+msgstr "Обновить"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__renew_automatically
+msgid "Renew contract automatically"
+msgstr "Продлять автоматически"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_res_partner__representative_id
+#: model:ir.model.fields,field_description:contract.field_res_users__representative_id
+msgid "Representative"
+msgstr "Представитель"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_res_partner__representative_document
+#: model:ir.model.fields,field_description:contract.field_res_users__representative_document
+msgid "Representative acts on the basis of"
+msgstr "Представитель действует на основании"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__res_model
+msgid "Res Model"
+msgstr ""
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__activity_user_id
+msgid "Responsible User"
+msgstr "Ответственный"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__responsible_employee_id
+msgid "Responsible employee"
+msgstr "Ответственный сотрудник"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "Ошибка доставки SMS"
+
+#. module: contract
+#: model_terms:ir.ui.view,arch_db:contract.contract_filter_view
+msgid "Search Contract"
+msgstr "Найти договор"
+
+#. module: contract
+#: model_terms:ir.ui.view,arch_db:contract.contract_form_view
+msgid "Sign"
+msgstr "Подпись"
+
+#. module: contract
+#: model:ir.model.fields.selection,name:contract.selection__contract_contract__state__sign
+msgid "Signed"
+msgstr "Подписано"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_annex__date_conclusion
+msgid "Signing Date"
+msgstr "Дата подписания"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__date_conclusion
+msgid "Signing date in system"
+msgstr "Дата подписания в системе"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__state
+msgid "Status"
+msgstr "Статус"
+
+#. module: contract
+#: model:ir.model.fields,help:contract.field_contract_contract__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_res_partner__name_initials
+#: model:ir.model.fields,field_description:contract.field_res_users__name_initials
+msgid "Surname and initials"
+msgstr "Фамилия и инициалы"
+
+#. module: contract
+#: model:ir.model.fields,help:contract.field_contract_contract__notification_expiration_period
+msgid "The day's number to contract expiration for sending notice"
+msgstr "Количество дней до истечения срока действия контракта для отправки уведомления"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__renew_period_type
+msgid "Type of contract renew period"
+msgstr "Тип интервала продления"
+
+#. module: contract
+#: model:ir.model.fields,help:contract.field_contract_contract__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "Тип исключающего действия в записи"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__message_unread
+msgid "Unread Messages"
+msgstr "Непрочитанные сообщения"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "Счетчик непрочитанных сообщений"
+
+#. module: contract
+#: model_terms:ir.ui.view,arch_db:contract.contract_form_view
+msgid "View"
+msgstr ""
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__website_message_ids
+msgid "Website Messages"
+msgstr "Сообщения сайта"
+
+#. module: contract
+#: model:ir.model.fields,help:contract.field_contract_contract__website_message_ids
+msgid "Website communication history"
+msgstr "История общения на сайте"
+
+#. module: contract
+#: model:ir.model.fields.selection,name:contract.selection__contract_contract__type__with_customer
+msgid "With customer"
+msgstr "С заказчиком"
+
+#. module: contract
+#: model:ir.model.fields.selection,name:contract.selection__contract_contract__type__with_vendor
+msgid "With vendor"
+msgstr "С поставщиком"
+
+#. module: contract
+#: model:ir.model.fields.selection,name:contract.selection__contract_contract__renew_period_type__years
+msgid "Years"
+msgstr "Годы"
