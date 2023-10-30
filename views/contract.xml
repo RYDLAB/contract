@@ -31,47 +31,55 @@
                     <field name="state" widget="statusbar" statusbar_visible="draft,sign,close"/>
                 </header>
                 <sheet>
-                    <label for="name"/>
-                    <h1>
-                        <field name="name" />
-                    </h1>
-                    <group name="single_params">
-                        <group>
-                            <field name="partner_id"/>
-                            <field name="type"/>
-                            <field name="currency_id"/>
-                            <field name="responsible_employee_id"/>
-                            <field name="create_date" attrs="{'invisible': [('id', '=', False)]}"/>
-                        </group>
-                        <group>
-                            <field name="date_conclusion" attrs="{'invisible': ['|', ('id', '=', False), ('date_conclusion', '=', False)]}"/>
-                            <field name="date_conclusion_fix" attrs="{'invisible': [('id', '=', False)]}"/>
-                            <field name="expiration_date"/>
-                            <field name="notification_expiration" attrs="{'invisible': [('responsible_employee_id', '=', False)]}"/>
-                            <field name="notification_expiration_period" attrs="{'invisible': [('notification_expiration', '=', False)]}"/>
-                            <field name="renew_automatically"/>
-                            <field name="renew_period" attrs="{'invisible': [('renew_automatically', '=', False)]}"/>
-                            <field name="renew_period_type" attrs="{'invisible': [('renew_automatically', '=', False)]}"/>
+                    <notebook>
+                        <page string="Specifications">
+                            <label for="name"/>
+                            <h1>
+                                <field name="name" />
+                            </h1>
+                            <group name="single_params">
+                                <group>
+                                    <field name="partner_id"/>
+                                    <field name="type"/>
+                                    <field name="currency_id"/>
+                                    <field name="responsible_employee_id"/>
+                                    <field name="create_date" attrs="{'invisible': [('id', '=', False)]}"/>
+                                    <field name="section_ids"/>
+                                </group>
+                                <group>
+                                    <field name="date_conclusion" attrs="{'invisible': ['|', ('id', '=', False), ('date_conclusion', '=', False)]}"/>
+                                    <field name="date_conclusion_fix" attrs="{'invisible': [('id', '=', False)]}"/>
+                                    <field name="expiration_date"/>
+                                    <field name="notification_expiration" attrs="{'invisible': [('responsible_employee_id', '=', False)]}"/>
+                                    <field name="notification_expiration_period" attrs="{'invisible': [('notification_expiration', '=', False)]}"/>
+                                    <field name="renew_automatically"/>
+                                    <field name="renew_period" attrs="{'invisible': [('renew_automatically', '=', False)]}"/>
+                                    <field name="renew_period_type" attrs="{'invisible': [('renew_automatically', '=', False)]}"/>
 
-                            <!-- Uses to generate number of Annex -->
-                            <field name="contract_annex_amount" invisible="1"/>
-                        </group>
-                    </group>
-                    <group string="Annexed Specifications" name="annexes">
-                        <field name="allow_not_signed_contract" invisible="1"/>
-                        <p colspan="2">
-                            <field name="contract_annex_ids"
-                                   nolabel="1"
-                                   mode="tree"
-                                   attrs="{'readonly': ['|', ('state', '=', 'close'), '&amp;', ('allow_not_signed_contract', '=', False), ('state', '=', 'draft')]}"
-                                   >
-                                <tree>
-                                    <field name="display_name" string="Name"/>
-                                    <button name="action_open_annex_form" type="object" string="View" attrs="{'invisible': [('id', '=', False)]}"/>
-                                </tree>
-                            </field>
-                        </p>
-                    </group>
+                                    <!-- Uses to generate number of Annex -->
+                                    <field name="contract_annex_amount" invisible="1"/>
+                                </group>
+                            </group>
+                            <group string="Annexed Specifications" name="annexes">
+                                <field name="allow_not_signed_contract" invisible="1"/>
+                                <p colspan="2">
+                                    <field name="contract_annex_ids"
+                                           nolabel="1"
+                                           mode="tree"
+                                           attrs="{'readonly': ['|', ('state', '=', 'close'), '&amp;', ('allow_not_signed_contract', '=', False), ('state', '=', 'draft')]}"
+                                           >
+                                        <tree>
+                                            <field name="display_name" string="Name"/>
+                                            <button name="action_open_annex_form" type="object" string="View" attrs="{'invisible': [('id', '=', False)]}"/>
+                                        </tree>
+                                    </field>
+                                </p>
+                            </group>
+                        </page>
+                        <page string="Sections">
+                            <field name="section_ids"/>
+                        </page>
+                    </notebook>
                 </sheet>
                 <div class="oe_chatter">
                     <field name="message_follower_ids"/> <!-- widget="mail_followers"/>-->
@@ -101,16 +109,43 @@
 
 
     <!-- Top menu item -->
-    <menuitem name="Contract" id="contract.menu_root" web_icon="contract,static/description/icon.png"/>
+    <menuitem name="Contract"
+              id="contract.menu_root"
+              web_icon="contract,static/description/icon.png"/>
 
     <!-- menu categories -->
-    <menuitem name="Contracts" id="contract.contract_menu" parent="contract.menu_root"/>
+    <menuitem name="Contracts"
+              id="contract.contract_menu"
+              parent="contract.menu_root"/>
 
     <!-- actions -->
-    <menuitem name="Contracts" id="contract.contract_list" parent="contract.contract_menu"
+    <menuitem name="Contracts"
+              id="contract.contract_list"
+              parent="contract.contract_menu"
               action="contract.contract_action_window"/>
-    <menuitem name="Annexes" id="contract.annex_list" parent="contract.contract_menu"
+
+    <menuitem name="Annexes"
+              id="contract.annex_list"
+              parent="contract.contract_menu"
               action="contract.annex_action_window"/>
+
+    <menuitem name="Contract Sections"
+              id="contract.section_list"
+              parent="contract.contract_menu"
+              action="contract.contract_section_window"
+              groups="base.group_no_one"/>
+
+    <menuitem name="Contract Lines"
+              id="contract.line_list"
+              parent="contract.contract_menu"
+              action="contract.contract_lines_window"
+              groups="base.group_no_one"/>
+
+    <menuitem name="Contract Contents"
+              id="contract.content_list"
+              parent="contract.contract_menu"
+              action="contract.contract_contents_window"
+              groups="base.group_no_one"/>
 
   </data>
 </odoo>

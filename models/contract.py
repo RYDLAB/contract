@@ -77,6 +77,9 @@ class Contract(models.Model):
         help="Annexes to this contract",
     )
     contract_annex_amount = fields.Integer(default=0, help="Counter for tech purposes")
+
+    section_ids = fields.One2many("contract.section", "contract_id", string="Секции")
+
     state = fields.Selection(
         [
             ("draft", "New"),
@@ -130,6 +133,17 @@ class Contract(models.Model):
     def unlink(self):
         self.contract_annex_ids.unlink()
         return super(Contract, self).unlink()
+
+    @api.returns("self", lambda value: value.id)
+    def copy(self, default=None):
+        new_contract = super(Contract, self).copy(default)
+        for section in self.section_ids:
+            new_section = section.copy({"contract_id": new_contract.id})
+            for line in section.line_ids:
+                new_line = line.copy(
+                    {"section_id": new_section.id, "contract_id": new_contract.id}
+                )
+        return new_contract
 
     def get_allow_not_signed_contract(self):
         ir_config = self.env["ir.config_parameter"].sudo()
