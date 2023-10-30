@@ -19,7 +19,11 @@
     # always loaded
     "data": [
         "security/ir.model.access.csv",
+        "wizard/contract_content_wizard_view.xml",
         "views/contract_annex.xml",
+        "views/contract_section_view.xml",
+        "views/contract_line_view.xml",
+        "views/contract_content_view.xml",
         "views/contract.xml",
         "views/partner.xml",
         "views/res_config_settings.xml",
