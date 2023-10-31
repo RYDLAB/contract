@@ -8,23 +8,21 @@ class ContractLine(models.Model):
     _description = "Contract Line"
     _order = "create_date desc"
 
-    section_id = fields.Many2one("contract.section", string="Раздел")
-    contract_id = fields.Many2one("contract.contract", string="Договор")
-    number = fields.Char(string="Номер")
-    sequence = fields.Integer(string="Sequence")
-    create_date = fields.Datetime(string="Дата создания")
+    section_id = fields.Many2one("contract.section", string="Section")
+    contract_id = fields.Many2one("contract.contract", string="Contract")
+    number = fields.Char(string="Number")
+    sequence = fields.Integer()
+    create_date = fields.Datetime(string="Creation date")
     content_ids = fields.Many2many(
         "contract.content",
         "contract_line_content_rel",
         "line_id",
         "content_id",
-        string="Содержимое",
+        string="Content",
     )
-    current_content_id = fields.Many2one(
-        "contract.content", string="Актуальное содержимое"
-    )
+    current_content_id = fields.Many2one("contract.content", string="Actual content")
     current_content_text = fields.Text(
-        string="Текст актуального содержимого",
+        string="Actual content text",
         related="current_content_id.content",
         readonly=True,
     )
@@ -45,7 +43,7 @@ class ContractLine(models.Model):
         """Отображает историю изменений содержимого пункта договора."""
 
         return {
-            "name": "История Содержимого",
+            "name": "Content history",
             "type": "ir.actions.act_window",
             "view_type": "form",
             "view_mode": "tree,form",
@@ -58,7 +56,7 @@ class ContractLine(models.Model):
         """Открывает визард для редактирования содержимого текущего пункта договора."""
 
         return {
-            "name": "Редактировать пункт",
+            "name": "Edit clause",
             "type": "ir.actions.act_window",
             "res_model": "contract.content.wizard",
             "view_mode": "form",

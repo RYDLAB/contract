@@ -78,7 +78,7 @@ class Contract(models.Model):
     )
     contract_annex_amount = fields.Integer(default=0, help="Counter for tech purposes")
 
-    section_ids = fields.One2many("contract.section", "contract_id", string="Секции")
+    section_ids = fields.One2many("contract.section", "contract_id", string="Sections")
 
     state = fields.Selection(
         [

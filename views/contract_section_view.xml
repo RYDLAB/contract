@@ -10,9 +10,21 @@
                         <group>
                             <field name="name"/>
                             <field name="create_date" readonly="1"/>
-                            <field name="contract_id"/>
-                            <field name="line_ids"/>
+                            <field name="contract_id" invisible="1"/>
                         </group>
+                        <h1>
+                            <label for="line_ids"/>
+                        </h1>
+                        <button name="button_create_clause" string="New clause" type="object" class="btn-primary my-3"/>
+                        <field name="line_ids" readonly="1">
+                            <tree > <!-- options="{'no_create_edit': True, 'no_create': True}" -->
+                                <field name="sequence" widget="handle"/>
+                                <field name="number"/>
+                                <field name="current_content_text"/>
+                                <field name="create_date"/>
+                                <button name="button_edit_content" string="Edit" type="object"/>
+                            </tree>
+                        </field>
                     </sheet>
                 </form>
             </field>
