@@ -1,6 +1,7 @@
 from odoo import models, fields, api
 from odoo.exceptions import UserError
 
+
 class ContractContent(models.Model):
     _name = "contract.content"
     _description = "Contract Content"
@@ -21,11 +22,13 @@ class ContractContent(models.Model):
             line.current_content_id = new_content.id
         return new_content
 
-    @api.constrains('content', 'line_ids')
+    @api.constrains("content", "line_ids")
     def _check_published_version(self):
         for record in self:
             if any(line.section_id.version_id.is_published for line in record.line_ids):
-                raise UserError("Cannot modify the content of a published contract version.")
+                raise UserError(
+                    "Cannot modify the content of a published contract version."
+                )
 
     def write(self, vals):
         if "content" in vals:

@@ -23,7 +23,8 @@
             <field name="arch" type="xml">
                 <form>
                     <header attrs="{'invisible': [('id', '=', False)]}">
-                        <button name="publish_version" type="object" string="Publish" class="oe_highlight"/>
+                        <button name="publish_version" type="object" string="Publish" class="oe_highlight" attrs="{'invisible': [('is_published', '=', True)]}"/>
+                        <button name="rollback_unpublish_version" type="object" string="Unpublish" attrs="{'invisible': [('is_published', '=', False)]}"/>
                     </header>
                     <sheet>
                         <group>

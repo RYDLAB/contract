@@ -8,11 +8,13 @@
                 <form>
                     <header>
                         <button string="Редактировать пункт" name="button_edit_content" type="object" class="oe_highlight"/>
-                        <button name="button_show_history" type="object" class="oe_inline oe_stat_button" icon="fa-pencil-square-o">
-                            <field string="История" name="history_count" widget="statinfo"/>
-                        </button>
                     </header>
                     <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="button_show_history" type="object" class="oe_inline oe_stat_button" icon="fa-pencil-square-o">
+                                <field string="История" name="history_count" widget="statinfo"/>
+                            </button>
+                        </div>
                         <group>
                             <field name="section_id"/>
                             <field name="contract_id"/>

@@ -4,7 +4,9 @@ from dateutil.relativedelta import relativedelta
 
 from odoo import api, fields, models
 from odoo.exceptions import AccessError, UserError
+
 _logger = logging.getLogger(__name__)
+
 
 class Contract(models.Model):
     _name = "contract.contract"
@@ -32,7 +34,7 @@ class Contract(models.Model):
         comodel_name="res.partner",
         string="Partner",
         default=lambda self: self.env.context.get("active_id"),
-
+        required=True,
     )
     company_id = fields.Many2one(
         "res.company",
@@ -58,7 +60,7 @@ class Contract(models.Model):
         ],
         string="Contract type",
         help="Different relations requires different contracts with own text and template.",
-
+        required=True,
     )
     create_date = fields.Datetime(string="Created on")
     date_conclusion = fields.Date(
@@ -126,30 +128,38 @@ class Contract(models.Model):
         ],
         string="Type of contract renew period",
         default="days",
+        required=True,
     )
 
-    version_ids = fields.One2many('contract.version', 'contract_id', string="Versions")
+    version_ids = fields.One2many(
+        "contract.version",
+        "contract_id",
+        string="Versions",
+        copy=False,
+    )
 
     published_version_id = fields.Many2one(
-        'contract.version', string="Published Version", readonly=True
+        "contract.version", string="Published Version", readonly=True
     )
 
     published_version_number = fields.Integer(
-        related='published_version_id.version_number',
+        related="published_version_id.version_number",
         string="Published Version Number",
-        readonly=True
+        readonly=True,
     )
 
-    draft_version_ids = fields.One2many('contract.version', 'contract_id', string="Draft Versions",
-                                        domain=[('is_published', '=', False)])
+    draft_version_ids = fields.One2many(
+        "contract.version",
+        "contract_id",
+        string="Draft Versions",
+        domain=[("is_published", "=", False)],
+    )
 
     version_count = fields.Integer(
-        string='Version Count',
-        compute='_compute_version_count',
-        store=False
+        string="Version Count", compute="_compute_version_count", store=False
     )
 
-    @api.depends('version_ids')
+    @api.depends("version_ids")
     def _compute_version_count(self):
         for record in self:
             record.version_count = len(record.version_ids)
@@ -157,10 +167,12 @@ class Contract(models.Model):
     @api.model
     def create(self, vals):
         contract = super().create(vals)
-        self.env['contract.version'].create({
-            'contract_id': contract.id,
-            'version_number': 1,
-        })
+        self.env["contract.version"].create(
+            {
+                "contract_id": contract.id,
+                "version_number": 1,
+            }
+        )
         return contract
 
     def unlink(self):
@@ -169,36 +181,27 @@ class Contract(models.Model):
 
     @api.returns("self", lambda value: value.id)
     def copy(self, default=None):
-        new_contract = super(Contract, self).copy(default)
-
         if not self.published_version_id:
             raise UserError("Cannot duplicate without a published version.")
-
+        default = dict(default or {})
+        default.update({"published_version_id": False})
+        new_contract = super(Contract, self).copy(default)
         current_version = self.published_version_id
-
-
-        new_version = current_version.copy({
-            'contract_id': new_contract.id,
-            'is_published': False,
-            'version_number': 1,
-
-        })
-
-        new_contract.write({'published_version_id': False})
-
-        (new_contract.version_ids - new_version).unlink()
-
-        for section in current_version.section_ids:
-            new_section = section.copy({
+        new_version = current_version.copy(
+            {
                 "contract_id": new_contract.id,
-                'version_id': new_version.id
-            })
+                "is_published": False,
+                "version_number": 1,
+            }
+        )
+        for section in current_version.section_ids:
+            new_section = section.copy(
+                {"contract_id": new_contract.id, "version_id": new_version.id}
+            )
             for line in section.line_ids:
-                new_line = line.copy({
-                    "section_id": new_section.id,
-                    "contract_id": new_contract.id
-                })
-
+                new_line = line.copy(
+                    {"section_id": new_section.id, "contract_id": new_contract.id}
+                )
         return new_contract
 
     def get_allow_not_signed_contract(self):
@@ -214,55 +217,56 @@ class Contract(models.Model):
 
         if not self.published_version_id:
             raise UserError("Cannot create new version without a published version.")
-        if self.state == 'sign':
+        if self.state == "sign":
             raise UserError("Cannot create a new version of a signed contract.")
 
-        #Получаем новый актуальный номер версии
+        # Получаем новый актуальный номер версии
         current_version = self.published_version_id
         new_version_number = int(current_version.version_number) + 1
 
-        #Создаем новую версию договора
-        new_version = self.env['contract.version'].create({
-            'contract_id': self.id,
-            'version_number': str(new_version_number)
-        })
+        # Создаем новую версию договора
+        new_version = self.env["contract.version"].create(
+            {"contract_id": self.id, "version_number": str(new_version_number)}
+        )
 
-        #Копируем секции, пункты, и добавляем новую связь в rel между пукнтом и содержимым
+        # Копируем секции, пункты, и добавляем новую связь в rel между пукнтом и содержимым
         for section in current_version.section_ids:
             new_section = section.copy({"version_id": new_version.id})
             for line in section.line_ids:
-                new_line = line.copy({
-                    'section_id': new_section.id,
-                    'contract_id': self.id
-                })
+                new_line = line.copy(
+                    {"section_id": new_section.id, "contract_id": self.id}
+                )
 
         return new_version
 
-    @api.constrains('section_ids')
+    @api.constrains("section_ids")
     def _check_sign_version(self):
         for record in self:
             if record.state == "sign":
-                raise UserError("Cannot modify a contract of a published contract version.")
+                raise UserError(
+                    "Cannot modify a content of a published contract version."
+                )
 
     def action_sign(self):
         if not self.published_version_id:
             return {
-                'name': 'Publish Version Wizard',
-                'type': 'ir.actions.act_window',
-                'res_model': 'contract.version.publish.wizard',
-                'view_mode': 'form',
-                'target': 'new',
-                'context': {
-                    'default_contract_id': self.id,
-                    'draft_version_ids': self.draft_version_ids.ids,
+                "name": "Publish Version Wizard",
+                "type": "ir.actions.act_window",
+                "res_model": "contract.version.publish.wizard",
+                "view_mode": "form",
+                "target": "new",
+                "context": {
+                    "default_contract_id": self.id,
+                    "draft_version_ids": self.draft_version_ids.ids,
                 },
             }
         self.write({"state": "sign", "date_conclusion": fields.Date.today()})
 
     def action_unsign(self):
-        if self.state != 'sign':
+        if self.state != "sign":
             raise UserError("Cannot sign without a sign status.")
         self.write({"state": "draft", "date_conclusion": False})
+
     def action_close(self):
         self.write({"state": "close"})
 
@@ -334,33 +338,25 @@ class Contract(models.Model):
                 )
 
     def open_publish_wizard(self):
-        if self.state == 'sign':
+        if self.state == "sign":
             raise UserError("Cannot publish version of a signed contract.")
         return {
-            'name': 'Publish Contract Version',
-            'view_mode': 'form',
-            'res_model': 'contract.publish_wizard',
-            'type': 'ir.actions.act_window',
-            'target': 'new',
-            'context': {'default_contract_id': self.id}
+            "name": "Publish Contract Version",
+            "view_mode": "form",
+            "res_model": "contract.publish_wizard",
+            "type": "ir.actions.act_window",
+            "target": "new",
+            "context": {"default_contract_id": self.id},
         }
-
-    def rollback_unpublish_version(self):
-        if self.state == 'sign':
-            raise UserError("Cannot rollback publish version of a signed contract.")
-        self.ensure_one()
-        if self.published_version_id:
-            self.published_version_id.is_published = False
-            self.published_version_id = False
 
     def show_versions(self):
         self.ensure_one()
         return {
-            'name': 'Contract Versions',
-            'type': 'ir.actions.act_window',
-            'view_mode': 'tree,form',
-            'res_model': 'contract.version',
-            'domain': [('contract_id', '=', self.id)],
-            'context': {'default_contract_id': self.id},
-            'target': 'current',
+            "name": "Contract Versions",
+            "type": "ir.actions.act_window",
+            "view_mode": "tree,form",
+            "res_model": "contract.version",
+            "domain": [("contract_id", "=", self.id)],
+            "context": {"default_contract_id": self.id},
+            "target": "current",
         }

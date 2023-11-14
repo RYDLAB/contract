@@ -38,7 +38,6 @@
 
 
                     <button name="open_publish_wizard" type="object" string="Publish Version" class="oe_highlight"/>
-                    <button name="rollback_unpublish_version" type="object" string="Unpublish Version"/>
                     <field name="state" widget="statusbar" statusbar_visible="draft,sign,close"/>
                 </header>
                 <sheet>
@@ -94,14 +93,24 @@
                             </group>
                         </page>
                         <page string="Text">
-                            <field name="section_ids">
+                            <group>
+                                <field name="published_version_id"/>
+                            </group>
+                            <label for="draft_version_ids"/>
+                            <field name="draft_version_ids">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="version_number"/>
+                                </tree>
+                            </field>
+                            <!--field name="section_ids">
                                 <tree>
                                     <field name="sequence" widget="handle"/>
                                     <field name="name"/>
                                     <field name="version_id"/>
                                     <field name="create_date"/>
                                 </tree>
-                            </field>
+                            </field-->
                         </page>
                     </notebook>
                 </sheet>
