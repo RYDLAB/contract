@@ -11,13 +11,16 @@
                             <field name="name"/>
                             <field name="create_date" readonly="1"/>
                             <field name="contract_id" invisible="1"/>
+                            <field name="version_id"/>
                         </group>
-                        <h1>
-                            <label for="line_ids"/>
-                        </h1>
-                        <button name="button_create_clause" string="New clause" type="object" class="btn-primary my-3"/>
+                        <div class="o_group" style="display:flex;align-items:center;">
+                            <h1>
+                                <label for="line_ids" string="Clauses"/>
+                            </h1>
+                            <button name="button_create_clause" string="New clause" type="object" class="btn-primary" style="margin-left: 5px;"/>
+                        </div>
                         <field name="line_ids" readonly="1">
-                            <tree > <!-- options="{'no_create_edit': True, 'no_create': True}" -->
+                            <tree >
                                 <field name="sequence" widget="handle"/>
                                 <field name="number"/>
                                 <field name="current_content_text"/>

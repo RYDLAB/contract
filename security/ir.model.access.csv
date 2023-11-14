@@ -4,4 +4,7 @@ access_contract_annex,access_contract_annex,model_contract_annex,base.group_user
 access_contract_section,access_contract_section,model_contract_section,base.group_user,1,1,1,1
 access_contract_line,access_contract_line,model_contract_line,base.group_user,1,1,1,1
 access_contract_content,access_contract_content,model_contract_content,base.group_user,1,1,1,1
+access_contract_version,access_contract_version,model_contract_version,base.group_user,1,1,1,1
 access_contract_content_wizard,access_contract_content_wizard,model_contract_content_wizard,base.group_user,1,1,1,1
+access_contract_publish_wizard,access_contract_publish_wizard,model_contract_publish_wizard,base.group_user,1,1,1,1
+access_contract_version_publish_wizard,access_contract_version_publish_wizard,model_contract_version_publish_wizard,base.group_user,1,1,1,1

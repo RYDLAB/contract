@@ -1,5 +1,5 @@
 from odoo import models, fields, api
-
+from odoo.exceptions import UserError
 
 class ContractLine(models.Model):
     """Хранит информацию о пунктах(абзацах) договора."""
@@ -27,6 +27,17 @@ class ContractLine(models.Model):
         readonly=True,
     )
 
+    history_count = fields.Integer(
+        string='History Count',
+        compute='_compute_history_count',
+        store=False
+    )
+
+    @api.depends('content_ids')
+    def _compute_history_count(self):
+        for record in self:
+            record.history_count = len(record.content_ids)
+
     @api.returns("self", lambda value: value.id)
     def copy(self, default=None):
         """Создает копию текущего пункта договора."""
@@ -38,6 +49,13 @@ class ContractLine(models.Model):
         new_line.write({"content_ids": [(6, 0, self.current_content_id.ids)]})
 
         return new_line
+
+    @api.constrains('section_id', 'contract_id', 'number', 'content_ids')
+    def _check_published_version(self):
+        for record in self:
+            if record.section_id.version_id.is_published:
+                raise UserError("Cannot modify a line of a published contract version.")
+
 
     def button_show_history(self):
         """Отображает историю изменений содержимого пункта договора."""
