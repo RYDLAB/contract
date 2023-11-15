@@ -11,6 +11,7 @@
           <field name="type"/>
           <field name="create_date"/>
           <field name="state"/>
+          <field name="published_version_number"/>
           <field name="responsible_employee_id"/>
           <field name="expiration_date"/>
           <field name="notification_expiration"/>
@@ -26,19 +27,34 @@
             <form string="Contract" >
                 <header attrs="{'invisible': [('id', '=', False)]}">
                     <button name="action_sign" type="object" string="Sign" states="draft" class="oe_highlight"/>
+
+                    <button name="action_unsign" type="object" string="Unsign" states="sign" class="oe_highlight"/>
+
+
                     <button name="action_close" type="object" string="Close" states="sign" class="oe_highlight"/>
                     <button name="action_renew" type="object" string="Renew" states="close"/>
+                    <button name="create_new_version" type="object" string="New version" class="oe_highlight"/>
+
+
+
+                    <button name="open_publish_wizard" type="object" string="Publish Version" class="oe_highlight"/>
                     <field name="state" widget="statusbar" statusbar_visible="draft,sign,close"/>
                 </header>
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="show_versions" type="object" string="Show Versions" class="oe_inline oe_stat_button" icon="fa-pencil-square-o">
+                             <field string="Версии" name="version_count" widget="statinfo"/>
+                        </button>
+                    </div>
                     <label for="name"/>
                     <h1>
-                        <field name="name" />
+                        <field name="name"/>
                     </h1>
                     <group name="single_params">
                         <group>
                             <field name="partner_id"/>
                             <field name="type"/>
+                            <field name="published_version_number"/>
                             <field name="currency_id"/>
                             <field name="responsible_employee_id"/>
                             <field name="create_date" attrs="{'invisible': [('id', '=', False)]}"/>
@@ -77,13 +93,24 @@
                             </group>
                         </page>
                         <page string="Text">
-                            <field name="section_ids">
+                            <group>
+                                <field name="published_version_id"/>
+                            </group>
+                            <label for="draft_version_ids"/>
+                            <field name="draft_version_ids">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="version_number"/>
+                                </tree>
+                            </field>
+                            <!--field name="section_ids">
                                 <tree>
                                     <field name="sequence" widget="handle"/>
                                     <field name="name"/>
+                                    <field name="version_id"/>
                                     <field name="create_date"/>
                                 </tree>
-                            </field>
+                            </field-->
                         </page>
                     </notebook>
                 </sheet>
@@ -151,6 +178,12 @@
               id="contract.content_list"
               parent="contract.contract_menu"
               action="contract.contract_contents_window"
+              groups="base.group_no_one"/>
+
+    <menuitem name="Contract Versions"
+              id="contract.version_list"
+              parent="contract.contract_menu"
+              action="contract.contract_version_window"
               groups="base.group_no_one"/>
 
   </data>

@@ -4,7 +4,7 @@
     "summary": """
         Introduces Contract entity.""",
     "description": """
-        Framework Contracts between company and customers, company and vendors. Contracts have annexes for 
+        Framework Contracts between company and customers, company and vendors. Contracts have annexes for
         sale/purchase orders.
     """,
     "author": "RYDLAB",
@@ -20,10 +20,13 @@
     "data": [
         "security/ir.model.access.csv",
         "wizard/contract_content_wizard_view.xml",
+        "wizard/contract_publish_wizard_view.xml",
+        "wizard/contract_version_publish_wizard_view.xml",
         "views/contract_annex.xml",
         "views/contract_section_view.xml",
         "views/contract_line_view.xml",
         "views/contract_content_view.xml",
+        "views/contract_version_view.xml",
         "views/contract.xml",
         "views/partner.xml",
         "views/res_config_settings.xml",
