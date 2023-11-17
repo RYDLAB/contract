@@ -220,29 +220,39 @@ class Contract(models.Model):
         if self.state == "sign":
             raise UserError("Cannot create a new version of a signed contract.")
 
-        current_version = self.published_version_id
-
-        last_version = self.env["contract.version"].search(
-            [("contract_id", "=", self.id)], order="version_number desc", limit=1
-        )
-
-        if not last_version:
-            raise UserError("No existing version found to create a new version.")
-
-        new_version_number = int(last_version.version_number) + 1
-
-        new_version = self.env["contract.version"].create(
-            {"contract_id": self.id, "version_number": str(new_version_number)}
-        )
-
-        for section in current_version.section_ids:
-            new_section = section.copy({"version_id": new_version.id})
-            for line in section.line_ids:
-                new_line = line.copy(
-                    {"section_id": new_section.id, "contract_id": self.id}
-                )
-
-        return new_version
+        return {
+            "name": "Create New Contract Version",
+            "type": "ir.actions.act_window",
+            "res_model": "contract.version.creation.wizard",
+            "view_mode": "form",
+            "target": "new",
+            "context": {
+                "default_contract_id": self.id,
+            },
+        }
+        # current_version = self.published_version_id
+        #
+        # last_version = self.env["contract.version"].search(
+        #     [("contract_id", "=", self.id)], order="version_number desc", limit=1
+        # )
+        #
+        # if not last_version:
+        #     raise UserError("No existing version found to create a new version.")
+        #
+        # new_version_number = int(last_version.version_number) + 1
+        #
+        # new_version = self.env["contract.version"].create(
+        #     {"contract_id": self.id, "version_number": str(new_version_number)}
+        # )
+        #
+        # for section in current_version.section_ids:
+        #     new_section = section.copy({"version_id": new_version.id})
+        #     for line in section.line_ids:
+        #         new_line = line.copy(
+        #             {"section_id": new_section.id, "contract_id": self.id}
+        #         )
+        #
+        # return new_version
 
     @api.constrains("section_ids")
     def _check_sign_version(self):

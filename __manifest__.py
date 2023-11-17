@@ -24,6 +24,7 @@
         "wizard/confirm_delete_wizard.xml",
         "wizard/contract_version_publish_wizard_view.xml",
         "wizard/contract_line_wizard_view.xml",
+        "wizard/contract_version_creation_wizard_view.xml",
         "wizard/contract_section_wizard_view.xml",
         "views/contract_annex.xml",
         "views/contract_section_view.xml",
