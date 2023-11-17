@@ -23,13 +23,10 @@ class ContractVersionPublishWizard(models.TransientModel):
     )
 
     version_selection = fields.Selection(
-        [
-            ('draft', 'Draft Versions'),
-            ('published', 'Published Versions')
-        ],
+        [("draft", "Draft Versions"), ("published", "Published Versions")],
         string="Version Selection",
-        default='draft',
-        required=True
+        default="draft",
+        required=True,
     )
 
     @api.model
@@ -58,4 +55,3 @@ class ContractVersionPublishWizard(models.TransientModel):
         self.contract_id.state = "sign"
         self.contract_id.published_version_id = self.version_to_publish_id
         return {"type": "ir.actions.act_window_close"}
-

@@ -36,5 +36,3 @@ class ContractSection(models.Model):
             },
             "target": "new",
         }
-
-

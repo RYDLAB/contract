@@ -223,9 +223,7 @@ class Contract(models.Model):
         current_version = self.published_version_id
 
         last_version = self.env["contract.version"].search(
-            [("contract_id", "=", self.id)],
-            order="version_number desc",
-            limit=1
+            [("contract_id", "=", self.id)], order="version_number desc", limit=1
         )
 
         if not last_version:
@@ -267,7 +265,6 @@ class Contract(models.Model):
             },
         }
 
-
     def action_unsign(self):
         if self.state != "sign":
             raise UserError("Cannot sign without a sign status.")
@@ -304,32 +301,32 @@ class Contract(models.Model):
         finally:
             for contract in contracts:
                 if (
-                        contract.renew_automatically
-                        and contract.expiration_date == datetime.date.today()
+                    contract.renew_automatically
+                    and contract.expiration_date == datetime.date.today()
                 ):
                     contract.renew_contract()
                 elif (
-                        not contract.renew_automatically
-                        and contract.expiration_date == datetime.date.today()
+                    not contract.renew_automatically
+                    and contract.expiration_date == datetime.date.today()
                 ):
                     contract.action_close()
 
     def _send_notification_today(self):
         return (
-                self.responsible_employee_id
-                and self.notification_expiration
-                and self.expiration_date
-                and self.expiration_date
-                - datetime.timedelta(days=self.notification_expiration_period)
-                == datetime.date.today()
+            self.responsible_employee_id
+            and self.notification_expiration
+            and self.expiration_date
+            and self.expiration_date
+            - datetime.timedelta(days=self.notification_expiration_period)
+            == datetime.date.today()
         )
 
     @api.constrains("notification_expiration_period")
     def _check_notification_expiration_period(self):
         for record in self:
             if (
-                    record.notification_expiration_period
-                    and record.notification_expiration_period <= 0
+                record.notification_expiration_period
+                and record.notification_expiration_period <= 0
             ):
                 raise models.ValidationError(
                     "The validity period of the notification must be a positive number"

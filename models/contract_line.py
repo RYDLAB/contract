@@ -69,7 +69,7 @@ class ContractLine(models.Model):
             "context": {
                 "default_confirm_message": f"Are you sure you want to delete {self.number}?",
                 "active_model": self._name,
-                "active_id": self.id
+                "active_id": self.id,
             },
         }
 
