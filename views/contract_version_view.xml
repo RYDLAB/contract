@@ -24,16 +24,21 @@
                 <form>
                     <header attrs="{'invisible': [('id', '=', False)]}">
                         <button name="publish_version" type="object" string="Publish" class="oe_highlight" attrs="{'invisible': [('is_published', '=', True)]}"/>
+                        <button name="button_create_section" string="New Section" type="object" class="btn-primary"/>
                         <button name="rollback_unpublish_version" type="object" string="Unpublish" attrs="{'invisible': [('is_published', '=', False)]}"/>
                     </header>
                     <sheet>
                         <group>
-                            <field name="id"/>
+                            <field name="contract_id" readonly="1" invisible="1"/>
                             <field name="name"/>
-                            <field name="version_number"/>
-                            <field name="is_published"/>
-                            <field name="contract_id"/>
-                            <field name="section_ids"/>
+                            <field name="version_number" invisible="1"/>
+                            <field name="is_published" readonly="1" invisible="1"/>
+                            <field name="section_ids">
+                                <tree >
+                                    <field name="name"/>
+                                    <field name="create_date" optional="hide"/>
+                                </tree>
+                            </field>
                         </group>
                     </sheet>
                 </form>

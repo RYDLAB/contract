@@ -220,16 +220,23 @@ class Contract(models.Model):
         if self.state == "sign":
             raise UserError("Cannot create a new version of a signed contract.")
 
-        # Получаем новый актуальный номер версии
         current_version = self.published_version_id
-        new_version_number = int(current_version.version_number) + 1
 
-        # Создаем новую версию договора
+        last_version = self.env["contract.version"].search(
+            [("contract_id", "=", self.id)],
+            order="version_number desc",
+            limit=1
+        )
+
+        if not last_version:
+            raise UserError("No existing version found to create a new version.")
+
+        new_version_number = int(last_version.version_number) + 1
+
         new_version = self.env["contract.version"].create(
             {"contract_id": self.id, "version_number": str(new_version_number)}
         )
 
-        # Копируем секции, пункты, и добавляем новую связь в rel между пукнтом и содержимым
         for section in current_version.section_ids:
             new_section = section.copy({"version_id": new_version.id})
             for line in section.line_ids:
@@ -248,19 +255,18 @@ class Contract(models.Model):
                 )
 
     def action_sign(self):
-        if not self.published_version_id:
-            return {
-                "name": "Publish Version Wizard",
-                "type": "ir.actions.act_window",
-                "res_model": "contract.version.publish.wizard",
-                "view_mode": "form",
-                "target": "new",
-                "context": {
-                    "default_contract_id": self.id,
-                    "draft_version_ids": self.draft_version_ids.ids,
-                },
-            }
-        self.write({"state": "sign", "date_conclusion": fields.Date.today()})
+        return {
+            "name": "Publish Version Wizard",
+            "type": "ir.actions.act_window",
+            "res_model": "contract.version.publish.wizard",
+            "view_mode": "form",
+            "target": "new",
+            "context": {
+                "default_contract_id": self.id,
+                "draft_version_ids": self.draft_version_ids.ids,
+            },
+        }
+
 
     def action_unsign(self):
         if self.state != "sign":
@@ -298,32 +304,32 @@ class Contract(models.Model):
         finally:
             for contract in contracts:
                 if (
-                    contract.renew_automatically
-                    and contract.expiration_date == datetime.date.today()
+                        contract.renew_automatically
+                        and contract.expiration_date == datetime.date.today()
                 ):
                     contract.renew_contract()
                 elif (
-                    not contract.renew_automatically
-                    and contract.expiration_date == datetime.date.today()
+                        not contract.renew_automatically
+                        and contract.expiration_date == datetime.date.today()
                 ):
                     contract.action_close()
 
     def _send_notification_today(self):
         return (
-            self.responsible_employee_id
-            and self.notification_expiration
-            and self.expiration_date
-            and self.expiration_date
-            - datetime.timedelta(days=self.notification_expiration_period)
-            == datetime.date.today()
+                self.responsible_employee_id
+                and self.notification_expiration
+                and self.expiration_date
+                and self.expiration_date
+                - datetime.timedelta(days=self.notification_expiration_period)
+                == datetime.date.today()
         )
 
     @api.constrains("notification_expiration_period")
     def _check_notification_expiration_period(self):
         for record in self:
             if (
-                record.notification_expiration_period
-                and record.notification_expiration_period <= 0
+                    record.notification_expiration_period
+                    and record.notification_expiration_period <= 0
             ):
                 raise models.ValidationError(
                     "The validity period of the notification must be a positive number"

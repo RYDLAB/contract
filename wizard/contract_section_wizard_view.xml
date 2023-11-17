@@ -1,0 +1,21 @@
+<odoo>
+    <data>
+        <record id="view_contract_section_wizard_form" model="ir.ui.view">
+            <field name="name">contract.section.wizard.form</field>
+            <field name="model">contract.section.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <footer>
+                            <button string="Create" type="object" name="button_create" class="btn-primary"/>
+                            <button string="Cancel" class="btn-secondary" special="cancel"/>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -22,6 +22,16 @@ class ContractVersionPublishWizard(models.TransientModel):
         "contract.version", string="Select Version to Publish"
     )
 
+    version_selection = fields.Selection(
+        [
+            ('draft', 'Draft Versions'),
+            ('published', 'Published Versions')
+        ],
+        string="Version Selection",
+        default='draft',
+        required=True
+    )
+
     @api.model
     def default_get(self, fields):
         res = super(ContractVersionPublishWizard, self).default_get(fields)
@@ -42,14 +52,10 @@ class ContractVersionPublishWizard(models.TransientModel):
 
     def action_publish(self):
         self.ensure_one()
-        if self.version_to_publish_id:
-            self.contract_id.published_version_id = self.version_to_publish_id
-            self.version_to_publish_id.is_published = True
-            self.contract_id.state = "sign"
-            return {"type": "ir.actions.act_window_close"}
-        return {
-            "warning": {
-                "title": "No version selected",
-                "message": "Please select a version to publish.",
-            }
-        }
+
+        self.contract_id.published_version_id = self.version_to_publish_id
+        self.version_to_publish_id.is_published = True
+        self.contract_id.state = "sign"
+        self.contract_id.published_version_id = self.version_to_publish_id
+        return {"type": "ir.actions.act_window_close"}
+

@@ -27,7 +27,8 @@ class ContractSection(models.Model):
             "type": "ir.actions.act_window",
             "name": "Create Line",
             "view_mode": "form",
-            "res_model": "contract.line",
+            "res_model": "contract.line.wizard",
+            "view_id": self.env.ref("contract.view_contract_line_wizard_form").id,
             "context": {
                 "default_section_id": self.id,
                 "default_contract_id": self.contract_id.id,
@@ -35,3 +36,5 @@ class ContractSection(models.Model):
             },
             "target": "new",
         }
+
+
