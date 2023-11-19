@@ -217,27 +217,21 @@ class Contract(models.Model):
 
         if not self.published_version_id:
             raise UserError("Cannot create new version without a published version.")
-        if self.state == "sign":
-            raise UserError("Cannot create a new version of a signed contract.")
+        if self.state in ["sign", "close"]:
+            raise UserError(
+                "Cannot create a new version of a signed or closed contract."
+            )
 
-        # Получаем новый актуальный номер версии
-        current_version = self.published_version_id
-        new_version_number = int(current_version.version_number) + 1
-
-        # Создаем новую версию договора
-        new_version = self.env["contract.version"].create(
-            {"contract_id": self.id, "version_number": str(new_version_number)}
-        )
-
-        # Копируем секции, пункты, и добавляем новую связь в rel между пукнтом и содержимым
-        for section in current_version.section_ids:
-            new_section = section.copy({"version_id": new_version.id})
-            for line in section.line_ids:
-                new_line = line.copy(
-                    {"section_id": new_section.id, "contract_id": self.id}
-                )
-
-        return new_version
+        return {
+            "name": "Create New Contract Version",
+            "type": "ir.actions.act_window",
+            "res_model": "contract.version.creation.wizard",
+            "view_mode": "form",
+            "target": "new",
+            "context": {
+                "default_contract_id": self.id,
+            },
+        }
 
     @api.constrains("section_ids")
     def _check_sign_version(self):
@@ -248,19 +242,17 @@ class Contract(models.Model):
                 )
 
     def action_sign(self):
-        if not self.published_version_id:
-            return {
-                "name": "Publish Version Wizard",
-                "type": "ir.actions.act_window",
-                "res_model": "contract.version.publish.wizard",
-                "view_mode": "form",
-                "target": "new",
-                "context": {
-                    "default_contract_id": self.id,
-                    "draft_version_ids": self.draft_version_ids.ids,
-                },
-            }
-        self.write({"state": "sign", "date_conclusion": fields.Date.today()})
+        return {
+            "name": "Publish Version Wizard",
+            "type": "ir.actions.act_window",
+            "res_model": "contract.version.publish.wizard",
+            "view_mode": "form",
+            "target": "new",
+            "context": {
+                "default_contract_id": self.id,
+                "draft_version_ids": self.draft_version_ids.ids,
+            },
+        }
 
     def action_unsign(self):
         if self.state != "sign":

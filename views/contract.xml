@@ -97,7 +97,7 @@
                                 <field name="published_version_id"/>
                             </group>
                             <label for="draft_version_ids"/>
-                            <field name="draft_version_ids">
+                            <field name="draft_version_ids" readonly="1">
                                 <tree>
                                     <field name="name"/>
                                     <field name="version_number"/>

@@ -58,6 +58,21 @@ class ContractLine(models.Model):
             if record.section_id.version_id.is_published:
                 raise UserError("Cannot modify a line of a published contract version.")
 
+    def button_delete_content(self):
+        self.ensure_one()
+        return {
+            "name": "Confirm Deletion",
+            "type": "ir.actions.act_window",
+            "res_model": "confirm.deletion.wizard",
+            "view_mode": "form",
+            "target": "new",
+            "context": {
+                "default_confirm_message": f"Are you sure you want to delete {self.number}?",
+                "active_model": self._name,
+                "active_id": self.id,
+            },
+        }
+
     def button_show_history(self):
         """Отображает историю изменений содержимого пункта договора."""
 

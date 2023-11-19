@@ -46,3 +46,18 @@ class ContractVersion(models.Model):
                 self.contract_id.published_version_id = (
                     published_vers[0] if published_vers else False
                 )
+
+    def button_create_section(self):
+        self.ensure_one()
+        return {
+            "name": "Create Contract Section",
+            "type": "ir.actions.act_window",
+            "res_model": "contract.section.wizard",
+            "view_mode": "form",
+            "view_id": self.env.ref("contract.view_contract_section_wizard_form").id,
+            "target": "new",
+            "context": {
+                "default_version_id": self.id,
+                "default_contract_id": self.contract_id.id,
+            },
+        }
