@@ -217,8 +217,10 @@ class Contract(models.Model):
 
         if not self.published_version_id:
             raise UserError("Cannot create new version without a published version.")
-        if self.state == "sign":
-            raise UserError("Cannot create a new version of a signed contract.")
+        if self.state in ["sign", "close"]:
+            raise UserError(
+                "Cannot create a new version of a signed or closed contract."
+            )
 
         return {
             "name": "Create New Contract Version",
@@ -230,29 +232,6 @@ class Contract(models.Model):
                 "default_contract_id": self.id,
             },
         }
-        # current_version = self.published_version_id
-        #
-        # last_version = self.env["contract.version"].search(
-        #     [("contract_id", "=", self.id)], order="version_number desc", limit=1
-        # )
-        #
-        # if not last_version:
-        #     raise UserError("No existing version found to create a new version.")
-        #
-        # new_version_number = int(last_version.version_number) + 1
-        #
-        # new_version = self.env["contract.version"].create(
-        #     {"contract_id": self.id, "version_number": str(new_version_number)}
-        # )
-        #
-        # for section in current_version.section_ids:
-        #     new_section = section.copy({"version_id": new_version.id})
-        #     for line in section.line_ids:
-        #         new_line = line.copy(
-        #             {"section_id": new_section.id, "contract_id": self.id}
-        #         )
-        #
-        # return new_version
 
     @api.constrains("section_ids")
     def _check_sign_version(self):
