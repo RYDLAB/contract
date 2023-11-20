@@ -61,3 +61,5 @@ class ContractVersion(models.Model):
                 "default_contract_id": self.contract_id.id,
             },
         }
+
+

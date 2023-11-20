@@ -8,6 +8,7 @@ class ContractSection(models.Model):
     _order = "sequence"
 
     name = fields.Char(string="Name")
+    number = fields.Char(string="Number")
     sequence = fields.Integer()
     contract_id = fields.Many2one("contract.contract", string="Contract")
     line_ids = fields.One2many("contract.line", "section_id", string="Section text")
@@ -35,4 +36,19 @@ class ContractSection(models.Model):
                 "default_version_id": self.version_id.id,
             },
             "target": "new",
+        }
+
+    def button_delete_section(self):
+        self.ensure_one()
+        return {
+            "name": "Confirm Deletion",
+            "type": "ir.actions.act_window",
+            "res_model": "confirm.deletion.wizard",
+            "view_mode": "form",
+            "target": "new",
+            "context": {
+                "default_confirm_message": f"Are you sure you want to delete {self.name}?",
+                "active_model": self._name,
+                "active_id": self.id,
+            },
         }

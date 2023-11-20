@@ -24,9 +24,10 @@
             <field name="name">contract.content.tree</field>
             <field name="model">contract.content</field>
             <field name="arch" type="xml">
-                <tree>
+                <tree delete="false" edit="false" create="false">
                     <field name="content"/>
                     <field name="create_date"/>
+
                 </tree>
             </field>
         </record>

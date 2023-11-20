@@ -9,6 +9,7 @@
                     <sheet>
                         <group>
                             <field name="name"/>
+                            <field name="number"/>
                             <field name="create_date" readonly="1" invisible="1"/>
                             <field name="contract_id" invisible="1"/>
                             <field name="version_id" invisible="1"/>
@@ -20,7 +21,7 @@
                             <button name="button_create_clause" string="New clause" type="object" class="btn-primary" style="margin-left: 5px;"/>
                         </div>
                         <field name="line_ids">
-                            <tree >
+                            <tree delete="false" edit="false" create="false">
                                 <field name="sequence" widget="handle"/>
                                 <field name="number"/>
                                 <field name="current_content_text"/>

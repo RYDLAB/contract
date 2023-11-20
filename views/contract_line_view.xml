@@ -17,10 +17,10 @@
                         </div>
                         <group>
                             <field name="section_id" readonly="1"/>
-                            <field name="contract_id" readonly="1"/>
+                            <field name="contract_id" readonly="1" invisible="1"/>
                             <field name="number"/>
                             <field name="current_content_text"/>
-                            <field name="create_date" readonly="1"/>
+                            <field name="create_date" readonly="1" invisible="1"/>
                         </group>
                     </sheet>
                 </form>
