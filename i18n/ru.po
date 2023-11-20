@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.0\n"
+"Project-Id-Version: Odoo Server 16.0-20231017\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-10 19:07+0000\n"
-"PO-Revision-Date: 2022-07-10 19:07+0000\n"
+"POT-Creation-Date: 2023-11-20 10:15+0000\n"
+"PO-Revision-Date: 2023-11-20 10:15+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -24,9 +24,9 @@ msgstr "# договоров"
 #. module: contract
 #: model:mail.template,body_html:contract.contract_expiration_notification
 msgid ""
-"<p>Dear <t t-out=\"object.responsible_employee_id.name or ''\"/>,</p>\n"
-"            <p>A reminder to you about the expiration of contract No. <t t-out=\"object.name or ''\"/> in <t t-out=\"object.notification_expiration_period or ''\"/> days (<t t-out=\"object.expiration_date or ''\"/>).</p>\n"
-"            <br/>\n"
+"<p>Dear <t t-out=\"object.responsible_employee_id.name or ''\"></t>,</p>\n"
+"            <p>A reminder to you about the expiration of contract No. <t t-out=\"object.name or ''\"></t> in <t t-out=\"object.notification_expiration_period or ''\"></t> days (<t t-out=\"object.expiration_date or ''\"></t>).</p>\n"
+"            <br>\n"
 "        "
 msgstr ""
 "<p>Уважаемый(ая) <t t-out=\"object.responsible_employee_id.name or ''\"/>,</p>\n"
@@ -58,6 +58,16 @@ msgstr "Состояние активности"
 #: model:ir.model.fields,field_description:contract.field_contract_contract__activity_type_icon
 msgid "Activity Type Icon"
 msgstr "Значок вида деятельности"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_line__current_content_id
+msgid "Actual content"
+msgstr "Актуальное содержимое"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_line__current_content_text
+msgid "Actual content text"
+msgstr "Текст актуального содержимого"
 
 #. module: contract
 #: model:ir.model.fields,field_description:contract.field_contract_contract__date_conclusion_fix
@@ -102,6 +112,32 @@ msgid "Attachment Count"
 msgstr "Количество вложений"
 
 #. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_version_creation_wizard__base_version_id
+msgid "Base Version"
+msgstr "Исходная версия"
+
+#. module: contract
+#: model_terms:ir.ui.view,arch_db:contract.view_confirm_deletion_wizard_form
+#: model_terms:ir.ui.view,arch_db:contract.view_contract_content_wizard_form
+#: model_terms:ir.ui.view,arch_db:contract.view_contract_line_wizard_form
+#: model_terms:ir.ui.view,arch_db:contract.view_contract_publish_wizard_form
+#: model_terms:ir.ui.view,arch_db:contract.view_contract_section_wizard_form
+#: model_terms:ir.ui.view,arch_db:contract.view_contract_version_creation_wizard_form
+#: model_terms:ir.ui.view,arch_db:contract.view_contract_version_publish_wizard_form
+msgid "Cancel"
+msgstr "Отмена"
+
+#. module: contract
+#: model_terms:ir.ui.view,arch_db:contract.view_contract_version_publish_wizard_form
+msgid "Choose a version to publish:"
+msgstr "Выберите версию для публикации:"
+
+#. module: contract
+#: model_terms:ir.ui.view,arch_db:contract.view_contract_section_form
+msgid "Clauses"
+msgstr "Разделы"
+
+#. module: contract
 #: model_terms:ir.ui.view,arch_db:contract.contract_form_view
 msgid "Close"
 msgstr "Закрыть"
@@ -123,13 +159,42 @@ msgid "Config Settings"
 msgstr "Конфигурационные настройки"
 
 #. module: contract
+#: model_terms:ir.ui.view,arch_db:contract.view_confirm_deletion_wizard_form
+msgid "Confirm"
+msgstr "Подтвердить"
+
+#. module: contract
+#: model:ir.model,name:contract.model_confirm_deletion_wizard
+msgid "Confirm Deletion Wizard"
+msgstr ""
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_confirm_deletion_wizard__confirm_message
+msgid "Confirmation Message"
+msgstr "Сообщение подтверждения"
+
+#. module: contract
 #: model:ir.model,name:contract.model_res_partner
 msgid "Contact"
 msgstr "Контакт"
 
 #. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_line__content_ids
+#: model:ir.model.fields,field_description:contract.field_contract_line_wizard__content_text
+msgid "Content"
+msgstr "Содержимое"
+
+#. module: contract
 #: model:ir.model,name:contract.model_contract_contract
 #: model:ir.model.fields,field_description:contract.field_contract_annex__contract_id
+#: model:ir.model.fields,field_description:contract.field_contract_line__contract_id
+#: model:ir.model.fields,field_description:contract.field_contract_line_wizard__contract_id
+#: model:ir.model.fields,field_description:contract.field_contract_publish_wizard__contract_id
+#: model:ir.model.fields,field_description:contract.field_contract_section__contract_id
+#: model:ir.model.fields,field_description:contract.field_contract_section_wizard__contract_id
+#: model:ir.model.fields,field_description:contract.field_contract_version__contract_id
+#: model:ir.model.fields,field_description:contract.field_contract_version_creation_wizard__contract_id
+#: model:ir.model.fields,field_description:contract.field_contract_version_publish_wizard__contract_id
 #: model:ir.ui.menu,name:contract.menu_root
 #: model_terms:ir.ui.view,arch_db:contract.contract_form_view
 msgid "Contract"
@@ -145,6 +210,57 @@ msgstr "Приложения"
 #: model:ir.model.fields,field_description:contract.field_contract_contract__contract_annex_amount
 msgid "Contract Annex Amount"
 msgstr "Количество приложений к контракту "
+
+#. module: contract
+#: model:ir.model,name:contract.model_contract_content
+msgid "Contract Content"
+msgstr "Содержимое договора"
+
+#. module: contract
+#: model:ir.actions.act_window,name:contract.contract_contents_window
+#: model:ir.ui.menu,name:contract.content_list
+msgid "Contract Contents"
+msgstr "Тексты договора"
+
+#. module: contract
+#: model:ir.model,name:contract.model_contract_line
+msgid "Contract Line"
+msgstr "Пункт договора"
+
+#. module: contract
+#: model:ir.actions.act_window,name:contract.contract_lines_window
+#: model:ir.ui.menu,name:contract.line_list
+msgid "Contract Lines"
+msgstr "Пункты договора"
+
+#. module: contract
+#: model:ir.model,name:contract.model_contract_publish_wizard
+msgid "Contract Publish Wizard"
+msgstr "Визард публикации"
+
+#. module: contract
+#: model:ir.model,name:contract.model_contract_section
+msgid "Contract Section"
+msgstr "Глава договора"
+
+#. module: contract
+#: model:ir.actions.act_window,name:contract.contract_section_window
+#: model:ir.ui.menu,name:contract.section_list
+msgid "Contract Sections"
+msgstr "Главы договора"
+
+#. module: contract
+#: model:ir.actions.act_window,name:contract.contract_version_window
+#: model:ir.model,name:contract.model_contract_version
+#: model:ir.model.fields,field_description:contract.field_contract_section__version_id
+#: model:ir.model.fields,field_description:contract.field_contract_section_wizard__version_id
+msgid "Contract Version"
+msgstr "Версия договора"
+
+#. module: contract
+#: model:ir.ui.menu,name:contract.version_list
+msgid "Contract Versions"
+msgstr "Версии договора"
 
 #. module: contract
 #: model:ir.model.fields,field_description:contract.field_contract_contract__expiration_date
@@ -192,7 +308,6 @@ msgstr "Валюта договора"
 #. module: contract
 #: model:ir.actions.server,name:contract.contract_notification_template_ir_actions_server
 #: model:ir.cron,cron_name:contract.contract_notification_template
-#: model:ir.cron,name:contract.contract_notification_template
 msgid "Contract: Checking the expiration date of active contracts."
 msgstr "Контракт: Проверка срока действия активных контрактов"
 
@@ -214,16 +329,53 @@ msgid "Counter for tech purposes"
 msgstr "Счетчик для технических целей"
 
 #. module: contract
+#: model_terms:ir.ui.view,arch_db:contract.view_contract_line_wizard_form
+#: model_terms:ir.ui.view,arch_db:contract.view_contract_section_wizard_form
+msgid "Create"
+msgstr "Создать"
+
+#. module: contract
+#: model_terms:ir.ui.view,arch_db:contract.view_contract_version_creation_wizard_form
+msgid "Create New Version"
+msgstr "Создать новую версию"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_confirm_deletion_wizard__create_uid
 #: model:ir.model.fields,field_description:contract.field_contract_annex__create_uid
+#: model:ir.model.fields,field_description:contract.field_contract_content__create_uid
+#: model:ir.model.fields,field_description:contract.field_contract_content_wizard__create_uid
 #: model:ir.model.fields,field_description:contract.field_contract_contract__create_uid
+#: model:ir.model.fields,field_description:contract.field_contract_line__create_uid
+#: model:ir.model.fields,field_description:contract.field_contract_line_wizard__create_uid
+#: model:ir.model.fields,field_description:contract.field_contract_publish_wizard__create_uid
+#: model:ir.model.fields,field_description:contract.field_contract_section__create_uid
+#: model:ir.model.fields,field_description:contract.field_contract_section_wizard__create_uid
+#: model:ir.model.fields,field_description:contract.field_contract_version__create_uid
+#: model:ir.model.fields,field_description:contract.field_contract_version_creation_wizard__create_uid
+#: model:ir.model.fields,field_description:contract.field_contract_version_publish_wizard__create_uid
 msgid "Created by"
 msgstr "Создал"
 
 #. module: contract
+#: model:ir.model.fields,field_description:contract.field_confirm_deletion_wizard__create_date
 #: model:ir.model.fields,field_description:contract.field_contract_annex__create_date
+#: model:ir.model.fields,field_description:contract.field_contract_content__create_date
+#: model:ir.model.fields,field_description:contract.field_contract_content_wizard__create_date
 #: model:ir.model.fields,field_description:contract.field_contract_contract__create_date
+#: model:ir.model.fields,field_description:contract.field_contract_line_wizard__create_date
+#: model:ir.model.fields,field_description:contract.field_contract_publish_wizard__create_date
+#: model:ir.model.fields,field_description:contract.field_contract_section__create_date
+#: model:ir.model.fields,field_description:contract.field_contract_section_wizard__create_date
+#: model:ir.model.fields,field_description:contract.field_contract_version__create_date
+#: model:ir.model.fields,field_description:contract.field_contract_version_creation_wizard__create_date
+#: model:ir.model.fields,field_description:contract.field_contract_version_publish_wizard__create_date
 msgid "Created on"
 msgstr "Создано"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_line__create_date
+msgid "Creation date"
+msgstr ""
 
 #. module: contract
 #: model_terms:ir.ui.view,arch_db:contract.res_partner_contract_view_buttons
@@ -244,10 +396,34 @@ msgstr ""
 "Разные отношения требуют разных договоров с собственным текстом и шаблоном"
 
 #. module: contract
+#: model:ir.model.fields,field_description:contract.field_confirm_deletion_wizard__display_name
 #: model:ir.model.fields,field_description:contract.field_contract_annex__display_name
+#: model:ir.model.fields,field_description:contract.field_contract_content__display_name
+#: model:ir.model.fields,field_description:contract.field_contract_content_wizard__display_name
 #: model:ir.model.fields,field_description:contract.field_contract_contract__display_name
+#: model:ir.model.fields,field_description:contract.field_contract_line__display_name
+#: model:ir.model.fields,field_description:contract.field_contract_line_wizard__display_name
+#: model:ir.model.fields,field_description:contract.field_contract_publish_wizard__display_name
+#: model:ir.model.fields,field_description:contract.field_contract_section__display_name
+#: model:ir.model.fields,field_description:contract.field_contract_section_wizard__display_name
+#: model:ir.model.fields,field_description:contract.field_contract_version__display_name
+#: model:ir.model.fields,field_description:contract.field_contract_version_creation_wizard__display_name
+#: model:ir.model.fields,field_description:contract.field_contract_version_publish_wizard__display_name
 msgid "Display Name"
 msgstr "Отображаемое имя"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__draft_version_ids
+#: model:ir.model.fields,field_description:contract.field_contract_version_publish_wizard__draft_version_ids
+#: model:ir.model.fields.selection,name:contract.selection__contract_version_publish_wizard__version_selection__draft
+#: model_terms:ir.ui.view,arch_db:contract.view_contract_version_publish_wizard_form
+msgid "Draft Versions"
+msgstr "Версии в разработке"
+
+#. module: contract
+#: model_terms:ir.ui.view,arch_db:contract.view_contract_section_form
+msgid "Edit"
+msgstr "Редактировать"
 
 #. module: contract
 #: model:ir.model.fields,help:contract.field_contract_contract__date_conclusion_fix
@@ -281,13 +457,24 @@ msgid "Has Message"
 msgstr ""
 
 #. module: contract
-#: model_terms:ir.ui.view,arch_db:contract.reminder_closing_contract_qweb
-msgid "Hello"
-msgstr ""
+#: model:ir.model.fields,field_description:contract.field_contract_line__history_count
+msgid "History Count"
+msgstr "Кол-во записей"
 
 #. module: contract
+#: model:ir.model.fields,field_description:contract.field_confirm_deletion_wizard__id
 #: model:ir.model.fields,field_description:contract.field_contract_annex__id
+#: model:ir.model.fields,field_description:contract.field_contract_content__id
+#: model:ir.model.fields,field_description:contract.field_contract_content_wizard__id
 #: model:ir.model.fields,field_description:contract.field_contract_contract__id
+#: model:ir.model.fields,field_description:contract.field_contract_line__id
+#: model:ir.model.fields,field_description:contract.field_contract_line_wizard__id
+#: model:ir.model.fields,field_description:contract.field_contract_publish_wizard__id
+#: model:ir.model.fields,field_description:contract.field_contract_section__id
+#: model:ir.model.fields,field_description:contract.field_contract_section_wizard__id
+#: model:ir.model.fields,field_description:contract.field_contract_version__id
+#: model:ir.model.fields,field_description:contract.field_contract_version_creation_wizard__id
+#: model:ir.model.fields,field_description:contract.field_contract_version_publish_wizard__id
 msgid "ID"
 msgstr "Номер"
 
@@ -303,7 +490,6 @@ msgstr "Значок для обозначения действия"
 
 #. module: contract
 #: model:ir.model.fields,help:contract.field_contract_contract__message_needaction
-#: model:ir.model.fields,help:contract.field_contract_contract__message_unread
 msgid "If checked, new messages require your attention."
 msgstr "Если выбрано, новые сообщения требуют вашего внимания"
 
@@ -334,20 +520,53 @@ msgid "Is Follower"
 msgstr "Наблюдатель"
 
 #. module: contract
+#: model:ir.model.fields,field_description:contract.field_confirm_deletion_wizard____last_update
 #: model:ir.model.fields,field_description:contract.field_contract_annex____last_update
+#: model:ir.model.fields,field_description:contract.field_contract_content____last_update
+#: model:ir.model.fields,field_description:contract.field_contract_content_wizard____last_update
 #: model:ir.model.fields,field_description:contract.field_contract_contract____last_update
+#: model:ir.model.fields,field_description:contract.field_contract_line____last_update
+#: model:ir.model.fields,field_description:contract.field_contract_line_wizard____last_update
+#: model:ir.model.fields,field_description:contract.field_contract_publish_wizard____last_update
+#: model:ir.model.fields,field_description:contract.field_contract_section____last_update
+#: model:ir.model.fields,field_description:contract.field_contract_section_wizard____last_update
+#: model:ir.model.fields,field_description:contract.field_contract_version____last_update
+#: model:ir.model.fields,field_description:contract.field_contract_version_creation_wizard____last_update
+#: model:ir.model.fields,field_description:contract.field_contract_version_publish_wizard____last_update
 msgid "Last Modified on"
 msgstr "Изменено"
 
 #. module: contract
+#: model:ir.model.fields,field_description:contract.field_confirm_deletion_wizard__write_uid
 #: model:ir.model.fields,field_description:contract.field_contract_annex__write_uid
+#: model:ir.model.fields,field_description:contract.field_contract_content__write_uid
+#: model:ir.model.fields,field_description:contract.field_contract_content_wizard__write_uid
 #: model:ir.model.fields,field_description:contract.field_contract_contract__write_uid
+#: model:ir.model.fields,field_description:contract.field_contract_line__write_uid
+#: model:ir.model.fields,field_description:contract.field_contract_line_wizard__write_uid
+#: model:ir.model.fields,field_description:contract.field_contract_publish_wizard__write_uid
+#: model:ir.model.fields,field_description:contract.field_contract_section__write_uid
+#: model:ir.model.fields,field_description:contract.field_contract_section_wizard__write_uid
+#: model:ir.model.fields,field_description:contract.field_contract_version__write_uid
+#: model:ir.model.fields,field_description:contract.field_contract_version_creation_wizard__write_uid
+#: model:ir.model.fields,field_description:contract.field_contract_version_publish_wizard__write_uid
 msgid "Last Updated by"
 msgstr "Обновил"
 
 #. module: contract
+#: model:ir.model.fields,field_description:contract.field_confirm_deletion_wizard__write_date
 #: model:ir.model.fields,field_description:contract.field_contract_annex__write_date
+#: model:ir.model.fields,field_description:contract.field_contract_content__write_date
+#: model:ir.model.fields,field_description:contract.field_contract_content_wizard__write_date
 #: model:ir.model.fields,field_description:contract.field_contract_contract__write_date
+#: model:ir.model.fields,field_description:contract.field_contract_line__write_date
+#: model:ir.model.fields,field_description:contract.field_contract_line_wizard__write_date
+#: model:ir.model.fields,field_description:contract.field_contract_publish_wizard__write_date
+#: model:ir.model.fields,field_description:contract.field_contract_section__write_date
+#: model:ir.model.fields,field_description:contract.field_contract_section_wizard__write_date
+#: model:ir.model.fields,field_description:contract.field_contract_version__write_date
+#: model:ir.model.fields,field_description:contract.field_contract_version_creation_wizard__write_date
+#: model:ir.model.fields,field_description:contract.field_contract_version_publish_wizard__write_date
 msgid "Last Updated on"
 msgstr "Обновлено"
 
@@ -383,6 +602,8 @@ msgstr "Срок моего действия "
 
 #. module: contract
 #: model:ir.model.fields,field_description:contract.field_contract_annex__name
+#: model:ir.model.fields,field_description:contract.field_contract_section__name
+#: model:ir.model.fields,field_description:contract.field_contract_version__name
 #: model_terms:ir.ui.view,arch_db:contract.contract_form_view
 msgid "Name"
 msgstr "Имя"
@@ -393,9 +614,19 @@ msgid "New"
 msgstr "Новый"
 
 #. module: contract
-#: model:ir.model.fields,field_description:contract.field_contract_contract__activity_calendar_event_id
-msgid "Next Activity Calendar Event"
-msgstr ""
+#: model_terms:ir.ui.view,arch_db:contract.view_contract_version_form
+msgid "New Section"
+msgstr "Новая глава"
+
+#. module: contract
+#: model_terms:ir.ui.view,arch_db:contract.view_contract_section_form
+msgid "New clause"
+msgstr "Новый пункт"
+
+#. module: contract
+#: model_terms:ir.ui.view,arch_db:contract.contract_form_view
+msgid "New version"
+msgstr "Новая версия"
 
 #. module: contract
 #: model:ir.model.fields,field_description:contract.field_contract_contract__activity_date_deadline
@@ -420,7 +651,14 @@ msgstr "Срок уведомления, дней"
 #. module: contract
 #: model:ir.model.fields,help:contract.field_contract_contract__notification_expiration
 msgid "Notify the responsible employee of the expiration of the contract"
-msgstr "Уведомить ответственного сотрудника об истечении срока действия договора"
+msgstr ""
+"Уведомить ответственного сотрудника об истечении срока действия договора"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_line__number
+#: model:ir.model.fields,field_description:contract.field_contract_line_wizard__number
+msgid "Number"
+msgstr "Номер"
 
 #. module: contract
 #: model:ir.model.fields,field_description:contract.field_contract_contract__message_needaction_counter
@@ -439,18 +677,13 @@ msgstr "Количество ошибок"
 
 #. module: contract
 #: model:ir.model.fields,help:contract.field_contract_contract__message_needaction_counter
-msgid "Number of messages which requires an action"
+msgid "Number of messages requiring action"
 msgstr "Количество сообщений, требующих действия"
 
 #. module: contract
 #: model:ir.model.fields,help:contract.field_contract_contract__message_has_error_counter
 msgid "Number of messages with delivery error"
 msgstr "Количество сообщений с ошибкой доставки"
-
-#. module: contract
-#: model:ir.model.fields,help:contract.field_contract_contract__message_unread_counter
-msgid "Number of unread messages"
-msgstr "Количество непрочитанных сообщений"
 
 #. module: contract
 #: model:ir.model.fields,help:contract.field_res_partner__representative_document
@@ -475,6 +708,45 @@ msgstr "Представитель компании"
 #: model:ir.model.fields,field_description:contract.field_res_users__position_genitive
 msgid "Position genitive"
 msgstr "Должность в родительном падеже"
+
+#. module: contract
+#: model_terms:ir.ui.view,arch_db:contract.view_contract_publish_wizard_form
+#: model_terms:ir.ui.view,arch_db:contract.view_contract_version_form
+#: model_terms:ir.ui.view,arch_db:contract.view_contract_version_publish_wizard_form
+msgid "Publish"
+msgstr "Опубликовать"
+
+#. module: contract
+#: model:ir.actions.act_window,name:contract.action_contract_publish_wizard
+msgid "Publish Contract Version"
+msgstr "Опубликовать версию договора"
+
+#. module: contract
+#: model_terms:ir.ui.view,arch_db:contract.contract_form_view
+msgid "Publish Version"
+msgstr "Опубликовать версию"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_version__is_published
+msgid "Published"
+msgstr "Опубликовано"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__published_version_id
+msgid "Published Version"
+msgstr "Опубликованная версия"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__published_version_number
+msgid "Published Version Number"
+msgstr "Номер опубликованной версии"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_version_publish_wizard__published_version_ids
+#: model:ir.model.fields.selection,name:contract.selection__contract_version_publish_wizard__version_selection__published
+#: model_terms:ir.ui.view,arch_db:contract.view_contract_version_publish_wizard_form
+msgid "Published Versions"
+msgstr "Опубликованные версии"
 
 #. module: contract
 #: model:mail.template,subject:contract.contract_expiration_notification
@@ -524,9 +796,52 @@ msgid "SMS Delivery error"
 msgstr "Ошибка доставки SMS"
 
 #. module: contract
+#: model_terms:ir.ui.view,arch_db:contract.view_contract_content_wizard_form
+msgid "Save"
+msgstr "Сохранить"
+
+#. module: contract
 #: model_terms:ir.ui.view,arch_db:contract.contract_filter_view
 msgid "Search Contract"
 msgstr "Найти договор"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_line__section_id
+#: model:ir.model.fields,field_description:contract.field_contract_line_wizard__section_id
+msgid "Section"
+msgstr "Глава"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_section_wizard__name
+msgid "Section Name"
+msgstr "Название главы"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_section__line_ids
+msgid "Section text"
+msgstr "Текст главы"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__section_ids
+#: model:ir.model.fields,field_description:contract.field_contract_version__section_ids
+msgid "Sections"
+msgstr "Главы"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_version_publish_wizard__version_to_publish_id
+msgid "Select Version to Publish"
+msgstr "Выберите версию для публикации"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_line__sequence
+#: model:ir.model.fields,field_description:contract.field_contract_section__sequence
+msgid "Sequence"
+msgstr "Порядок"
+
+#. module: contract
+#: model_terms:ir.ui.view,arch_db:contract.contract_form_view
+msgid "Show Versions"
+msgstr "Показать версии"
 
 #. module: contract
 #: model_terms:ir.ui.view,arch_db:contract.contract_form_view
@@ -549,6 +864,11 @@ msgid "Signing date in system"
 msgstr "Дата подписания в системе"
 
 #. module: contract
+#: model_terms:ir.ui.view,arch_db:contract.contract_form_view
+msgid "Specifications"
+msgstr "Спецификации"
+
+#. module: contract
 #: model:ir.model.fields,field_description:contract.field_contract_contract__state
 msgid "Status"
 msgstr "Статус"
@@ -569,9 +889,16 @@ msgid "Surname and initials"
 msgstr "Фамилия и инициалы"
 
 #. module: contract
+#: model_terms:ir.ui.view,arch_db:contract.contract_form_view
+msgid "Text"
+msgstr "Версии"
+
+#. module: contract
 #: model:ir.model.fields,help:contract.field_contract_contract__notification_expiration_period
 msgid "The day's number to contract expiration for sending notice"
-msgstr "Количество дней до истечения срока действия контракта для отправки уведомления"
+msgstr ""
+"Количество дней до истечения срока действия контракта для отправки "
+"уведомления"
 
 #. module: contract
 #: model:ir.model.fields,field_description:contract.field_contract_contract__renew_period_type
@@ -584,14 +911,39 @@ msgid "Type of the exception activity on record."
 msgstr "Тип исключающего действия в записи"
 
 #. module: contract
-#: model:ir.model.fields,field_description:contract.field_contract_contract__message_unread
-msgid "Unread Messages"
-msgstr "Непрочитанные сообщения"
+#: model_terms:ir.ui.view,arch_db:contract.view_contract_version_form
+msgid "Unpublish"
+msgstr "Отмена публикации"
 
 #. module: contract
-#: model:ir.model.fields,field_description:contract.field_contract_contract__message_unread_counter
-msgid "Unread Messages Counter"
-msgstr "Счетчик непрочитанных сообщений"
+#: model_terms:ir.ui.view,arch_db:contract.contract_form_view
+msgid "Unsign"
+msgstr "Отмена подписания"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__version_count
+msgid "Version Count"
+msgstr "Количество версий"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_version__version_number
+msgid "Version Number"
+msgstr "Номер версии"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_version_publish_wizard__version_selection
+msgid "Version Selection"
+msgstr "Выбор типа версии"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_publish_wizard__version_id
+msgid "Version to Publish"
+msgstr "Версии для публикации"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__version_ids
+msgid "Versions"
+msgstr "Версии"
 
 #. module: contract
 #: model_terms:ir.ui.view,arch_db:contract.contract_form_view
@@ -619,6 +971,66 @@ msgid "With vendor"
 msgstr "С поставщиком"
 
 #. module: contract
+#: model:ir.model,name:contract.model_contract_version_creation_wizard
+msgid "Wizard for Creating New Contract Version"
+msgstr "Визард для создания новой версии договора"
+
+#. module: contract
+#: model:ir.model,name:contract.model_contract_version_publish_wizard
+msgid "Wizard for Publishing Contract Versions"
+msgstr "Визард для создания новой версии договора"
+
+#. module: contract
+#: model:ir.model,name:contract.model_contract_line_wizard
+msgid "Wizard to Create a Contract Line"
+msgstr "Визард для создания нового пункта договора"
+
+#. module: contract
+#: model:ir.model,name:contract.model_contract_section_wizard
+msgid "Wizard to Create a Contract Section"
+msgstr "Визард для создания новой главы договора"
+
+#. module: contract
+#: model:ir.model,name:contract.model_contract_content_wizard
+msgid "Wizard to edit contract content"
+msgstr "Визард для редактирования содержимого договора"
+
+#. module: contract
 #: model:ir.model.fields.selection,name:contract.selection__contract_contract__renew_period_type__years
 msgid "Years"
 msgstr "Годы"
+
+#. module: contract
+#: model_terms:ir.ui.view,arch_db:contract.contract_form_view
+msgid "Версии"
+msgstr ""
+
+#. module: contract
+#: model_terms:ir.ui.view,arch_db:contract.view_contract_line_form
+msgid "История"
+msgstr ""
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_content__line_ids
+msgid "Пункты"
+msgstr ""
+
+#. module: contract
+#: model_terms:ir.ui.view,arch_db:contract.view_contract_line_form
+msgid "Редактировать пункт"
+msgstr ""
+
+#. module: contract
+#: model_terms:ir.ui.view,arch_db:contract.view_contract_content_form
+msgid "Сделать актуальным"
+msgstr ""
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_content_wizard__content
+msgid "Содержимое"
+msgstr ""
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_content__content
+msgid "Текст"
+msgstr ""
