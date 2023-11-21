@@ -166,7 +166,7 @@ class Contract(models.Model):
 
     @api.model
     def create(self, vals):
-        if self.env.context.get('copy') is not True:
+        if self.env.context.get("copy") is not True:
             contract = super().create(vals)
             self.env["contract.version"].create(
                 {
