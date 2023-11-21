@@ -24,7 +24,7 @@ class ContractVersionCreationWizard(models.TransientModel):
             order="version_number desc",
             limit=1,
         )
-        new_version_number = int(last_version) + 1
+        new_version_number = int(last_version.version_number) + 1
         new_version = self.env["contract.version"].create(
             {
                 "contract_id": contract.id,

@@ -34,9 +34,10 @@
                             <field name="version_number" invisible="1"/>
                             <field name="is_published" readonly="1" invisible="1"/>
                             <field name="section_ids">
-                                <tree >
+                                <tree create="false" delete="false" edit="false">
                                     <field name="name"/>
                                     <field name="create_date" optional="hide"/>
+                                    <button name="button_delete_section" type="object" icon="fa-trash"/>
                                 </tree>
                             </field>
                         </group>

@@ -45,7 +45,7 @@ class ContractLine(models.Model):
         default.update(
             {
                 "current_content_id": self.current_content_id.id,
-                "content_ids": ([4, self.current_content_id.id, 0]),
+                "content_ids": ([(6, 0, self.current_content_id.ids)]),
             }
         )
         return super(ContractLine, self).copy(default)

@@ -166,14 +166,17 @@ class Contract(models.Model):
 
     @api.model
     def create(self, vals):
-        contract = super().create(vals)
-        self.env["contract.version"].create(
-            {
-                "contract_id": contract.id,
-                "version_number": 1,
-            }
-        )
-        return contract
+        if self.env.context.get("copy") is not True:
+            contract = super().create(vals)
+            self.env["contract.version"].create(
+                {
+                    "contract_id": contract.id,
+                    "version_number": 1,
+                }
+            )
+            return contract
+        else:
+            return super().create(vals)
 
     def unlink(self):
         self.contract_annex_ids.unlink()
@@ -185,7 +188,7 @@ class Contract(models.Model):
             raise UserError("Cannot duplicate without a published version.")
         default = dict(default or {})
         default.update({"published_version_id": False})
-        new_contract = super(Contract, self).copy(default)
+        new_contract = super(Contract, self.with_context(copy=True)).copy(default)
         current_version = self.published_version_id
         new_version = current_version.copy(
             {
