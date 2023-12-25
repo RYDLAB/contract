@@ -8,7 +8,7 @@ class ContractSection(models.Model):
     _order = "sequence"
 
     name = fields.Char(string="Name")
-    number = fields.Char(string="Number")
+    number = fields.Char(string="Section Number")
     sequence = fields.Integer()
     contract_id = fields.Many2one("contract.contract", string="Contract")
     line_ids = fields.One2many("contract.line", "section_id", string="Section text")
