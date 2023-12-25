@@ -8,6 +8,7 @@
                     <sheet>
                         <group>
                             <field name="name"/>
+                            <field name="number"/>
                         </group>
                         <footer>
                             <button string="Create" type="object" name="button_create" class="btn-primary"/>

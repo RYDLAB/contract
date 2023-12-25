@@ -7,7 +7,7 @@ class ContractLine(models.Model):
 
     _name = "contract.line"
     _description = "Contract Line"
-    _order = "create_date desc"
+    _order = "sequence"
 
     section_id = fields.Many2one("contract.section", string="Section")
     contract_id = fields.Many2one("contract.contract", string="Contract")
