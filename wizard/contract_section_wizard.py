@@ -9,7 +9,7 @@ class ContractSectionWizard(models.TransientModel):
     version_id = fields.Many2one("contract.version", string="Contract Version")
     contract_id = fields.Many2one("contract.contract", string="Contract")
     name = fields.Char(string="Section Name", required=True)
-    number = fields.Integer(string="Section Number", required=True)
+    number = fields.Char(string="Section Number", required=True)
 
     def button_create(self):
         self.ensure_one()
