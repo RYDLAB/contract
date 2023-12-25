@@ -657,6 +657,7 @@ msgstr ""
 #. module: contract
 #: model:ir.model.fields,field_description:contract.field_contract_line__number
 #: model:ir.model.fields,field_description:contract.field_contract_line_wizard__number
+#: model:ir.model.fields,field_description:contract.field_contract_section_number
 msgid "Number"
 msgstr "Номер"
 
@@ -815,6 +816,11 @@ msgstr "Глава"
 #: model:ir.model.fields,field_description:contract.field_contract_section_wizard__name
 msgid "Section Name"
 msgstr "Название главы"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_section_wizard__number
+msgid "Section Number"
+msgstr "Номер главы"
 
 #. module: contract
 #: model:ir.model.fields,field_description:contract.field_contract_section__line_ids
