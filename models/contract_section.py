@@ -1,4 +1,4 @@
-from odoo import fields, models, api
+from odoo import fields, models, api, _
 from odoo.exceptions import UserError
 
 
@@ -26,7 +26,7 @@ class ContractSection(models.Model):
         self.ensure_one()
         return {
             "type": "ir.actions.act_window",
-            "name": "Create Line",
+            "name": _("Create Line"),
             "view_mode": "form",
             "res_model": "contract.line.wizard",
             "view_id": self.env.ref("contract.view_contract_line_wizard_form").id,
@@ -41,13 +41,13 @@ class ContractSection(models.Model):
     def button_delete_section(self):
         self.ensure_one()
         return {
-            "name": "Confirm Deletion",
+            "name": _("Confirm Deletion"),
             "type": "ir.actions.act_window",
             "res_model": "confirm.deletion.wizard",
             "view_mode": "form",
             "target": "new",
             "context": {
-                "default_confirm_message": f"Are you sure you want to delete {self.name}?",
+                "default_confirm_message": _("Are you sure you want to delete: %s", self.name),
                 "active_model": self._name,
                 "active_id": self.id,
             },

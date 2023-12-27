@@ -2,7 +2,7 @@ import datetime
 import logging
 from dateutil.relativedelta import relativedelta
 
-from odoo import api, fields, models
+from odoo import api, fields, models, _
 from odoo.exceptions import AccessError, UserError
 
 _logger = logging.getLogger(__name__)
@@ -219,14 +219,14 @@ class Contract(models.Model):
         self.ensure_one()
 
         if not self.published_version_id:
-            raise UserError("Cannot create new version without a published version.")
+            raise UserError(_("Cannot create new version without a published version."))
         if self.state in ["sign", "close"]:
             raise UserError(
                 "Cannot create a new version of a signed or closed contract."
             )
 
         return {
-            "name": "Create New Contract Version",
+            "name": _("Create New Contract Version"),
             "type": "ir.actions.act_window",
             "res_model": "contract.version.creation.wizard",
             "view_mode": "form",
@@ -246,7 +246,7 @@ class Contract(models.Model):
 
     def action_sign(self):
         return {
-            "name": "Publish Version Wizard",
+            "name": _("Sign Contract"),
             "type": "ir.actions.act_window",
             "res_model": "contract.version.publish.wizard",
             "view_mode": "form",
@@ -336,7 +336,7 @@ class Contract(models.Model):
         if self.state == "sign":
             raise UserError("Cannot publish version of a signed contract.")
         return {
-            "name": "Publish Contract Version",
+            "name": _("Publish Contract Version"),
             "view_mode": "form",
             "res_model": "contract.publish_wizard",
             "type": "ir.actions.act_window",
@@ -347,7 +347,7 @@ class Contract(models.Model):
     def show_versions(self):
         self.ensure_one()
         return {
-            "name": "Contract Versions",
+            "name": _("Contract Versions"),
             "type": "ir.actions.act_window",
             "view_mode": "tree,form",
             "res_model": "contract.version",

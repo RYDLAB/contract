@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 from odoo.exceptions import UserError
 
 
@@ -61,7 +61,7 @@ class ContractLine(models.Model):
     def button_delete_content(self):
         self.ensure_one()
         return {
-            "name": "Confirm Deletion",
+            "name": -("Confirm Deletion"),
             "type": "ir.actions.act_window",
             "res_model": "confirm.deletion.wizard",
             "view_mode": "form",
@@ -77,7 +77,7 @@ class ContractLine(models.Model):
         """Отображает историю изменений содержимого пункта договора."""
 
         return {
-            "name": "Content history",
+            "name": _("Content history"),
             "type": "ir.actions.act_window",
             "view_type": "form",
             "view_mode": "tree,form",
@@ -90,7 +90,7 @@ class ContractLine(models.Model):
         """Открывает визард для редактирования содержимого текущего пункта договора."""
 
         return {
-            "name": "Edit clause",
+            "name": _("Edit clause"),
             "type": "ir.actions.act_window",
             "res_model": "contract.content.wizard",
             "view_mode": "form",

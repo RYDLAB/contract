@@ -1,4 +1,4 @@
-from odoo import fields, models, api
+from odoo import fields, models, api, _
 from odoo.exceptions import UserError
 
 
@@ -50,7 +50,7 @@ class ContractVersion(models.Model):
     def button_create_section(self):
         self.ensure_one()
         return {
-            "name": "Create Contract Section",
+            "name": _("Create Contract Section"),
             "type": "ir.actions.act_window",
             "res_model": "contract.section.wizard",
             "view_mode": "form",

@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0-20231017\n"
+"Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-20 10:15+0000\n"
-"PO-Revision-Date: 2023-11-20 10:15+0000\n"
+"POT-Creation-Date: 2023-12-27 10:40+0000\n"
+"PO-Revision-Date: 2023-12-27 10:40+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -107,6 +107,20 @@ msgid "Annexes to this contract"
 msgstr "Приложения к настоящему договору"
 
 #. module: contract
+#. odoo-python
+#: code:addons/contract/models/contract_section.py:0
+#, python-format
+msgid "Are you sure you want to delete: %s"
+msgstr "Вы уверены, что хотите удалить: %s"
+
+#. module: contract
+#. odoo-python
+#: code:addons/contract/wizard/confirm_delete_wizard.py:0
+#, python-format
+msgid "Are you sure you want to delete?"
+msgstr "Вы уверены, что хотите удалить?"
+
+#. module: contract
 #: model:ir.model.fields,field_description:contract.field_contract_contract__message_attachment_count
 msgid "Attachment Count"
 msgstr "Количество вложений"
@@ -126,6 +140,15 @@ msgstr "Исходная версия"
 #: model_terms:ir.ui.view,arch_db:contract.view_contract_version_publish_wizard_form
 msgid "Cancel"
 msgstr "Отмена"
+
+#. module: contract
+#. odoo-python
+#: code:addons/contract/models/contract.py:0
+#, python-format
+msgid "Cannot create new version without a published version."
+msgstr ""
+"Нельзя создать новую версию договора без хотя бы одной опубликованной версии"
+" договора"
 
 #. module: contract
 #: model_terms:ir.ui.view,arch_db:contract.view_contract_version_publish_wizard_form
@@ -164,6 +187,13 @@ msgid "Confirm"
 msgstr "Подтвердить"
 
 #. module: contract
+#. odoo-python
+#: code:addons/contract/models/contract_section.py:0
+#, python-format
+msgid "Confirm Deletion"
+msgstr "Подтвердить удаление"
+
+#. module: contract
 #: model:ir.model,name:contract.model_confirm_deletion_wizard
 msgid "Confirm Deletion Wizard"
 msgstr ""
@@ -176,13 +206,28 @@ msgstr "Сообщение подтверждения"
 #. module: contract
 #: model:ir.model,name:contract.model_res_partner
 msgid "Contact"
-msgstr "Контакт"
+msgstr ""
 
 #. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_content_wizard__content
 #: model:ir.model.fields,field_description:contract.field_contract_line__content_ids
 #: model:ir.model.fields,field_description:contract.field_contract_line_wizard__content_text
 msgid "Content"
 msgstr "Содержимое"
+
+#. module: contract
+#. odoo-python
+#: code:addons/contract/wizard/contract_line_wizard.py:0
+#, python-format
+msgid "Content can't be empty."
+msgstr "Содержимое не может быть пустым"
+
+#. module: contract
+#. odoo-python
+#: code:addons/contract/models/contract_line.py:0
+#, python-format
+msgid "Content history"
+msgstr "История содержимого"
 
 #. module: contract
 #: model:ir.model,name:contract.model_contract_contract
@@ -258,7 +303,10 @@ msgid "Contract Version"
 msgstr "Версия договора"
 
 #. module: contract
+#. odoo-python
+#: code:addons/contract/models/contract.py:0
 #: model:ir.ui.menu,name:contract.version_list
+#, python-format
 msgid "Contract Versions"
 msgstr "Версии договора"
 
@@ -335,6 +383,27 @@ msgid "Create"
 msgstr "Создать"
 
 #. module: contract
+#. odoo-python
+#: code:addons/contract/models/contract_version.py:0
+#, python-format
+msgid "Create Contract Section"
+msgstr "Создать главу контракта"
+
+#. module: contract
+#. odoo-python
+#: code:addons/contract/models/contract_section.py:0
+#, python-format
+msgid "Create Line"
+msgstr "Создать пункт"
+
+#. module: contract
+#. odoo-python
+#: code:addons/contract/models/contract.py:0
+#, python-format
+msgid "Create New Contract Version"
+msgstr "Создать новую версию контракта"
+
+#. module: contract
 #: model_terms:ir.ui.view,arch_db:contract.view_contract_version_creation_wizard_form
 msgid "Create New Version"
 msgstr "Создать новую версию"
@@ -375,7 +444,7 @@ msgstr "Создано"
 #. module: contract
 #: model:ir.model.fields,field_description:contract.field_contract_line__create_date
 msgid "Creation date"
-msgstr ""
+msgstr "Дата создания"
 
 #. module: contract
 #: model_terms:ir.ui.view,arch_db:contract.res_partner_contract_view_buttons
@@ -426,6 +495,18 @@ msgid "Edit"
 msgstr "Редактировать"
 
 #. module: contract
+#. odoo-python
+#: code:addons/contract/models/contract_line.py:0
+#, python-format
+msgid "Edit clause"
+msgstr "Редактировать пункт"
+
+#. module: contract
+#: model_terms:ir.ui.view,arch_db:contract.view_contract_line_form
+msgid "Edit content"
+msgstr "Редактировать пункт"
+
+#. module: contract
 #: model:ir.model.fields,help:contract.field_contract_contract__date_conclusion_fix
 msgid "Field for pointing out manually when contract was actually signed."
 msgstr "Поле для указания вручную, когда контракт был фактически подписан."
@@ -449,7 +530,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:contract.field_res_partner__name_genitive
 #: model:ir.model.fields,field_description:contract.field_res_users__name_genitive
 msgid "Full name in genitive"
-msgstr ""
+msgstr "Полное имя в родительном падеже"
 
 #. module: contract
 #: model:ir.model.fields,field_description:contract.field_contract_contract__has_message
@@ -460,6 +541,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:contract.field_contract_line__history_count
 msgid "History Count"
 msgstr "Кол-во записей"
+
+#. module: contract
+#: model_terms:ir.ui.view,arch_db:contract.view_contract_line_form
+msgid "Hystory"
+msgstr "История"
 
 #. module: contract
 #: model:ir.model.fields,field_description:contract.field_confirm_deletion_wizard__id
@@ -579,6 +665,11 @@ msgstr "Оставьте пустым для вычисления"
 #: model:ir.model.fields,field_description:contract.field_contract_contract__message_main_attachment_id
 msgid "Main Attachment"
 msgstr "Вложение"
+
+#. module: contract
+#: model_terms:ir.ui.view,arch_db:contract.view_contract_content_form
+msgid "Make relevant"
+msgstr "Сделать актуальным"
 
 #. module: contract
 #: model:ir.model.fields,field_description:contract.field_contract_contract__message_has_error
@@ -712,12 +803,14 @@ msgstr "Должность в родительном падеже"
 #. module: contract
 #: model_terms:ir.ui.view,arch_db:contract.view_contract_publish_wizard_form
 #: model_terms:ir.ui.view,arch_db:contract.view_contract_version_form
-#: model_terms:ir.ui.view,arch_db:contract.view_contract_version_publish_wizard_form
 msgid "Publish"
 msgstr "Опубликовать"
 
 #. module: contract
+#. odoo-python
+#: code:addons/contract/models/contract.py:0
 #: model:ir.actions.act_window,name:contract.action_contract_publish_wizard
+#, python-format
 msgid "Publish Contract Version"
 msgstr "Опубликовать версию договора"
 
@@ -817,8 +910,8 @@ msgid "Section Name"
 msgstr "Название главы"
 
 #. module: contract
-#: model:ir.model.fields,field_description:contract.field_contract_section_wizard__number
 #: model:ir.model.fields,field_description:contract.field_contract_section__number
+#: model:ir.model.fields,field_description:contract.field_contract_section_wizard__number
 msgid "Section Number"
 msgstr "Номер главы"
 
@@ -851,8 +944,16 @@ msgstr "Показать версии"
 
 #. module: contract
 #: model_terms:ir.ui.view,arch_db:contract.contract_form_view
+#: model_terms:ir.ui.view,arch_db:contract.view_contract_version_publish_wizard_form
 msgid "Sign"
 msgstr "Подпись"
+
+#. module: contract
+#. odoo-python
+#: code:addons/contract/models/contract.py:0
+#, python-format
+msgid "Sign Contract"
+msgstr "Подписать договор"
 
 #. module: contract
 #: model:ir.model.fields.selection,name:contract.selection__contract_contract__state__sign
@@ -895,9 +996,10 @@ msgid "Surname and initials"
 msgstr "Фамилия и инициалы"
 
 #. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_content__content
 #: model_terms:ir.ui.view,arch_db:contract.contract_form_view
 msgid "Text"
-msgstr "Версии"
+msgstr "Текст"
 
 #. module: contract
 #: model:ir.model.fields,help:contract.field_contract_contract__notification_expiration_period
@@ -948,6 +1050,7 @@ msgstr "Версии для публикации"
 
 #. module: contract
 #: model:ir.model.fields,field_description:contract.field_contract_contract__version_ids
+#: model_terms:ir.ui.view,arch_db:contract.contract_form_view
 msgid "Versions"
 msgstr "Версии"
 
@@ -1007,36 +1110,6 @@ msgid "Years"
 msgstr "Годы"
 
 #. module: contract
-#: model_terms:ir.ui.view,arch_db:contract.contract_form_view
-msgid "Версии"
-msgstr ""
-
-#. module: contract
-#: model_terms:ir.ui.view,arch_db:contract.view_contract_line_form
-msgid "История"
-msgstr ""
-
-#. module: contract
 #: model:ir.model.fields,field_description:contract.field_contract_content__line_ids
-msgid "Пункты"
-msgstr ""
-
-#. module: contract
-#: model_terms:ir.ui.view,arch_db:contract.view_contract_line_form
-msgid "Редактировать пункт"
-msgstr ""
-
-#. module: contract
-#: model_terms:ir.ui.view,arch_db:contract.view_contract_content_form
-msgid "Сделать актуальным"
-msgstr ""
-
-#. module: contract
-#: model:ir.model.fields,field_description:contract.field_contract_content_wizard__content
-msgid "Содержимое"
-msgstr ""
-
-#. module: contract
-#: model:ir.model.fields,field_description:contract.field_contract_content__content
-msgid "Текст"
-msgstr ""
+msgid "Сlauses"
+msgstr "Пункты"

@@ -47,7 +47,7 @@ class ContractVersionPublishWizard(models.TransientModel):
             )
         return res
 
-    def action_publish(self):
+    def action_publish(self):#изменить название
         self.ensure_one()
 
         self.contract_id.published_version_id = self.version_to_publish_id

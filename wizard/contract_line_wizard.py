@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import models, fields, _
 from odoo.exceptions import UserError
 
 
@@ -14,7 +14,7 @@ class ContractLineWizard(models.TransientModel):
     def button_create(self):
         self.ensure_one()
         if not self.content_text:
-            raise UserError("Content can't be empty.")
+            raise UserError(_("Content can't be empty."))
 
         content = self.env["contract.content"].create({"content": self.content_text})
 

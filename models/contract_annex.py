@@ -99,7 +99,7 @@ class ContractAnnex(models.Model):
         view_id = self.env.ref("contract.contract_annex_view_form").id
         context = self._context.copy()
         return {
-            "name": "Contact annex",
+            "name": _("Contact annex"),
             "view_type": "form",
             "view_mode": "tree",
             "views": [(view_id, "form")],

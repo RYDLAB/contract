@@ -43,7 +43,7 @@
                 <sheet>
                     <div class="oe_button_box" name="button_box">
                         <button name="show_versions" type="object" string="Show Versions" class="oe_inline oe_stat_button" icon="fa-pencil-square-o">
-                             <field string="Версии" name="version_count" widget="statinfo"/>
+                             <field string="Versions" name="version_count" widget="statinfo"/>
                         </button>
                     </div>
                     <label for="name"/>

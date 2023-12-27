@@ -19,7 +19,7 @@
                     <field name="version_to_publish_id" domain="[('id', 'in', version_selection == 'draft' and draft_version_ids or published_version_ids)]" options="{'no_create': True}"/>
                 </group>
                 <footer>
-                    <button string="Publish" type="object" name="action_publish" class="btn-primary"/>
+                    <button string="Sign" type="object" name="action_publish" class="btn-primary"/>
                     <button string="Cancel" class="btn-secondary" special="cancel"/>
                 </footer>
             </form>
