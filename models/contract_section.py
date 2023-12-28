@@ -19,7 +19,7 @@ class ContractSection(models.Model):
         for record in self:
             if record.version_id.is_published:
                 raise UserError(
-                    "Cannot modify a section of a published contract version."
+                    _("Cannot modify a section of a published contract version.")
                 )
 
     def button_create_clause(self):
@@ -47,7 +47,9 @@ class ContractSection(models.Model):
             "view_mode": "form",
             "target": "new",
             "context": {
-                "default_confirm_message": _("Are you sure you want to delete: %s", self.name),
+                "default_confirm_message": _(
+                    "Are you sure you want to delete: %s", self.name
+                ),
                 "active_model": self._name,
                 "active_id": self.id,
             },

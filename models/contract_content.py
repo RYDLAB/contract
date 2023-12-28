@@ -27,7 +27,7 @@ class ContractContent(models.Model):
         for record in self:
             if any(line.section_id.version_id.is_published for line in record.line_ids):
                 raise UserError(
-                    "Cannot modify the content of a published contract version."
+                    _("Cannot modify the content of a published contract version.")
                 )
 
     def write(self, vals):

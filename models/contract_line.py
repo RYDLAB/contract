@@ -49,25 +49,27 @@ class ContractLine(models.Model):
             }
         )
         return super(ContractLine, self).copy(default)
-        # new_line.write({"content_ids": [(6, 0, self.current_content_id.ids)]})
-        # return new_line
 
     @api.constrains("section_id", "contract_id", "number", "content_ids")
     def _check_published_version(self):
         for record in self:
             if record.section_id.version_id.is_published:
-                raise UserError("Cannot modify a line of a published contract version.")
+                raise UserError(
+                    _("Cannot modify a line of a published contract version.")
+                )
 
     def button_delete_content(self):
         self.ensure_one()
         return {
-            "name": -("Confirm Deletion"),
+            "name": _("Confirm Deletion"),
             "type": "ir.actions.act_window",
             "res_model": "confirm.deletion.wizard",
             "view_mode": "form",
             "target": "new",
             "context": {
-                "default_confirm_message": f"Are you sure you want to delete {self.number}?",
+                "default_confirm_message": _(
+                    "Are you sure you want to delete: %s", self.number
+                ),
                 "active_model": self._name,
                 "active_id": self.id,
             },

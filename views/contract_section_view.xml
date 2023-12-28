@@ -27,7 +27,7 @@
                                 <field name="current_content_text"/>
                                 <field name="create_date" optional="hide"/>
                                 <button name="button_edit_content" string="Edit" type="object"/>
-                                <button name="button_delete_content" type="object" icon="fa-trash"/>
+                                <button name="button_delete_content" type="object" icon="fa-trash" title="Delete point"/>
                             </tree>
                         </field>
                     </sheet>

@@ -10,7 +10,7 @@ class ContractPublishWizard(models.TransientModel):
         "contract.version",
         string="Version to Publish",
         required=True,
-        domain="[('contract_id', '=', contract_id)]",
+        domain="[('contract_id', '=', contract_id),('is_published', '=', False)]",
     )
 
     def action_publish_version(self):

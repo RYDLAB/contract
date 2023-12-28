@@ -85,7 +85,7 @@ class ContractAnnex(models.Model):
             if data.get("date_conclusion")
             else self.date_conclusion
         )
-        return _(f"Annex №{annex_number} from {annex_date}")
+        return (_("Annex №%s from %s", annex_number, annex_date),)
 
     def _set_annex_to_invoice(self):
         """

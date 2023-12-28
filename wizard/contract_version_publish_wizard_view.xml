@@ -8,18 +8,14 @@
                 <group>
                     <field name="contract_id" invisible="1"/>
 
-                        <label for="version_selection" string="Choose a version to publish:"/>
+                        <label for="version_selection" string="Choose a type of sign:"/>
                         <field name="version_selection" widget="radio"/>
-                    <group attrs="{'invisible': [('version_selection', '!=', 'draft')]}" string="Draft Versions">
-                        <field name="draft_version_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                    <group  >
+                        <field string="Published Version" name="published_version_id" attrs="{'invisible': [('version_selection', '!=', 'published')]}"/>
                     </group>
-                    <group attrs="{'invisible': [('version_selection', '!=', 'published')]}" string="Published Versions">
-                        <field name="published_version_ids" widget="many2many_tags" readonly="1" options="{'no_create': True}"/>
-                    </group>
-                    <field name="version_to_publish_id" domain="[('id', 'in', version_selection == 'draft' and draft_version_ids or published_version_ids)]" options="{'no_create': True}"/>
                 </group>
                 <footer>
-                    <button string="Sign" type="object" name="action_publish" class="btn-primary"/>
+                    <button string="Sign" type="object" name="action_sign" class="btn-primary"/>
                     <button string="Cancel" class="btn-secondary" special="cancel"/>
                 </footer>
             </form>

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-27 10:40+0000\n"
-"PO-Revision-Date: 2023-12-27 10:40+0000\n"
+"POT-Creation-Date: 2023-12-28 15:56+0000\n"
+"PO-Revision-Date: 2023-12-28 15:56+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -90,6 +90,13 @@ msgid "Annex Cost"
 msgstr ""
 
 #. module: contract
+#. odoo-python
+#: code:addons/contract/models/contract_annex.py:0
+#, python-format
+msgid "Annex №%s from %s"
+msgstr "Приложение №%s от %s"
+
+#. module: contract
 #: model_terms:ir.ui.view,arch_db:contract.contract_form_view
 msgid "Annexed Specifications"
 msgstr "Спецификации"
@@ -108,6 +115,7 @@ msgstr "Приложения к настоящему договору"
 
 #. module: contract
 #. odoo-python
+#: code:addons/contract/models/contract_line.py:0
 #: code:addons/contract/models/contract_section.py:0
 #, python-format
 msgid "Are you sure you want to delete: %s"
@@ -145,15 +153,78 @@ msgstr "Отмена"
 #. odoo-python
 #: code:addons/contract/models/contract.py:0
 #, python-format
+msgid "Cannot create a new version of a signed or closed contract."
+msgstr "Нельзя создать новую версию для подписанного или закрытого контракта"
+
+#. module: contract
+#. odoo-python
+#: code:addons/contract/models/contract.py:0
+#, python-format
 msgid "Cannot create new version without a published version."
 msgstr ""
 "Нельзя создать новую версию договора без хотя бы одной опубликованной версии"
 " договора"
 
 #. module: contract
+#. odoo-python
+#: code:addons/contract/models/contract.py:0
+#, python-format
+msgid "Cannot modify a content of a published contract version."
+msgstr "Невозможно изменить содержимое опубликованной версии договора."
+
+#. module: contract
+#. odoo-python
+#: code:addons/contract/models/contract_line.py:0
+#, python-format
+msgid "Cannot modify a line of a published contract version."
+msgstr "Невозможно изменить пункт опубликованной версии договора."
+
+#. module: contract
+#. odoo-python
+#: code:addons/contract/models/contract_section.py:0
+#, python-format
+msgid "Cannot modify a section of a published contract version."
+msgstr "Нельзя изменять главы опубликованной версии договора"
+
+#. module: contract
+#. odoo-python
+#: code:addons/contract/models/contract_content.py:0
+#, python-format
+msgid "Cannot modify the content of a published contract version."
+msgstr "Невозможно изменить содержимое опубликованной версии договора."
+
+#. module: contract
+#. odoo-python
+#: code:addons/contract/models/contract_version.py:0
+#, python-format
+msgid "Cannot publish a new version of a signed contract."
+msgstr "Невозможно опубликовать новую версию подписанного договора."
+
+#. module: contract
+#. odoo-python
+#: code:addons/contract/models/contract.py:0
+#, python-format
+msgid "Cannot publish version of a signed contract."
+msgstr "Невозможно опубликовать новую версию подписанного договора."
+
+#. module: contract
+#. odoo-python
+#: code:addons/contract/models/contract_version.py:0
+#, python-format
+msgid "Cannot rollback publish version of a signed contract."
+msgstr "Невозможно выполнить откат опубликованной версии подписанного договора."
+
+#. module: contract
+#. odoo-python
+#: code:addons/contract/models/contract.py:0
+#, python-format
+msgid "Cannot sign without a sign status."
+msgstr "Невозможно подписать без прав на подписание."
+
+#. module: contract
 #: model_terms:ir.ui.view,arch_db:contract.view_contract_version_publish_wizard_form
-msgid "Choose a version to publish:"
-msgstr "Выберите версию для публикации:"
+msgid "Choose a type of sign:"
+msgstr "Выберите тип подписания:"
 
 #. module: contract
 #: model_terms:ir.ui.view,arch_db:contract.view_contract_section_form
@@ -188,6 +259,7 @@ msgstr "Подтвердить"
 
 #. module: contract
 #. odoo-python
+#: code:addons/contract/models/contract_line.py:0
 #: code:addons/contract/models/contract_section.py:0
 #, python-format
 msgid "Confirm Deletion"
@@ -207,6 +279,13 @@ msgstr "Сообщение подтверждения"
 #: model:ir.model,name:contract.model_res_partner
 msgid "Contact"
 msgstr ""
+
+#. module: contract
+#. odoo-python
+#: code:addons/contract/models/contract_annex.py:0
+#, python-format
+msgid "Contact annex"
+msgstr "Приложение договора"
 
 #. module: contract
 #: model:ir.model.fields,field_description:contract.field_contract_content_wizard__content
@@ -457,6 +536,16 @@ msgid "Days"
 msgstr "Дни"
 
 #. module: contract
+#: model_terms:ir.ui.view,arch_db:contract.view_contract_version_form
+msgid "Delete clause"
+msgstr "Удалить главу"
+
+#. module: contract
+#: model_terms:ir.ui.view,arch_db:contract.view_contract_section_form
+msgid "Delete point"
+msgstr "Удалить пункт"
+
+#. module: contract
 #: model:ir.model.fields,help:contract.field_contract_annex__contract_type
 #: model:ir.model.fields,help:contract.field_contract_contract__type
 msgid ""
@@ -483,9 +572,6 @@ msgstr "Отображаемое имя"
 
 #. module: contract
 #: model:ir.model.fields,field_description:contract.field_contract_contract__draft_version_ids
-#: model:ir.model.fields,field_description:contract.field_contract_version_publish_wizard__draft_version_ids
-#: model:ir.model.fields.selection,name:contract.selection__contract_version_publish_wizard__version_selection__draft
-#: model_terms:ir.ui.view,arch_db:contract.view_contract_version_publish_wizard_form
 msgid "Draft Versions"
 msgstr "Версии в разработке"
 
@@ -720,6 +806,11 @@ msgid "New version"
 msgstr "Новая версия"
 
 #. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__activity_calendar_event_id
+msgid "Next Activity Calendar Event"
+msgstr "Следующее активное событие календаря"
+
+#. module: contract
 #: model:ir.model.fields,field_description:contract.field_contract_contract__activity_date_deadline
 msgid "Next Activity Deadline"
 msgstr "Срок следующего действия"
@@ -826,6 +917,9 @@ msgstr "Опубликовано"
 
 #. module: contract
 #: model:ir.model.fields,field_description:contract.field_contract_contract__published_version_id
+#: model:ir.model.fields,field_description:contract.field_contract_version_publish_wizard__published_version_id
+#: model:ir.model.fields.selection,name:contract.selection__contract_version_publish_wizard__version_selection__published
+#: model_terms:ir.ui.view,arch_db:contract.view_contract_version_publish_wizard_form
 msgid "Published Version"
 msgstr "Опубликованная версия"
 
@@ -833,13 +927,6 @@ msgstr "Опубликованная версия"
 #: model:ir.model.fields,field_description:contract.field_contract_contract__published_version_number
 msgid "Published Version Number"
 msgstr "Номер опубликованной версии"
-
-#. module: contract
-#: model:ir.model.fields,field_description:contract.field_contract_version_publish_wizard__published_version_ids
-#: model:ir.model.fields.selection,name:contract.selection__contract_version_publish_wizard__version_selection__published
-#: model_terms:ir.ui.view,arch_db:contract.view_contract_version_publish_wizard_form
-msgid "Published Versions"
-msgstr "Опубликованные версии"
 
 #. module: contract
 #: model:mail.template,subject:contract.contract_expiration_notification
@@ -916,6 +1003,13 @@ msgid "Section Number"
 msgstr "Номер главы"
 
 #. module: contract
+#. odoo-python
+#: code:addons/contract/wizard/contract_section_wizard.py:0
+#, python-format
+msgid "Section name can't be empty."
+msgstr "Имя главы не может быть пустым."
+
+#. module: contract
 #: model:ir.model.fields,field_description:contract.field_contract_section__line_ids
 msgid "Section text"
 msgstr "Текст главы"
@@ -927,9 +1021,9 @@ msgid "Sections"
 msgstr "Главы"
 
 #. module: contract
-#: model:ir.model.fields,field_description:contract.field_contract_version_publish_wizard__version_to_publish_id
-msgid "Select Version to Publish"
-msgstr "Выберите версию для публикации"
+#: model:ir.model.fields,field_description:contract.field_contract_version__sections_number
+msgid "Sections Number"
+msgstr "Количество глав"
 
 #. module: contract
 #: model:ir.model.fields,field_description:contract.field_contract_line__sequence
@@ -956,9 +1050,15 @@ msgid "Sign Contract"
 msgstr "Подписать договор"
 
 #. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_version__is_signed
 #: model:ir.model.fields.selection,name:contract.selection__contract_contract__state__sign
 msgid "Signed"
 msgstr "Подписано"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__signed_version_id
+msgid "Signed Version"
+msgstr "Подписанная версия"
 
 #. module: contract
 #: model:ir.model.fields,field_description:contract.field_contract_annex__date_conclusion
@@ -997,9 +1097,15 @@ msgstr "Фамилия и инициалы"
 
 #. module: contract
 #: model:ir.model.fields,field_description:contract.field_contract_content__content
-#: model_terms:ir.ui.view,arch_db:contract.contract_form_view
 msgid "Text"
 msgstr "Текст"
+
+#. module: contract
+#. odoo-python
+#: code:addons/contract/models/contract.py:0
+#, python-format
+msgid "The contract new period must be a positive number"
+msgstr "Новый период контракты должен быть положительным числом"
 
 #. module: contract
 #: model:ir.model.fields,help:contract.field_contract_contract__notification_expiration_period
@@ -1007,6 +1113,13 @@ msgid "The day's number to contract expiration for sending notice"
 msgstr ""
 "Количество дней до истечения срока действия контракта для отправки "
 "уведомления"
+
+#. module: contract
+#. odoo-python
+#: code:addons/contract/models/contract.py:0
+#, python-format
+msgid "The validity period of the notification must be a positive number"
+msgstr "Период уведомления должен быть положительным числом."
 
 #. module: contract
 #: model:ir.model.fields,field_description:contract.field_contract_contract__renew_period_type
@@ -1080,13 +1193,18 @@ msgid "With vendor"
 msgstr "С поставщиком"
 
 #. module: contract
+#: model:ir.model.fields.selection,name:contract.selection__contract_version_publish_wizard__version_selection__empty
+msgid "Without Versions"
+msgstr "Без версий"
+
+#. module: contract
 #: model:ir.model,name:contract.model_contract_version_creation_wizard
 msgid "Wizard for Creating New Contract Version"
 msgstr "Визард для создания новой версии договора"
 
 #. module: contract
 #: model:ir.model,name:contract.model_contract_version_publish_wizard
-msgid "Wizard for Publishing Contract Versions"
+msgid "Wizard for Signing Contract Versions"
 msgstr "Визард для создания новой версии договора"
 
 #. module: contract
