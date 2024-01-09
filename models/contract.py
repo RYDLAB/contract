@@ -252,7 +252,7 @@ class Contract(models.Model):
         return {
             "name": _("Sign Contract"),
             "type": "ir.actions.act_window",
-            "res_model": "contract.version.publish.wizard",
+            "res_model": "contract.version.sign.wizard",
             "view_mode": "form",
             "target": "new",
             "context": {

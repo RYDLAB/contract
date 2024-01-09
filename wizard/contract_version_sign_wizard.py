@@ -1,8 +1,8 @@
 from odoo import models, fields, api
 
 
-class ContractVersionPublishWizard(models.TransientModel):
-    _name = "contract.version.publish.wizard"
+class ContractVersionSignWizard(models.TransientModel):
+    _name = "contract.version.sign.wizard"
     _description = "Wizard for Signing Contract Versions"
 
     contract_id = fields.Many2one("contract.contract", string="Contract")
@@ -21,7 +21,7 @@ class ContractVersionPublishWizard(models.TransientModel):
 
     @api.model
     def default_get(self, fields):
-        res = super(ContractVersionPublishWizard, self).default_get(fields)
+        res = super(ContractVersionSignWizard, self).default_get(fields)
         context = self.env.context
         contract_id = context.get("default_contract_id", False)
         if contract_id:
