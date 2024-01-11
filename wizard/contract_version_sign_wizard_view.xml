@@ -5,11 +5,15 @@
         <field name="model">contract.version.sign.wizard</field>
         <field name="arch" type="xml">
             <form>
+                <div attrs="{'invisible': [('published_version_id', '!=', False)]}">
+                    <p>Опубликованные версии отсутствуют!</p>
+                    <p>Подписание без версии.</p>
+                </div>
                 <group>
                     <field name="contract_id" invisible="1"/>
 
-                        <label for="version_selection" string="Choose a type of sign:"/>
-                        <field name="version_selection" widget="radio"/>
+                        <label for="version_selection" string="Choose a type of sign:" attrs="{'invisible': [('published_version_id', '=', False)]}"/>
+                        <field name="version_selection" widget="radio" attrs="{'invisible': [('published_version_id', '=', False)]}"/>
                     <group  >
                         <field string="Published Version" name="published_version_id" attrs="{'invisible': [('version_selection', '!=', 'published')]}"/>
                     </group>

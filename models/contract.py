@@ -265,6 +265,7 @@ class Contract(models.Model):
     def action_unsign(self):
         if self.state != "sign":
             raise UserError(_("Cannot sign without a sign status."))
+        self.signed_version_id.write({"is_signed": False})
         self.write(
             {"state": "draft", "date_conclusion": False, "signed_version_id": False}
         )

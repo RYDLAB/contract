@@ -93,9 +93,12 @@
                             </group>
                         </page>
                         <page string="Versions">
+                            <div attrs="{'invisible': ['|', ('state', '=', 'draft'), ('signed_version_id', '!=', False)]}">
+                                <p>Договор подписан без версии.</p>
+                            </div>
                             <group>
                                 <field name="published_version_id" attrs="{'invisible': [('state', '!=', 'draft')]}" />
-                                <field name="signed_version_id" attrs="{'invisible': [('state', '=', 'draft')]}" />
+                                <field name="signed_version_id" attrs="{'invisible': ['|', ('state', '=', 'draft'), ('signed_version_id', '=', False)]}" />
                             </group>
                             <field name="draft_version_ids" readonly="1" attrs="{'invisible': [('state', '!=', 'draft')]}">
                                 <tree>
@@ -103,14 +106,6 @@
                                     <field name="version_number"/>
                                 </tree>
                             </field>
-                            <!--field name="section_ids">
-                                <tree>
-                                    <field name="sequence" widget="handle"/>
-                                    <field name="name"/>
-                                    <field name="version_id"/>
-                                    <field name="create_date"/>
-                                </tree>
-                            </field-->
                         </page>
                     </notebook>
                 </sheet>
