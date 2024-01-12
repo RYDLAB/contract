@@ -12,7 +12,7 @@
                     <sheet>
                         <div class="oe_button_box" name="button_box">
                             <button name="button_show_history" type="object" class="oe_inline oe_stat_button" icon="fa-pencil-square-o">
-                                <field string="Hystory" name="history_count" widget="statinfo"/>
+                                <field string="History" name="history_count" widget="statinfo"/>
                             </button>
                         </div>
                         <group>

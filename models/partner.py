@@ -22,7 +22,6 @@ class ResPartner(models.Model):
     contract_count = fields.Integer(
         compute="_compute_contract_count",
         string="# of contracts",
-        search=True,
     )
     representative_id = fields.Many2one(
         "res.partner", string="Representative", help="Person representing company"

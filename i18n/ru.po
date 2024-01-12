@@ -619,7 +619,7 @@ msgstr "Кол-во записей"
 
 #. module: contract
 #: model_terms:ir.ui.view,arch_db:contract.view_contract_line_form
-msgid "Hystory"
+msgid "History"
 msgstr "История"
 
 #. module: contract

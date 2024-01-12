@@ -189,7 +189,7 @@ class Contract(models.Model):
     @api.returns("self", lambda value: value.id)
     def copy(self, default=None):
         if not self.published_version_id:
-            raise UserError_(("Cannot duplicate without a published version."))
+            raise UserError(_("Cannot duplicate without a published version."))
         default = dict(default or {})
         default.update({"published_version_id": False})
         new_contract = super(Contract, self.with_context(copy=True)).copy(default)
