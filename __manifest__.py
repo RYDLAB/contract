@@ -13,7 +13,7 @@
     # Check https://github.com/odoo/odoo/blob/14.0/odoo/addons/base/data/ir_module_category_data.xml
     # for the full list
     "category": "Sale/Purchase",
-    "version": "0.4",
+    "version": "16.0.0.5",
     # any module necessary for this one to work correctly
     "depends": ["base", "base_setup", "contacts", "portal"],
     # always loaded
@@ -22,7 +22,7 @@
         "wizard/contract_content_wizard_view.xml",
         "wizard/contract_publish_wizard_view.xml",
         "wizard/confirm_delete_wizard.xml",
-        "wizard/contract_version_publish_wizard_view.xml",
+        "wizard/contract_version_sign_wizard_view.xml",
         "wizard/contract_line_wizard_view.xml",
         "wizard/contract_version_creation_wizard_view.xml",
         "wizard/contract_section_wizard_view.xml",

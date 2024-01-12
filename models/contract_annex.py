@@ -85,7 +85,7 @@ class ContractAnnex(models.Model):
             if data.get("date_conclusion")
             else self.date_conclusion
         )
-        return _(f"Annex №{annex_number} from {annex_date}")
+        return _("Annex №%s from %s", annex_number, annex_date)
 
     def _set_annex_to_invoice(self):
         """
@@ -99,7 +99,7 @@ class ContractAnnex(models.Model):
         view_id = self.env.ref("contract.contract_annex_view_form").id
         context = self._context.copy()
         return {
-            "name": "Contact annex",
+            "name": _("Contact annex"),
             "view_type": "form",
             "view_mode": "tree",
             "views": [(view_id, "form")],

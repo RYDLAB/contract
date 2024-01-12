@@ -5,7 +5,7 @@ class ContractContentWizard(models.TransientModel):
     _name = "contract.content.wizard"
     _description = "Wizard to edit contract content"
 
-    content = fields.Text("Содержимое", required=True)
+    content = fields.Text("Content", required=True)
 
     def button_save(self):
         line_id = self.env.context.get("active_id", False)

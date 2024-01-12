@@ -43,7 +43,7 @@
                 <sheet>
                     <div class="oe_button_box" name="button_box">
                         <button name="show_versions" type="object" string="Show Versions" class="oe_inline oe_stat_button" icon="fa-pencil-square-o">
-                             <field string="Версии" name="version_count" widget="statinfo"/>
+                             <field string="Versions" name="version_count" widget="statinfo"/>
                         </button>
                     </div>
                     <label for="name"/>
@@ -92,25 +92,20 @@
                                 </p>
                             </group>
                         </page>
-                        <page string="Text">
+                        <page string="Versions">
+                            <div attrs="{'invisible': ['|', ('state', '=', 'draft'), ('signed_version_id', '!=', False)]}">
+                                <p>Договор подписан без версии.</p>
+                            </div>
                             <group>
-                                <field name="published_version_id"/>
+                                <field name="published_version_id" attrs="{'invisible': [('state', '!=', 'draft')]}" />
+                                <field name="signed_version_id" attrs="{'invisible': ['|', ('state', '=', 'draft'), ('signed_version_id', '=', False)]}" />
                             </group>
-                            <label for="draft_version_ids"/>
-                            <field name="draft_version_ids" readonly="1">
+                            <field name="draft_version_ids" readonly="1" attrs="{'invisible': [('state', '!=', 'draft')]}">
                                 <tree>
                                     <field name="name"/>
                                     <field name="version_number"/>
                                 </tree>
                             </field>
-                            <!--field name="section_ids">
-                                <tree>
-                                    <field name="sequence" widget="handle"/>
-                                    <field name="name"/>
-                                    <field name="version_id"/>
-                                    <field name="create_date"/>
-                                </tree>
-                            </field-->
                         </page>
                     </notebook>
                 </sheet>

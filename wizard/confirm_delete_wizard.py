@@ -1,4 +1,4 @@
-from odoo import api, fields, models
+from odoo import _, fields, models
 
 
 class ConfirmDeletionWizard(models.TransientModel):
@@ -8,7 +8,7 @@ class ConfirmDeletionWizard(models.TransientModel):
     confirm_message = fields.Char(
         string="Confirmation Message",
         readonly=True,
-        default="Are you sure you want to delete?",
+        default=_("Are you sure you want to delete?"),
     )
 
     def button_confirm_deletion(self):

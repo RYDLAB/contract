@@ -2,7 +2,7 @@ import datetime
 import logging
 from dateutil.relativedelta import relativedelta
 
-from odoo import api, fields, models
+from odoo import api, fields, models, _
 from odoo.exceptions import AccessError, UserError
 
 _logger = logging.getLogger(__name__)
@@ -159,6 +159,10 @@ class Contract(models.Model):
         string="Version Count", compute="_compute_version_count", store=False
     )
 
+    signed_version_id = fields.Many2one(
+        "contract.version", string="Signed Version", readonly=True
+    )
+
     @api.depends("version_ids")
     def _compute_version_count(self):
         for record in self:
@@ -185,7 +189,7 @@ class Contract(models.Model):
     @api.returns("self", lambda value: value.id)
     def copy(self, default=None):
         if not self.published_version_id:
-            raise UserError("Cannot duplicate without a published version.")
+            raise UserError(_("Cannot duplicate without a published version."))
         default = dict(default or {})
         default.update({"published_version_id": False})
         new_contract = super(Contract, self.with_context(copy=True)).copy(default)
@@ -219,14 +223,14 @@ class Contract(models.Model):
         self.ensure_one()
 
         if not self.published_version_id:
-            raise UserError("Cannot create new version without a published version.")
+            raise UserError(_("Cannot create new version without a published version."))
         if self.state in ["sign", "close"]:
             raise UserError(
-                "Cannot create a new version of a signed or closed contract."
+                _("Cannot create a new version of a signed or closed contract.")
             )
 
         return {
-            "name": "Create New Contract Version",
+            "name": _("Create New Contract Version"),
             "type": "ir.actions.act_window",
             "res_model": "contract.version.creation.wizard",
             "view_mode": "form",
@@ -241,26 +245,30 @@ class Contract(models.Model):
         for record in self:
             if record.state == "sign":
                 raise UserError(
-                    "Cannot modify a content of a published contract version."
+                    _("Cannot modify the content of a published contract version.")
                 )
 
     def action_sign(self):
         return {
-            "name": "Publish Version Wizard",
+            "name": _("Sign Contract"),
             "type": "ir.actions.act_window",
-            "res_model": "contract.version.publish.wizard",
+            "res_model": "contract.version.sign.wizard",
             "view_mode": "form",
             "target": "new",
             "context": {
                 "default_contract_id": self.id,
                 "draft_version_ids": self.draft_version_ids.ids,
+                "published_version_id": self.published_version_id.id,
             },
         }
 
     def action_unsign(self):
         if self.state != "sign":
-            raise UserError("Cannot sign without a sign status.")
-        self.write({"state": "draft", "date_conclusion": False})
+            raise UserError(_("Cannot sign without a sign status."))
+        self.signed_version_id.write({"is_signed": False})
+        self.write(
+            {"state": "draft", "date_conclusion": False, "signed_version_id": False}
+        )
 
     def action_close(self):
         self.write({"state": "close"})
@@ -321,7 +329,9 @@ class Contract(models.Model):
                 and record.notification_expiration_period <= 0
             ):
                 raise models.ValidationError(
-                    "The validity period of the notification must be a positive number"
+                    _(
+                        "The validity period of the notification must be a positive number"
+                    )
                 )
 
     @api.constrains("renew_period")
@@ -329,14 +339,14 @@ class Contract(models.Model):
         for record in self:
             if record.renew_period and record.renew_period <= 0:
                 raise models.ValidationError(
-                    "The contract new period must be a positive number"
+                    _("The contract new period must be a positive number")
                 )
 
     def open_publish_wizard(self):
         if self.state == "sign":
-            raise UserError("Cannot publish version of a signed contract.")
+            raise UserError(_("Cannot publish a new version of a signed contract."))
         return {
-            "name": "Publish Contract Version",
+            "name": _("Publish Contract Version"),
             "view_mode": "form",
             "res_model": "contract.publish_wizard",
             "type": "ir.actions.act_window",
@@ -347,7 +357,7 @@ class Contract(models.Model):
     def show_versions(self):
         self.ensure_one()
         return {
-            "name": "Contract Versions",
+            "name": _("Contract Versions"),
             "type": "ir.actions.act_window",
             "view_mode": "tree,form",
             "res_model": "contract.version",

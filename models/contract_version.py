@@ -1,4 +1,4 @@
-from odoo import fields, models, api
+from odoo import fields, models, api, _
 from odoo.exceptions import UserError
 
 
@@ -11,8 +11,12 @@ class ContractVersion(models.Model):
 
     contract_id = fields.Many2one("contract.contract", string="Contract", required=True)
     section_ids = fields.One2many("contract.section", "version_id", string="Sections")
+    sections_number = fields.Integer(
+        "Sections Number", compute="_compute_section_number"
+    )
 
     is_published = fields.Boolean(string="Published")
+    is_signed = fields.Boolean(string="Signed", default=False)
 
     @api.depends("contract_id.name", "version_number")
     def _compute_name(self):
@@ -25,7 +29,7 @@ class ContractVersion(models.Model):
         """Метод для публикации версии."""
         self.ensure_one()
         if self.contract_id.state == "sign":
-            raise UserError("Cannot publish a new version of a signed contract.")
+            raise UserError(_("Cannot publish a new version of a signed contract."))
 
         if not self.is_published:
             self.write({"is_published": True})
@@ -35,7 +39,9 @@ class ContractVersion(models.Model):
         self.ensure_one()
         if self.is_published:
             if self.contract_id.state == "sign":
-                raise UserError("Cannot rollback publish version of a signed contract.")
+                raise UserError(
+                    _("Cannot rollback publish version of a signed contract.")
+                )
             self.is_published = False
             if self.contract_id.published_version_id.id == self.id:
                 published_vers = (
@@ -50,7 +56,7 @@ class ContractVersion(models.Model):
     def button_create_section(self):
         self.ensure_one()
         return {
-            "name": "Create Contract Section",
+            "name": _("Create Contract Section"),
             "type": "ir.actions.act_window",
             "res_model": "contract.section.wizard",
             "view_mode": "form",
@@ -61,3 +67,6 @@ class ContractVersion(models.Model):
                 "default_contract_id": self.contract_id.id,
             },
         }
+
+    def _compute_section_number(self):
+        self.sections_number = len(self.section_ids)

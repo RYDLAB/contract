@@ -6,13 +6,13 @@ class ContractContent(models.Model):
     _name = "contract.content"
     _description = "Contract Content"
 
-    content = fields.Text(string="Текст")
+    content = fields.Text(string="Text")
     line_ids = fields.Many2many(
         "contract.line",
         "contract_line_content_rel",
         "content_id",
         "line_id",
-        string="Пункты",
+        string="Сlauses",
     )
 
     @api.model_create_multi
@@ -27,7 +27,7 @@ class ContractContent(models.Model):
         for record in self:
             if any(line.section_id.version_id.is_published for line in record.line_ids):
                 raise UserError(
-                    "Cannot modify the content of a published contract version."
+                    _("Cannot modify the content of a published contract version.")
                 )
 
     def write(self, vals):

@@ -14,7 +14,7 @@ class ContractSectionWizard(models.TransientModel):
     def button_create(self):
         self.ensure_one()
         if not self.name:
-            raise UserError("Section name can't be empty.")
+            raise UserError(_("Section name can't be empty."))
 
         self.env["contract.section"].create(
             {
