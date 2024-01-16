@@ -33,6 +33,13 @@ class ContractLine(models.Model):
         string="History Count", compute="_compute_history_count", store=False
     )
 
+    @api.model
+    def create(self, vals):
+        section = self.env["contract.section"].browse(vals.get("section_id"))
+        vals.update({"sequence": len(section.line_ids.ids)})
+        res = super(ContractLine, self).create(vals)
+        return res
+
     @api.depends("content_ids")
     def _compute_history_count(self):
         for record in self:
