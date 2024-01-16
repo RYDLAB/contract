@@ -14,6 +14,13 @@ class ContractSection(models.Model):
     line_ids = fields.One2many("contract.line", "section_id", string="Section text")
     version_id = fields.Many2one("contract.version", string="Contract Version")
 
+    @api.model
+    def create(self, vals):
+        version = self.env["contract.version"].browse(vals.get("version_id"))
+        vals.update({"sequence": version.sections_number})
+        res = super(ContractSection, self).create(vals)
+        return res
+
     @api.constrains("name", "version_id", "line_ids", "contract_id")
     def _check_published_version(self):
         for record in self:
