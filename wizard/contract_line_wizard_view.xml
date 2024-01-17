@@ -9,8 +9,8 @@
                 <group>
                     <field name="section_id" invisible="1"/>
                     <field name="contract_id" invisible="1"/>
-                    <field name="content_text"/>
                     <field name="number"/>
+                    <field name="content_text"/>
                 </group>
                 <footer>
                     <button string="Create" type="object" name="button_create" class="btn-primary"/>
