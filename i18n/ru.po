@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-09 15:42+0000\n"
-"PO-Revision-Date: 2024-01-09 15:42+0000\n"
+"POT-Creation-Date: 2024-01-18 13:45+0000\n"
+"PO-Revision-Date: 2024-01-18 13:45+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -164,6 +164,13 @@ msgid "Cannot create new version without a published version."
 msgstr ""
 "Нельзя создать новую версию договора без хотя бы одной опубликованной версии"
 " договора"
+
+#. module: contract
+#. odoo-python
+#: code:addons/contract/models/contract.py:0
+#, python-format
+msgid "Cannot duplicate without a published version."
+msgstr "Невозможно дублировать без опубликованной версии."
 
 #. module: contract
 #. odoo-python
@@ -561,6 +568,7 @@ msgstr "Отображаемое имя"
 
 #. module: contract
 #: model:ir.model.fields,field_description:contract.field_contract_contract__draft_version_ids
+#: model_terms:ir.ui.view,arch_db:contract.contract_form_view
 msgid "Draft Versions"
 msgstr "Версии в разработке"
 
@@ -613,14 +621,14 @@ msgid "Has Message"
 msgstr ""
 
 #. module: contract
-#: model:ir.model.fields,field_description:contract.field_contract_line__history_count
-msgid "History Count"
-msgstr "Кол-во записей"
-
-#. module: contract
 #: model_terms:ir.ui.view,arch_db:contract.view_contract_line_form
 msgid "History"
 msgstr "История"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_line__history_count
+msgid "History Count"
+msgstr "Кол-во записей"
 
 #. module: contract
 #: model:ir.model.fields,field_description:contract.field_confirm_deletion_wizard__id
@@ -793,6 +801,11 @@ msgstr "Новый пункт"
 #: model_terms:ir.ui.view,arch_db:contract.contract_form_view
 msgid "New version"
 msgstr "Новая версия"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__activity_calendar_event_id
+msgid "Next Activity Calendar Event"
+msgstr "Следующее событие календаря действий"
 
 #. module: contract
 #: model:ir.model.fields,field_description:contract.field_contract_contract__activity_date_deadline
@@ -1157,6 +1170,11 @@ msgid "View"
 msgstr ""
 
 #. module: contract
+#: model_terms:ir.ui.view,arch_db:contract.contract_form_view
+msgid "View Contract Version"
+msgstr "Посмотреть версию договора"
+
+#. module: contract
 #: model:ir.model.fields,field_description:contract.field_contract_contract__website_message_ids
 msgid "Website Messages"
 msgstr "Сообщения сайта"
@@ -1210,6 +1228,21 @@ msgstr "Визард для редактирования содержимого 
 #: model:ir.model.fields.selection,name:contract.selection__contract_contract__renew_period_type__years
 msgid "Years"
 msgstr "Годы"
+
+#. module: contract
+#: model_terms:ir.ui.view,arch_db:contract.contract_form_view
+msgid "The contract was signed without a version."
+msgstr "Договор подписан без версии."
+
+#. module: contract
+#: model_terms:ir.ui.view,arch_db:contract.view_contract_version_sign_wizard_form
+msgid "There are no published versions!"
+msgstr "Опубликованные версии отсутствуют!"
+
+#. module: contract
+#: model_terms:ir.ui.view,arch_db:contract.view_contract_version_sign_wizard_form
+msgid "Signing without a version."
+msgstr "Подписание без версии."
 
 #. module: contract
 #: model:ir.model.fields,field_description:contract.field_contract_content__line_ids

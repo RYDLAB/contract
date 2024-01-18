@@ -6,8 +6,8 @@
         <field name="arch" type="xml">
             <form>
                 <div attrs="{'invisible': [('published_version_id', '!=', False)]}">
-                    <p>Опубликованные версии отсутствуют!</p>
-                    <p>Подписание без версии.</p>
+                    <p>There are no published versions!</p>
+                    <p>Signing without a version.</p>
                 </div>
                 <group>
                     <field name="contract_id" invisible="1"/>

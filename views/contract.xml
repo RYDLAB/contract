@@ -94,16 +94,18 @@
                         </page>
                         <page string="Versions">
                             <div attrs="{'invisible': ['|', ('state', '=', 'draft'), ('signed_version_id', '!=', False)]}">
-                                <p>Договор подписан без версии.</p>
+                                <p>The contract was signed without a version.</p>
                             </div>
                             <group>
                                 <field name="published_version_id" attrs="{'invisible': [('state', '!=', 'draft')]}" />
                                 <field name="signed_version_id" attrs="{'invisible': ['|', ('state', '=', 'draft'), ('signed_version_id', '=', False)]}" />
                             </group>
+                            <label for="draft_version_ids" string="Draft Versions" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
                             <field name="draft_version_ids" readonly="1" attrs="{'invisible': [('state', '!=', 'draft')]}">
-                                <tree>
+                                <tree no_open="true">
                                     <field name="name"/>
                                     <field name="version_number"/>
+                                    <button name="view_contract_version_button" class="btn-link" string="View Contract Version" type="object" />
                                 </tree>
                             </field>
                         </page>
