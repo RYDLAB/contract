@@ -25,6 +25,17 @@ class ContractVersion(models.Model):
                 record.contract_id.name, record.version_number
             )
 
+    def view_contract_version_button(self):
+        return {
+            "type": "ir.actions.act_window",
+            "name": self.name,
+            "res_model": "contract.version",
+            "view_mode": "form",
+            "view_id": self.env.ref("contract.view_contract_version_form").id,
+            "target": "current",
+            "res_id": self.id,
+        }
+
     def publish_version(self):
         """Метод для публикации версии."""
         self.ensure_one()
