@@ -18,7 +18,8 @@
                         type="action"
                         name="%(contract.contract_partner_action_window)d"
                         attrs="{'invisible': [('parent_id', '!=', False)]}"
-                        icon="fa-pencil-square-o">
+                        icon="fa-pencil-square-o"
+                        groups="contract.group_contract_reader">
                     <field string="Contracts" name="contract_count" widget="statinfo"/>
                 </button>
             </xpath>

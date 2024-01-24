@@ -7,7 +7,7 @@
             <field name="arch" type="xml">
                 <form edit="false">
                     <header>
-                        <button name="button_make_current" string="Make relevant" type="object" class="oe_highlight"/>
+                        <button name="button_make_current" string="Make relevant" type="object" class="oe_highlight" groups="contract.group_contract_manager"/>
                     </header>
                     <sheet>
                         <group>

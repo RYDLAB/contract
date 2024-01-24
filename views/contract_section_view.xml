@@ -18,7 +18,7 @@
                             <h1>
                                 <label for="line_ids" string="Clauses"/>
                             </h1>
-                            <button name="button_create_clause" string="New clause" type="object" class="btn-primary" style="margin-left: 5px;"/>
+                            <button name="button_create_clause" string="New clause" type="object" class="btn-primary" style="margin-left: 5px;" groups="contract.group_contract_manager"/>
                         </div>
                         <field name="line_ids">
                             <tree delete="false" edit="false" create="false">
@@ -26,8 +26,8 @@
                                 <field name="number"/>
                                 <field name="current_content_text"/>
                                 <field name="create_date" optional="hide"/>
-                                <button name="button_edit_content" string="Edit" type="object"/>
-                                <button name="button_delete_content" type="object" icon="fa-trash" title="Delete point"/>
+                                <button name="button_edit_content" string="Edit" type="object" groups="contract.group_contract_manager"/>
+                                <button name="button_delete_content" type="object" icon="fa-trash" title="Delete point" groups="contract.group_contract_manager"/>
                             </tree>
                         </field>
                     </sheet>

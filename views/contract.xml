@@ -26,18 +26,18 @@
         <field name="arch" type="xml">
             <form string="Contract" >
                 <header attrs="{'invisible': [('id', '=', False)]}">
-                    <button name="action_sign" type="object" string="Sign" states="draft" class="oe_highlight"/>
+                    <button name="action_sign" type="object" string="Sign" states="draft" class="oe_highlight" groups="contract.group_contract_manager"/>
 
-                    <button name="action_unsign" type="object" string="Unsign" states="sign" class="oe_highlight"/>
-
-
-                    <button name="action_close" type="object" string="Close" states="sign" class="oe_highlight"/>
-                    <button name="action_renew" type="object" string="Renew" states="close"/>
-                    <button name="create_new_version" type="object" string="New version" class="oe_highlight"/>
+                    <button name="action_unsign" type="object" string="Unsign" states="sign" class="oe_highlight" groups="contract.group_contract_manager"/>
 
 
+                    <button name="action_close" type="object" string="Close" states="sign" class="oe_highlight" groups="contract.group_contract_manager"/>
+                    <button name="action_renew" type="object" string="Renew" states="close" groups="contract.group_contract_manager"/>
+                    <button name="create_new_version" type="object" string="New version" class="oe_highlight" groups="contract.group_contract_manager"/>
 
-                    <button name="open_publish_wizard" type="object" string="Publish Version" class="oe_highlight"/>
+
+
+                    <button name="open_publish_wizard" type="object" string="Publish Version" class="oe_highlight" groups="contract.group_contract_manager"/>
                     <field name="state" widget="statusbar" statusbar_visible="draft,sign,close"/>
                 </header>
                 <sheet>
@@ -141,7 +141,8 @@
     <!-- Top menu item -->
     <menuitem name="Contract"
               id="contract.menu_root"
-              web_icon="contract,static/description/icon.png"/>
+              web_icon="contract,static/description/icon.png"
+              groups="group_contract_reader"/>
 
     <!-- menu categories -->
     <menuitem name="Contracts"
