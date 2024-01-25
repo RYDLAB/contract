@@ -96,7 +96,6 @@ class Contract(models.Model):
     )
     allow_not_signed_contract = fields.Boolean(
         compute="get_allow_not_signed_contract",
-        default=lambda self: self.get_allow_not_signed_contract(),
         store=False,
     )
     responsible_employee_id = fields.Many2one(
@@ -216,8 +215,8 @@ class Contract(models.Model):
         allow_not_signed_contract = ir_config.get_param(
             "contract.allow_not_signed_contract"
         )
-        self.write({"allow_not_signed_contract": allow_not_signed_contract})
-        return allow_not_signed_contract
+        for record in self: 
+            record.allow_not_signed_contract = allow_not_signed_contract
 
     def create_new_version(self):
         self.ensure_one()

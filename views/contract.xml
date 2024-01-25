@@ -160,7 +160,7 @@
               parent="contract.contract_menu"
               action="contract.annex_action_window"/>
 
-    <menuitem name="Contract Sections"
+    <!-- <menuitem name="Contract Sections"
               id="contract.section_list"
               parent="contract.contract_menu"
               action="contract.contract_section_window"
@@ -182,7 +182,7 @@
               id="contract.version_list"
               parent="contract.contract_menu"
               action="contract.contract_version_window"
-              groups="base.group_no_one"/>
+              groups="base.group_no_one"/> -->
 
   </data>
 </odoo>

@@ -32,7 +32,7 @@
                 </group>
             </xpath>
             <xpath expr="//page[@name='contact_addresses']" position="after">
-                <page name="for_contracts" string="Data for contracts" attrs="{'invisible': [('company_type', '=', 'company')]}">
+                <page name="for_contracts" string="Data for contracts" attrs="{'invisible': [('company_type', '=', 'company')]}" groups="contract.group_contract_reader">
                     <group>
                         <group>
                             <field name="name_genitive"/>

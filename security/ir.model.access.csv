@@ -1,5 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_contract_contract_reader,access_contract_contract_reader,model_contract_contract,contract.group_contract_reader,1,1,0,0
+access_contract_contract_reader,access_contract_contract_reader,model_contract_contract,contract.group_contract_reader,1,0,0,0
 access_contract_annex_reader,access_contract_annex_reader,model_contract_annex,contract.group_contract_reader,1,0,0,0
 access_contract_section_reader,access_contract_section_reader,model_contract_section,contract.group_contract_reader,1,0,0,0
 access_contract_line_reader,access_contract_line_reader,model_contract_line,contract.group_contract_reader,1,0,0,0
