@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-18 13:45+0000\n"
-"PO-Revision-Date: 2024-01-18 13:45+0000\n"
+"POT-Creation-Date: 2024-01-24 08:21+0000\n"
+"PO-Revision-Date: 2024-01-24 08:21+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -33,6 +33,17 @@ msgstr ""
 "            <p>Напоминаем вам об истечении срока действия договора No. <t t-out=\"object.name or ''\"/> через <t t-out=\"object.notification_expiration_period or ''\"/> дней (<t t-out=\"object.expiration_date or ''\"/>).</p>\n"
 "            <br/>\n"
 "        "
+
+#. module: contract
+#: model:ir.module.category,description:contract.module_category_contract
+msgid ""
+"A user without any rights on Contract will not be able to see the app. Read "
+"Only User will be able to see all information but won't be able to edit it. "
+"Admin has all rights"
+msgstr ""
+"Пользователь без прав на модуль Договор не сможет увидеть приложение. "
+"Пользователь с правами на чтение сможет читать всю информацию по контракту, "
+"но не сможет ее изменить. Администратор имеет все права."
 
 #. module: contract
 #: model:ir.model.fields,field_description:contract.field_contract_contract__message_needaction
@@ -73,6 +84,11 @@ msgstr "Текст актуального содержимого"
 #: model:ir.model.fields,field_description:contract.field_contract_contract__date_conclusion_fix
 msgid "Actual signing date"
 msgstr "Дата фактического подписания"
+
+#. module: contract
+#: model:res.groups,name:contract.group_contract_manager
+msgid "Administrator"
+msgstr "Администратор"
 
 #. module: contract
 #: model:ir.model.fields,field_description:contract.field_contract_contract__allow_not_signed_contract
@@ -315,6 +331,8 @@ msgstr "История содержимого"
 #: model:ir.model.fields,field_description:contract.field_contract_version__contract_id
 #: model:ir.model.fields,field_description:contract.field_contract_version_creation_wizard__contract_id
 #: model:ir.model.fields,field_description:contract.field_contract_version_sign_wizard__contract_id
+#: model:ir.module.category,name:contract.module_category_contract
+#: model:ir.module.category,name:contract.module_category_contract_management
 #: model:ir.ui.menu,name:contract.menu_root
 #: model_terms:ir.ui.view,arch_db:contract.contract_form_view
 msgid "Contract"
@@ -926,6 +944,11 @@ msgid "Published Version Number"
 msgstr "Номер опубликованной версии"
 
 #. module: contract
+#: model:res.groups,name:contract.group_contract_reader
+msgid "Read Only User"
+msgstr "Права только на чтение"
+
+#. module: contract
 #: model:mail.template,subject:contract.contract_expiration_notification
 msgid "Reminder of the expiration of the contract"
 msgstr "Напоминание об истечении срока действия контракта"
@@ -1068,6 +1091,11 @@ msgid "Signing date in system"
 msgstr "Дата подписания в системе"
 
 #. module: contract
+#: model_terms:ir.ui.view,arch_db:contract.view_contract_version_sign_wizard_form
+msgid "Signing without a version."
+msgstr "Подписание без версии."
+
+#. module: contract
 #: model_terms:ir.ui.view,arch_db:contract.contract_form_view
 msgid "Specifications"
 msgstr "Спецификации"
@@ -1105,6 +1133,11 @@ msgid "The contract new period must be a positive number"
 msgstr "Новый период контракты должен быть положительным числом"
 
 #. module: contract
+#: model_terms:ir.ui.view,arch_db:contract.contract_form_view
+msgid "The contract was signed without a version."
+msgstr "Договор подписан без версии."
+
+#. module: contract
 #: model:ir.model.fields,help:contract.field_contract_contract__notification_expiration_period
 msgid "The day's number to contract expiration for sending notice"
 msgstr ""
@@ -1117,6 +1150,11 @@ msgstr ""
 #, python-format
 msgid "The validity period of the notification must be a positive number"
 msgstr "Период уведомления должен быть положительным числом."
+
+#. module: contract
+#: model_terms:ir.ui.view,arch_db:contract.view_contract_version_sign_wizard_form
+msgid "There are no published versions!"
+msgstr "Опубликованные версии отсутствуют!"
 
 #. module: contract
 #: model:ir.model.fields,field_description:contract.field_contract_contract__renew_period_type
@@ -1228,21 +1266,6 @@ msgstr "Визард для редактирования содержимого 
 #: model:ir.model.fields.selection,name:contract.selection__contract_contract__renew_period_type__years
 msgid "Years"
 msgstr "Годы"
-
-#. module: contract
-#: model_terms:ir.ui.view,arch_db:contract.contract_form_view
-msgid "The contract was signed without a version."
-msgstr "Договор подписан без версии."
-
-#. module: contract
-#: model_terms:ir.ui.view,arch_db:contract.view_contract_version_sign_wizard_form
-msgid "There are no published versions!"
-msgstr "Опубликованные версии отсутствуют!"
-
-#. module: contract
-#: model_terms:ir.ui.view,arch_db:contract.view_contract_version_sign_wizard_form
-msgid "Signing without a version."
-msgstr "Подписание без версии."
 
 #. module: contract
 #: model:ir.model.fields,field_description:contract.field_contract_content__line_ids

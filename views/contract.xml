@@ -1,7 +1,7 @@
 <odoo>
   <data>
     <!-- explicit list view definition -->
-    <record model="ir.ui.view" id="contract.list_view">
+    <record model="ir.ui.view" id="list_view">
       <field name="name">Contracts list</field>
       <field name="model">contract.contract</field>
       <field name="arch" type="xml">
@@ -20,24 +20,24 @@
       </field>
     </record>
 
-    <record id="contract.contract_form_view" model="ir.ui.view">
+    <record id="contract_form_view" model="ir.ui.view">
         <field name="name">Contract Form</field>
         <field name="model">contract.contract</field>
         <field name="arch" type="xml">
             <form string="Contract" >
                 <header attrs="{'invisible': [('id', '=', False)]}">
-                    <button name="action_sign" type="object" string="Sign" states="draft" class="oe_highlight"/>
+                    <button name="action_sign" type="object" string="Sign" states="draft" class="oe_highlight" groups="contract.group_contract_manager"/>
 
-                    <button name="action_unsign" type="object" string="Unsign" states="sign" class="oe_highlight"/>
-
-
-                    <button name="action_close" type="object" string="Close" states="sign" class="oe_highlight"/>
-                    <button name="action_renew" type="object" string="Renew" states="close"/>
-                    <button name="create_new_version" type="object" string="New version" class="oe_highlight"/>
+                    <button name="action_unsign" type="object" string="Unsign" states="sign" class="oe_highlight" groups="contract.group_contract_manager"/>
 
 
+                    <button name="action_close" type="object" string="Close" states="sign" class="oe_highlight" groups="contract.group_contract_manager"/>
+                    <button name="action_renew" type="object" string="Renew" states="close" groups="contract.group_contract_manager"/>
+                    <button name="create_new_version" type="object" string="New version" class="oe_highlight" groups="contract.group_contract_manager"/>
 
-                    <button name="open_publish_wizard" type="object" string="Publish Version" class="oe_highlight"/>
+
+
+                    <button name="open_publish_wizard" type="object" string="Publish Version" class="oe_highlight" groups="contract.group_contract_manager"/>
                     <field name="state" widget="statusbar" statusbar_visible="draft,sign,close"/>
                 </header>
                 <sheet>
@@ -135,13 +135,15 @@
       <field name="name">Contracts</field>
       <field name="res_model">contract.contract</field>
       <field name="view_mode">tree,form</field>
+      <field name="context">{'form_view_initial_mode': 'readonly'}</field>
     </record>
 
 
     <!-- Top menu item -->
     <menuitem name="Contract"
               id="contract.menu_root"
-              web_icon="contract,static/description/icon.png"/>
+              web_icon="contract,static/description/icon.png"
+              groups="group_contract_reader"/>
 
     <!-- menu categories -->
     <menuitem name="Contracts"
@@ -159,7 +161,7 @@
               parent="contract.contract_menu"
               action="contract.annex_action_window"/>
 
-    <menuitem name="Contract Sections"
+    <!-- <menuitem name="Contract Sections"
               id="contract.section_list"
               parent="contract.contract_menu"
               action="contract.contract_section_window"
@@ -181,7 +183,7 @@
               id="contract.version_list"
               parent="contract.contract_menu"
               action="contract.contract_version_window"
-              groups="base.group_no_one"/>
+              groups="base.group_no_one"/> -->
 
   </data>
 </odoo>

@@ -18,6 +18,7 @@
     "depends": ["base", "base_setup", "contacts", "portal"],
     # always loaded
     "data": [
+        "security/contract_security.xml",
         "security/ir.model.access.csv",
         "wizard/contract_content_wizard_view.xml",
         "wizard/contract_publish_wizard_view.xml",

@@ -54,6 +54,7 @@ class ContractAnnex(models.Model):
             record.contract_id.contract_annex_amount -= 1
         return super(ContractAnnex, self).unlink()
 
+    @api.model
     def create(self, values_list):
         if isinstance(values_list, dict):
             values_list = [values_list]

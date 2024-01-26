@@ -18,7 +18,8 @@
                         type="action"
                         name="%(contract.contract_partner_action_window)d"
                         attrs="{'invisible': [('parent_id', '!=', False)]}"
-                        icon="fa-pencil-square-o">
+                        icon="fa-pencil-square-o"
+                        groups="contract.group_contract_reader">
                     <field string="Contracts" name="contract_count" widget="statinfo"/>
                 </button>
             </xpath>
@@ -31,7 +32,7 @@
                 </group>
             </xpath>
             <xpath expr="//page[@name='contact_addresses']" position="after">
-                <page name="for_contracts" string="Data for contracts" attrs="{'invisible': [('company_type', '=', 'company')]}">
+                <page name="for_contracts" string="Data for contracts" attrs="{'invisible': [('company_type', '=', 'company')]}" groups="contract.group_contract_reader">
                     <group>
                         <group>
                             <field name="name_genitive"/>
