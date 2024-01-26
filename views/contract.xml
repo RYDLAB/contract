@@ -135,7 +135,6 @@
       <field name="name">Contracts</field>
       <field name="res_model">contract.contract</field>
       <field name="view_mode">tree,form</field>
-      <field name="context">{'form_view_initial_mode': 'readonly'}</field>
     </record>
 
 
