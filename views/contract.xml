@@ -55,7 +55,7 @@
                             <field name="partner_id"/>
                             <field name="type"/>
                             <field name="published_version_number"/>
-                            <field name="currency_id"/>
+                            <field name="currency_id" options="{'no_open': True}"/>
                             <field name="responsible_employee_id"/>
                             <field name="create_date" attrs="{'invisible': [('id', '=', False)]}"/>
                             <!--field name="section_ids"/-->
