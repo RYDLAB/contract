@@ -70,7 +70,7 @@ class Contract(models.Model):
         string="Contract commencement date",
         help="Field for pointing out manually when contract was actually signed.",
         default=lambda self: self.date_conclusion,
-        required=True
+        required=True,
     )
     contract_annex_ids = fields.One2many(
         comodel_name="contract.annex",
