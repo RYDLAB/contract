@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-24 08:21+0000\n"
-"PO-Revision-Date: 2024-01-24 08:21+0000\n"
+"POT-Creation-Date: 2024-02-05 16:52+0000\n"
+"PO-Revision-Date: 2024-02-05 16:52+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -33,17 +33,6 @@ msgstr ""
 "            <p>Напоминаем вам об истечении срока действия договора No. <t t-out=\"object.name or ''\"/> через <t t-out=\"object.notification_expiration_period or ''\"/> дней (<t t-out=\"object.expiration_date or ''\"/>).</p>\n"
 "            <br/>\n"
 "        "
-
-#. module: contract
-#: model:ir.module.category,description:contract.module_category_contract
-msgid ""
-"A user without any rights on Contract will not be able to see the app. Read "
-"Only User will be able to see all information but won't be able to edit it. "
-"Admin has all rights"
-msgstr ""
-"Пользователь без прав на модуль Договор не сможет увидеть приложение. "
-"Пользователь с правами на чтение сможет читать всю информацию по контракту, "
-"но не сможет ее изменить. Администратор имеет все права."
 
 #. module: contract
 #: model:ir.model.fields,field_description:contract.field_contract_contract__message_needaction
@@ -79,11 +68,6 @@ msgstr "Актуальное содержимое"
 #: model:ir.model.fields,field_description:contract.field_contract_line__current_content_text
 msgid "Actual content text"
 msgstr "Текст актуального содержимого"
-
-#. module: contract
-#: model:ir.model.fields,field_description:contract.field_contract_contract__date_conclusion_fix
-msgid "Actual signing date"
-msgstr "Дата фактического подписания"
 
 #. module: contract
 #: model:res.groups,name:contract.group_contract_manager
@@ -290,7 +274,7 @@ msgstr "Сообщение подтверждения"
 #. module: contract
 #: model:ir.model,name:contract.model_res_partner
 msgid "Contact"
-msgstr "Контакт"
+msgstr ""
 
 #. module: contract
 #. odoo-python
@@ -356,7 +340,6 @@ msgstr "Содержимое договора"
 
 #. module: contract
 #: model:ir.actions.act_window,name:contract.contract_contents_window
-#: model:ir.ui.menu,name:contract.content_list
 msgid "Contract Contents"
 msgstr "Тексты договора"
 
@@ -367,7 +350,6 @@ msgstr "Пункт договора"
 
 #. module: contract
 #: model:ir.actions.act_window,name:contract.contract_lines_window
-#: model:ir.ui.menu,name:contract.line_list
 msgid "Contract Lines"
 msgstr "Пункты договора"
 
@@ -383,7 +365,6 @@ msgstr "Глава договора"
 
 #. module: contract
 #: model:ir.actions.act_window,name:contract.contract_section_window
-#: model:ir.ui.menu,name:contract.section_list
 msgid "Contract Sections"
 msgstr "Главы договора"
 
@@ -398,10 +379,14 @@ msgstr "Версия договора"
 #. module: contract
 #. odoo-python
 #: code:addons/contract/models/contract.py:0
-#: model:ir.ui.menu,name:contract.version_list
 #, python-format
 msgid "Contract Versions"
 msgstr "Версии договора"
+
+#. module: contract
+#: model:ir.model.fields,field_description:contract.field_contract_contract__commencement_date
+msgid "Contract commencement date"
+msgstr "Дата начала действия"
 
 #. module: contract
 #: model:ir.model.fields,field_description:contract.field_contract_contract__expiration_date
@@ -608,7 +593,7 @@ msgid "Edit content"
 msgstr "Редактировать пункт"
 
 #. module: contract
-#: model:ir.model.fields,help:contract.field_contract_contract__date_conclusion_fix
+#: model:ir.model.fields,help:contract.field_contract_contract__commencement_date
 msgid "Field for pointing out manually when contract was actually signed."
 msgstr "Поле для указания вручную, когда контракт был фактически подписан."
 
@@ -819,11 +804,6 @@ msgstr "Новый пункт"
 #: model_terms:ir.ui.view,arch_db:contract.contract_form_view
 msgid "New version"
 msgstr "Новая версия"
-
-#. module: contract
-#: model:ir.model.fields,field_description:contract.field_contract_contract__activity_calendar_event_id
-msgid "Next Activity Calendar Event"
-msgstr "Следующее событие календаря действий"
 
 #. module: contract
 #: model:ir.model.fields,field_description:contract.field_contract_contract__activity_date_deadline
