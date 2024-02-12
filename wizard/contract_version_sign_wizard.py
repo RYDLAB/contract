@@ -1,4 +1,5 @@
 from odoo import models, fields, api
+from datetime import datetime
 
 
 class ContractVersionSignWizard(models.TransientModel):
@@ -35,7 +36,11 @@ class ContractVersionSignWizard(models.TransientModel):
 
     def action_sign(self):
         self.ensure_one()
-        self.contract_id.state = "sign"
+        vals = {"state": "sign"}
+        if not self.contract_id.commencement_date:
+            vals.update({"commencement_date": datetime.now()})
+        vals.update({"date_conclusion": datetime.now()})
+        self.contract_id.write(vals)
         if self.version_selection == "published":
             self.contract_id.signed_version_id = self.published_version_id
             self.contract_id.signed_version_id.is_signed = True

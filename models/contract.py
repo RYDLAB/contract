@@ -62,14 +62,15 @@ class Contract(models.Model):
         help="Different relations requires different contracts with own text and template.",
         required=True,
     )
-    create_date = fields.Datetime(string="Created on")
     date_conclusion = fields.Date(
         string="Signing date in system",
+        readonly=True,
     )
-    date_conclusion_fix = fields.Date(
-        string="Actual signing date",
+    commencement_date = fields.Date(
+        string="Contract commencement date",
         help="Field for pointing out manually when contract was actually signed.",
         default=lambda self: self.date_conclusion,
+        required=True,
     )
     contract_annex_ids = fields.One2many(
         comodel_name="contract.annex",
