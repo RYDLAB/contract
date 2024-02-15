@@ -9,14 +9,10 @@
     """,
     "author": "RYDLAB",
     "website": "https://rydlab.ru",
-    # Categories can be used to filter modules in modules listing
-    # Check https://github.com/odoo/odoo/blob/14.0/odoo/addons/base/data/ir_module_category_data.xml
-    # for the full list
     "category": "Sale/Purchase",
-    "version": "16.0.0.5",
-    # any module necessary for this one to work correctly
+    "version": "16.0.1.0.5",
+    "license": "LGPL-3",
     "depends": ["base", "base_setup", "contacts", "portal"],
-    # always loaded
     "data": [
         "security/contract_security.xml",
         "security/ir.model.access.csv",
