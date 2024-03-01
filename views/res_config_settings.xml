@@ -10,7 +10,7 @@
             <xpath expr="//div[@id='contacts_settings']" position="after">
                 <h2>Contracts</h2>
                 <div class="row mt16 o_settings_container" id="contracts_settings">
-                    <div class="col-12 col-lg-6 o_setting_box" id="allow_unsigned_contract" >
+                    <div class="col-12 col-lg-6 o_setting_box" id="allow_unsigned_contract">
                         <div class="o_setting_left_pane">
                             <field name="allow_not_signed_contract"/>
                         </div>

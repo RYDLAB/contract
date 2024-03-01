@@ -8,17 +8,19 @@
                 <form>
                     <sheet>
                         <group>
-                            <field name="name"/>
                             <field name="number"/>
+                            <field name="name"/>
                             <field name="create_date" readonly="1" invisible="1"/>
                             <field name="contract_id" invisible="1"/>
                             <field name="version_id" invisible="1"/>
                         </group>
-                        <div class="o_group" style="display:flex;align-items:center;">
+                        <div style="display:flex;align-items:center;">
                             <h1>
                                 <label for="line_ids" string="Clauses"/>
                             </h1>
-                            <button name="button_create_clause" string="New clause" type="object" class="btn-primary" style="margin-left: 5px;" groups="contract.group_contract_manager"/>
+                            <div style="margin-left:10px">
+                                <button name="button_create_clause" string="New clause" type="object" class="btn-primary" groups="contract.group_contract_manager"/>
+                            </div>
                         </div>
                         <field name="line_ids">
                             <tree delete="false" edit="false" create="false">

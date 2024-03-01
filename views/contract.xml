@@ -1,188 +1,160 @@
 <odoo>
-  <data>
-    <!-- explicit list view definition -->
-    <record model="ir.ui.view" id="list_view">
-      <field name="name">Contracts list</field>
-      <field name="model">contract.contract</field>
-      <field name="arch" type="xml">
-        <tree>
-          <field name="name"/>
-          <field name="partner_id"/>
-          <field name="type"/>
-          <field name="create_date"/>
-          <field name="state"/>
-          <field name="published_version_number"/>
-          <field name="responsible_employee_id"/>
-          <field name="expiration_date"/>
-          <field name="notification_expiration"/>
-          <field name="renew_automatically"/>
-        </tree>
-      </field>
-    </record>
+    <data>
+        <!-- explicit list view definition -->
+        <record model="ir.ui.view" id="list_view">
+            <field name="name">Contracts list</field>
+            <field name="model">contract.contract</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="type"/>
+                    <field name="create_date"/>
+                    <field name="state"/>
+                    <field name="published_version_number"/>
+                    <field name="responsible_employee_id"/>
+                    <field name="expiration_date"/>
+                    <field name="notification_expiration"/>
+                    <field name="renew_automatically"/>
+                </tree>
+            </field>
+        </record>
 
-    <record id="contract_form_view" model="ir.ui.view">
-        <field name="name">Contract Form</field>
-        <field name="model">contract.contract</field>
-        <field name="arch" type="xml">
-            <form string="Contract" >
-                <header attrs="{'invisible': [('id', '=', False)]}">
-                    <button name="action_sign" type="object" string="Sign" states="draft" class="oe_highlight" groups="contract.group_contract_manager"/>
+        <record id="contract_form_view" model="ir.ui.view">
+            <field name="name">Contract Form</field>
+            <field name="model">contract.contract</field>
+            <field name="arch" type="xml">
+                <form string="Contract">
+                    <header attrs="{'invisible': [('id', '=', False)]}">
+                        <button name="action_sign" type="object" string="Sign" states="draft" class="oe_highlight" groups="contract.group_contract_manager"/>
 
-                    <button name="action_unsign" type="object" string="Unsign" states="sign" class="oe_highlight" groups="contract.group_contract_manager"/>
-
-
-                    <button name="action_close" type="object" string="Close" states="sign" class="oe_highlight" groups="contract.group_contract_manager"/>
-                    <button name="action_renew" type="object" string="Renew" states="close" groups="contract.group_contract_manager"/>
-                    <button name="create_new_version" type="object" string="New version" class="oe_highlight" groups="contract.group_contract_manager"/>
+                        <button name="action_unsign" type="object" string="Unsign" states="sign" class="oe_highlight" groups="contract.group_contract_manager"/>
 
 
+                        <button name="action_close" type="object" string="Close" states="sign" class="oe_highlight" groups="contract.group_contract_manager"/>
+                        <button name="action_renew" type="object" string="Renew" states="close" groups="contract.group_contract_manager"/>
+                        <button name="create_new_version" type="object" string="New version" class="oe_highlight" groups="contract.group_contract_manager"/>
 
-                    <button name="open_publish_wizard" type="object" string="Publish Version" class="oe_highlight" groups="contract.group_contract_manager"/>
-                    <field name="state" widget="statusbar" statusbar_visible="draft,sign,close"/>
-                </header>
-                <sheet>
-                    <div class="oe_button_box" name="button_box">
-                        <button name="show_versions" type="object" string="Show Versions" class="oe_inline oe_stat_button" icon="fa-pencil-square-o">
-                             <field string="Versions" name="version_count" widget="statinfo"/>
-                        </button>
-                    </div>
-                    <label for="name"/>
-                    <h1>
-                        <field name="name"/>
-                    </h1>
-                    <group name="single_params">
-                        <group>
-                            <field name="partner_id"/>
-                            <field name="type"/>
-                            <field name="published_version_number"/>
-                            <field name="currency_id" options="{'no_open': True}"/>
-                            <field name="responsible_employee_id"/>
-                            <field name="create_date" attrs="{'invisible': [('id', '=', False)]}"/>
-                            <!--field name="section_ids"/-->
-                        </group>
-                        <group>
-                            <field name="date_conclusion" attrs="{'invisible': ['|', ('id', '=', False), ('date_conclusion', '=', False)]}"/>
-                            <field name="commencement_date" attrs="{'invisible': [('id', '=', False)]}"/>
-                            <field name="expiration_date"/>
-                            <field name="notification_expiration" attrs="{'invisible': [('responsible_employee_id', '=', False)]}"/>
-                            <field name="notification_expiration_period" attrs="{'invisible': [('notification_expiration', '=', False)]}"/>
-                            <field name="renew_automatically"/>
-                            <field name="renew_period" attrs="{'invisible': [('renew_automatically', '=', False)]}"/>
-                            <field name="renew_period_type" attrs="{'invisible': [('renew_automatically', '=', False)]}"/>
 
-                            <!-- Uses to generate number of Annex -->
-                            <field name="contract_annex_amount" invisible="1"/>
-                        </group>
-                    </group>
-                    <notebook>
-                        <page string="Specifications">
-                            <group string="Annexed Specifications" name="annexes">
-                                <field name="allow_not_signed_contract" invisible="1"/>
-                                <p colspan="2">
-                                    <field name="contract_annex_ids"
-                                           nolabel="1"
-                                           mode="tree"
-                                           attrs="{'readonly': ['|', ('state', '=', 'close'), '&amp;', ('allow_not_signed_contract', '=', False), ('state', '=', 'draft')]}"
-                                           >
-                                        <tree>
-                                            <field name="display_name" string="Name"/>
-                                            <button name="action_open_annex_form" type="object" string="View" attrs="{'invisible': [('id', '=', False)]}"/>
-                                        </tree>
-                                    </field>
-                                </p>
-                            </group>
-                        </page>
-                        <page string="Versions">
-                            <div attrs="{'invisible': ['|', ('state', '=', 'draft'), ('signed_version_id', '!=', False)]}">
-                                <p>The contract was signed without a version.</p>
-                            </div>
+
+                        <button name="open_publish_wizard" type="object" string="Publish Version" class="oe_highlight" groups="contract.group_contract_manager"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,sign,close"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="show_versions" type="object" string="Show Versions" class="oe_inline oe_stat_button" icon="fa-pencil-square-o">
+                                <field string="Versions" name="version_count" widget="statinfo"/>
+                            </button>
+                        </div>
+                        <label for="name"/>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                        <group name="single_params">
                             <group>
-                                <field name="published_version_id" attrs="{'invisible': [('state', '!=', 'draft')]}" />
-                                <field name="signed_version_id" attrs="{'invisible': ['|', ('state', '=', 'draft'), ('signed_version_id', '=', False)]}" />
+                                <field name="partner_id"/>
+                                <field name="type"/>
+                                <field name="published_version_number"/>
+                                <field name="currency_id" options="{'no_open': True}"/>
+                                <field name="responsible_employee_id"/>
+                                <field name="create_date" attrs="{'invisible': [('id', '=', False)]}"/>
+                                <!--field name="section_ids"/-->
                             </group>
-                            <label for="draft_version_ids" string="Draft Versions" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
-                            <field name="draft_version_ids" readonly="1" attrs="{'invisible': [('state', '!=', 'draft')]}">
-                                <tree no_open="true">
-                                    <field name="name"/>
-                                    <field name="version_number"/>
-                                    <button name="view_contract_version_button" class="btn-link" string="View Contract Version" type="object" />
-                                </tree>
-                            </field>
-                        </page>
-                    </notebook>
-                </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids"/> <!-- widget="mail_followers"/>-->
-                    <field name="activity_ids"/> <!-- widget="mail_activity"/>-->
-                    <field name="message_ids"/> <!--widget="mail_thread"/>-->
-                </div>
-            </form>
-        </field>
-    </record>
+                            <group>
+                                <field name="date_conclusion" attrs="{'invisible': ['|', ('id', '=', False), ('date_conclusion', '=', False)]}"/>
+                                <field name="commencement_date"/>
+                                <field name="expiration_date"/>
+                                <field name="notification_expiration" attrs="{'invisible': [('responsible_employee_id', '=', False)]}"/>
+                                <field name="notification_expiration_period" attrs="{'invisible': [('notification_expiration', '=', False)]}"/>
+                                <field name="renew_automatically"/>
+                                <field name="renew_period" attrs="{'invisible': [('renew_automatically', '=', False)]}"/>
+                                <field name="renew_period_type" attrs="{'invisible': [('renew_automatically', '=', False)]}"/>
 
-    <record id="contract.contract_filter_view" model="ir.ui.view">
-        <field name="name">Contract search view</field>
-        <field name="model">contract.contract</field>
-        <field name="arch" type="xml">
-            <search string="Search Contract">
-                <field name="partner_id" operator="child_of"/>
-            </search>
-        </field>
-    </record>
+                                <!-- Uses to generate number of Annex -->
+                                <field name="contract_annex_amount" invisible="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Specifications">
+                                <group string="Annexed Specifications" name="annexes">
+                                    <field name="allow_not_signed_contract" invisible="1"/>
+                                    <p colspan="2">
+                                        <field name="contract_annex_ids" nolabel="1" mode="tree" attrs="{'readonly': ['|', ('state', '=', 'close'), '&amp;', ('allow_not_signed_contract', '=', False), ('state', '=', 'draft')]}">
+                                            <tree>
+                                                <field name="display_name" string="Name"/>
+                                                <button name="action_open_annex_form" type="object" string="View" attrs="{'invisible': [('id', '=', False)]}"/>
+                                            </tree>
+                                        </field>
+                                    </p>
+                                </group>
+                            </page>
+                            <page string="Versions">
+                                <div attrs="{'invisible': ['|', ('state', '=', 'draft'), ('signed_version_id', '!=', False)]}">
+                                    <p>The contract was signed without a version.</p>
+                                </div>
+                                <group>
+                                    <field name="published_version_id" attrs="{'invisible': [('state', '!=', 'draft')]}" />
+                                    <field name="signed_version_id" attrs="{'invisible': ['|', ('state', '=', 'draft'), ('signed_version_id', '=', False)]}" />
+                                </group>
+                                <label for="draft_version_ids" string="Draft Versions" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                                <field name="draft_version_ids" readonly="1" attrs="{'invisible': [('state', '!=', 'draft')]}">
+                                    <tree no_open="true">
+                                        <field name="name"/>
+                                        <field name="version_number"/>
+                                        <button name="view_contract_version_button" class="btn-link" string="View Contract Version" type="object" />
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <!-- widget="mail_followers"/>-->
+                        <field name="activity_ids"/>
+                        <!-- widget="mail_activity"/>-->
+                        <field name="message_ids"/>
+                        <!--widget="mail_thread"/>-->
+                    </div>
+                </form>
+            </field>
+        </record>
 
-    <!-- actions opening views on models -->
-    <record model="ir.actions.act_window" id="contract.contract_action_window">
-      <field name="name">Contracts</field>
-      <field name="res_model">contract.contract</field>
-      <field name="view_mode">tree,form</field>
-    </record>
+        <record id="contract.contract_filter_view" model="ir.ui.view">
+            <field name="name">Contract search view</field>
+            <field name="model">contract.contract</field>
+            <field name="arch" type="xml">
+                <search string="Search Contract">
+                    <field name="partner_id" operator="child_of"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- actions opening views on models -->
+        <record model="ir.actions.act_window" id="contract.contract_action_window">
+            <field name="name">Contracts</field>
+            <field name="res_model">contract.contract</field>
+            <field name="view_mode">tree,form</field>
+        </record>
 
 
-    <!-- Top menu item -->
-    <menuitem name="Contract"
-              id="contract.menu_root"
-              web_icon="contract,static/description/icon.png"
-              groups="group_contract_reader"/>
+        <!-- Top menu item -->
+        <menuitem name="Contract" id="contract.menu_root" web_icon="contract,static/description/icon.png" groups="group_contract_reader"/>
 
-    <!-- menu categories -->
-    <menuitem name="Contracts"
-              id="contract.contract_menu"
-              parent="contract.menu_root"/>
+        <!-- menu categories -->
+        <menuitem name="Contracts" id="contract.contract_menu" parent="contract.menu_root"/>
 
-    <!-- actions -->
-    <menuitem name="Contracts"
-              id="contract.contract_list"
-              parent="contract.contract_menu"
-              action="contract.contract_action_window"/>
+        <!-- actions -->
+        <menuitem name="Contracts" id="contract.contract_list" parent="contract.contract_menu" action="contract.contract_action_window"/>
 
-    <menuitem name="Annexes"
-              id="contract.annex_list"
-              parent="contract.contract_menu"
-              action="contract.annex_action_window"/>
+        <menuitem name="Annexes" id="contract.annex_list" parent="contract.contract_menu" action="contract.annex_action_window"/>
 
-    <!-- <menuitem name="Contract Sections"
-              id="contract.section_list"
-              parent="contract.contract_menu"
-              action="contract.contract_section_window"
-              groups="base.group_no_one"/>
+        <!-- <menuitem name="Contract Sections" id="contract.section_list" parent="contract.contract_menu" action="contract.contract_section_window" groups="base.group_no_one"/>
 
-    <menuitem name="Contract Lines"
-              id="contract.line_list"
-              parent="contract.contract_menu"
-              action="contract.contract_lines_window"
-              groups="base.group_no_one"/>
+    <menuitem name="Contract Lines" id="contract.line_list" parent="contract.contract_menu" action="contract.contract_lines_window" groups="base.group_no_one"/>
 
-    <menuitem name="Contract Contents"
-              id="contract.content_list"
-              parent="contract.contract_menu"
-              action="contract.contract_contents_window"
-              groups="base.group_no_one"/>
+    <menuitem name="Contract Contents" id="contract.content_list" parent="contract.contract_menu" action="contract.contract_contents_window" groups="base.group_no_one"/>
 
-    <menuitem name="Contract Versions"
-              id="contract.version_list"
-              parent="contract.contract_menu"
-              action="contract.contract_version_window"
-              groups="base.group_no_one"/> -->
+    <menuitem name="Contract Versions" id="contract.version_list" parent="contract.contract_menu" action="contract.contract_version_window" groups="base.group_no_one"/> -->
 
-  </data>
+    </data>
 </odoo>
