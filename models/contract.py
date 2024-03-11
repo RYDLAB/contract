@@ -30,41 +30,15 @@ class Contract(models.Model):
         )
         return contract_date
 
-    partner_id = fields.Many2one(
-        comodel_name="res.partner",
-        string="Partner",
-        default=lambda self: self.env.context.get("active_id"),
-        required=True,
+    allow_not_signed_contract = fields.Boolean(
+        compute="get_allow_not_signed_contract",
+        store=False,
     )
+
     company_id = fields.Many2one(
         "res.company",
         string="Company",
         default=lambda self: self.env.company,
-    )
-    currency_id = fields.Many2one(
-        comodel_name="res.currency",
-        string="Contract's currency",
-        help="Contract settlements should be performed in this currency.",
-        default=lambda self: self.env.company.currency_id.id,
-    )
-    res_model = fields.Char(default=lambda self: self._name)
-    name = fields.Char(
-        string="Contract number",
-        default=lambda self: self._get_default_name(),
-        readonly=False,
-    )
-    type = fields.Selection(
-        selection=[
-            ("with_customer", "With customer"),
-            ("with_vendor", "With vendor"),
-        ],
-        string="Contract type",
-        help="Different relations requires different contracts with own text and template.",
-        required=True,
-    )
-    date_conclusion = fields.Date(
-        string="Signing date in system",
-        readonly=True,
     )
     commencement_date = fields.Date(
         string="Contract commencement date",
@@ -72,40 +46,39 @@ class Contract(models.Model):
         default=lambda self: self.date_conclusion,
         required=True,
     )
+    contract_annex_amount = fields.Integer(default=0, help="Counter for tech purposes")
     contract_annex_ids = fields.One2many(
         comodel_name="contract.annex",
         inverse_name="contract_id",
         string="Annexes",
         help="Annexes to this contract",
     )
-    contract_annex_amount = fields.Integer(default=0, help="Counter for tech purposes")
 
-    section_ids = fields.One2many("contract.section", "contract_id", string="Sections")
-
-    state = fields.Selection(
-        [
-            ("draft", "New"),
-            ("sign", "Signed"),
-            ("close", "Closed"),
-        ],
-        string="Status",
+    currency_id = fields.Many2one(
+        comodel_name="res.currency",
+        string="Contract's currency",
+        help="Contract settlements should be performed in this currency.",
+        default=lambda self: self.env.company.currency_id.id,
+    )
+    date_conclusion = fields.Date(
+        string="Signing date in system",
         readonly=True,
-        copy=False,
-        tracking=True,
-        track_sequence=3,
-        default="draft",
     )
-    allow_not_signed_contract = fields.Boolean(
-        compute="get_allow_not_signed_contract",
-        store=False,
-    )
-    responsible_employee_id = fields.Many2one(
-        comodel_name="res.users",
-        string="Responsible employee",
-        domain=lambda self: [("groups_id", "=", self.env.ref("base.group_user").id)],
-        default=lambda self: self.env.user,
+
+    draft_version_ids = fields.One2many(
+        "contract.version",
+        "contract_id",
+        string="Draft Versions",
+        domain=[("is_published", "=", False)],
     )
     expiration_date = fields.Date(string="Contract expiration date")
+
+    name = fields.Char(
+        string="Contract number",
+        default=lambda self: self._get_default_name(),
+        readonly=False,
+    )
+
     notification_expiration = fields.Boolean(
         default=False,
         string="Contract expiration notice",
@@ -116,6 +89,23 @@ class Contract(models.Model):
         string="Notice period, days",
         help="The day's number to contract expiration for sending notice",
     )
+    partner_id = fields.Many2one(
+        comodel_name="res.partner",
+        string="Partner",
+        default=lambda self: self.env.context.get("active_id"),
+        required=True,
+    )
+
+    published_version_id = fields.Many2one(
+        "contract.version", string="Published Version", readonly=True
+    )
+
+    published_version_number = fields.Integer(
+        related="published_version_id.version_number",
+        string="Published Version Number",
+        readonly=True,
+    )
+
     renew_automatically = fields.Boolean(
         default=False, string="Renew contract automatically"
     )
@@ -130,37 +120,51 @@ class Contract(models.Model):
         default="days",
         required=True,
     )
-
-    version_ids = fields.One2many(
-        "contract.version",
-        "contract_id",
-        string="Versions",
-        copy=False,
+    responsible_employee_id = fields.Many2one(
+        comodel_name="res.users",
+        string="Responsible employee",
+        domain=lambda self: [("groups_id", "=", self.env.ref("base.group_user").id)],
+        default=lambda self: self.env.user,
     )
 
-    published_version_id = fields.Many2one(
-        "contract.version", string="Published Version", readonly=True
+    res_model = fields.Char(default=lambda self: self._name)
+    section_ids = fields.One2many("contract.section", "contract_id", string="Sections")
+    signed_version_id = fields.Many2one(
+        "contract.version", string="Signed Version", readonly=True
     )
-
-    published_version_number = fields.Integer(
-        related="published_version_id.version_number",
-        string="Published Version Number",
+    state = fields.Selection(
+        [
+            ("draft", "New"),
+            ("sign", "Signed"),
+            ("close", "Closed"),
+        ],
+        string="Status",
         readonly=True,
+        copy=False,
+        tracking=True,
+        track_sequence=3,
+        default="draft",
     )
 
-    draft_version_ids = fields.One2many(
-        "contract.version",
-        "contract_id",
-        string="Draft Versions",
-        domain=[("is_published", "=", False)],
+    type = fields.Selection(
+        selection=[
+            ("with_customer", "With customer"),
+            ("with_vendor", "With vendor"),
+        ],
+        string="Contract type",
+        help="Different relations requires different contracts with own text and template.",
+        required=True,
     )
 
     version_count = fields.Integer(
         string="Version Count", compute="_compute_version_count", store=False
     )
 
-    signed_version_id = fields.Many2one(
-        "contract.version", string="Signed Version", readonly=True
+    version_ids = fields.One2many(
+        "contract.version",
+        "contract_id",
+        string="Versions",
+        copy=False,
     )
 
     @api.depends("version_ids")
