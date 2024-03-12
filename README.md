@@ -1,4 +1,4 @@
 # contract
 
-Реализует сущности рамочных контрактов и приложений-заказов к ним.
-В рамках данного модуля можно создавать контракты с заказчиком, публиковать их и подписывать.
+Implements the essence of framework contracts and applications-orders to them.
+Within this module, you can create contracts with the customer, publish them and sign them.
