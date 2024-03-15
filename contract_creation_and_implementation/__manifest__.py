@@ -41,4 +41,5 @@
     ],
     "installable": True,
     "application": True,
+    "images": ["static/description/banner.png"],
 }
